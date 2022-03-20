@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>PDRRMO Documentation</title>
+
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../docs/css/theme-default.style.css" media="screen">
+    <link rel="stylesheet" href="../docs/css/theme-default.print.css" media="print">
+
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/@highlightjs/cdn-assets@10.7.2/styles/obsidian.min.css">
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@10.7.2/highlight.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jets/0.14.1/jets.min.js"></script>
+
+    <style id="language-style">
+        /* starts out as display none and is replaced with js later  */
+                    body .content .bash-example code { display: none; }
+                    body .content .javascript-example code { display: none; }
+            </style>
+
+    <script>
+        var baseUrl = "http://api.pdrrmo.local";
+        var useCsrf = Boolean();
+        var csrfUrl = "/sanctum/csrf-cookie";
+    </script>
+    <script src="../docs/js/tryitout-3.24.1.js"></script>
+
+    <script src="../docs/js/theme-default-3.24.1.js"></script>
+
+</head>
+
+<body data-languages="[&quot;bash&quot;,&quot;javascript&quot;]">
+
+<a href="#" id="nav-button">
+    <span>
+        MENU
+        <img src="../docs/images/navbar.png" alt="navbar-image" />
+    </span>
+</a>
+<div class="tocify-wrapper">
+    
+            <div class="lang-selector">
+                                            <button type="button" class="lang-button" data-language-name="bash">bash</button>
+                                            <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
+                    </div>
+    
+    <div class="search">
+        <input type="text" class="search" id="input-search" placeholder="Search">
+    </div>
+
+    <div id="toc">
+                                                                            <ul id="tocify-header-0" class="tocify-header">
+                    <li class="tocify-item level-1" data-unique="introduction">
+                        <a href="#introduction">Introduction</a>
+                    </li>
+                                            
+                                                                    </ul>
+                                                <ul id="tocify-header-1" class="tocify-header">
+                    <li class="tocify-item level-1" data-unique="authenticating-requests">
+                        <a href="#authenticating-requests">Authenticating requests</a>
+                    </li>
+                                            
+                                                </ul>
+                    
+                    <ul id="tocify-header-2" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="authentication">
+                    <a href="#authentication">Authentication</a>
+                </li>
+                                    <ul id="tocify-subheader-authentication" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="authentication-POSTv1-auth-login">
+                        <a href="#authentication-POSTv1-auth-login">Login user
+
+Login using email and password</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="authentication-POSTv1-auth-logout">
+                        <a href="#authentication-POSTv1-auth-logout">Logout
+
+Logout user</a>
+                    </li>
+                                                    </ul>
+                            </ul>
+        
+                        
+            </div>
+
+            <ul class="toc-footer" id="toc-footer">
+                            <li><a href="../docs/collection.json">View Postman collection</a></li>
+                            <li><a href="../docs/openapi.yaml">View OpenAPI spec</a></li>
+                            <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
+                    </ul>
+        <ul class="toc-footer" id="last-updated">
+        <li>Last updated: March 20 2022</li>
+    </ul>
+</div>
+
+<div class="page-wrapper">
+    <div class="dark-box"></div>
+    <div class="content">
+        <h1 id="introduction">Introduction</h1>
+<p>This documentation aims to provide all the information you need to work with our API.</p>
+<aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
+You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
+<blockquote>
+<p>Base URL</p>
+</blockquote>
+<pre><code class="language-yaml">http://api.pdrrmo.local</code></pre>
+
+        <h1 id="authenticating-requests">Authenticating requests</h1>
+<p>To authenticate requests, include an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
+<p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
+<p>You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.</p>
+
+        <h1 id="authentication">Authentication</h1>
+
+    
+
+            <h2 id="authentication-POSTv1-auth-login">Login user
+
+Login using email and password</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTv1-auth-login">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://api.pdrrmo.local/v1/auth/login" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"email\": \"nisi\",
+    \"password\": \"molestiae\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://api.pdrrmo.local/v1/auth/login"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "nisi",
+    "password": "molestiae"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTv1-auth-login">
+</span>
+<span id="execution-results-POSTv1-auth-login" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTv1-auth-login"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTv1-auth-login"></code></pre>
+</span>
+<span id="execution-error-POSTv1-auth-login" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTv1-auth-login"></code></pre>
+</span>
+<form id="form-POSTv1-auth-login" data-method="POST"
+      data-path="v1/auth/login"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTv1-auth-login', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTv1-auth-login"
+                    onclick="tryItOut('POSTv1-auth-login');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTv1-auth-login"
+                    onclick="cancelTryOut('POSTv1-auth-login');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTv1-auth-login" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>v1/auth/login</code></b>
+        </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="email"
+               data-endpoint="POSTv1-auth-login"
+               value="nisi"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="password"
+               data-endpoint="POSTv1-auth-login"
+               value="molestiae"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+        </form>
+
+            <h2 id="authentication-POSTv1-auth-logout">Logout
+
+Logout user</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTv1-auth-logout">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://api.pdrrmo.local/v1/auth/logout" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://api.pdrrmo.local/v1/auth/logout"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTv1-auth-logout">
+</span>
+<span id="execution-results-POSTv1-auth-logout" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTv1-auth-logout"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTv1-auth-logout"></code></pre>
+</span>
+<span id="execution-error-POSTv1-auth-logout" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTv1-auth-logout"></code></pre>
+</span>
+<form id="form-POSTv1-auth-logout" data-method="POST"
+      data-path="v1/auth/logout"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTv1-auth-logout', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTv1-auth-logout"
+                    onclick="tryItOut('POSTv1-auth-logout');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTv1-auth-logout"
+                    onclick="cancelTryOut('POSTv1-auth-logout');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTv1-auth-logout" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>v1/auth/logout</code></b>
+        </p>
+                <p>
+            <label id="auth-POSTv1-auth-logout" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="POSTv1-auth-logout"
+                                                                data-component="header"></label>
+        </p>
+                </form>
+
+    
+
+        
+    </div>
+    <div class="dark-box">
+                    <div class="lang-selector">
+                                                        <button type="button" class="lang-button" data-language-name="bash">bash</button>
+                                                        <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
+                            </div>
+            </div>
+</div>
+</body>
+</html>
