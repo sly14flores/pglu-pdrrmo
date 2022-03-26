@@ -47,6 +47,7 @@ class UserSignUpController extends Controller
         }
 
         $data = $validator->valid();
+        $data['is_super_admin'] = 0;
         $data['password'] = Hash::make(env('USER_PASSWORD','12345678'));
 
         $user = new User;
