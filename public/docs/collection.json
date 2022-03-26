@@ -10,11 +10,48 @@
     ],
     "info": {
         "name": "PDRRMO",
-        "_postman_id": "5f52e623-097b-4586-8923-f3d4b02a6499",
+        "_postman_id": "eda1280f-163c-4290-823c-a3b00affa4c3",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
     "item": [
+        {
+            "name": "Endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "User Sign Up",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "v1\/registration",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/v1\/registration"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"firstname\":\"et\",\"middlename\":\"quo\",\"lastname\":\"voluptatem\",\"email\":\"omnis\",\"password\":\"eos\",\"password_confirmation\":\"ut\",\"group_id\":3}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
         {
             "name": "Authentication",
             "description": "",
@@ -41,7 +78,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"nisi\",\"password\":\"molestiae\"}"
+                            "raw": "{\"email\":\"laudantium\",\"password\":\"recusandae\"}"
                         },
                         "description": "",
                         "auth": {

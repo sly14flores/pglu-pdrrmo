@@ -7,6 +7,69 @@ servers:
   -
     url: 'http://api.pdrrmo.local'
 paths:
+  /v1/registration:
+    post:
+      summary: 'User Sign Up'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstname:
+                  type: string
+                  description: ''
+                  example: et
+                middlename:
+                  type: string
+                  description: ''
+                  example: quo
+                lastname:
+                  type: string
+                  description: ''
+                  example: voluptatem
+                email:
+                  type: string
+                  description: ''
+                  example: omnis
+                password:
+                  type: string
+                  description: ''
+                  example: eos
+                password_confirmation:
+                  type: string
+                  description: ''
+                  example: ut
+                group_id:
+                  type: integer
+                  description: ''
+                  example: 3
+              required:
+                - firstname
+                - lastname
+                - email
+                - password
+      security: []
   /v1/auth/login:
     post:
       summary: "Login user\n\nLogin using email and password"
@@ -39,11 +102,11 @@ paths:
                 email:
                   type: string
                   description: ''
-                  example: nisi
+                  example: laudantium
                 password:
                   type: string
                   description: ''
-                  example: molestiae
+                  example: recusandae
               required:
                 - email
                 - password
@@ -78,6 +141,9 @@ paths:
       tags:
         - Authentication
 tags:
+  -
+    name: Endpoints
+    description: ''
   -
     name: Authentication
     description: ''
