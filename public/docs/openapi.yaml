@@ -39,11 +39,11 @@ paths:
                 email:
                   type: string
                   description: ''
-                  example: nisi
+                  example: labore
                 password:
                   type: string
                   description: ''
-                  example: molestiae
+                  example: impedit
               required:
                 - email
                 - password
@@ -77,9 +77,145 @@ paths:
       responses: {  }
       tags:
         - Authentication
+  /v1/registration:
+    post:
+      summary: 'User Sign Up'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstname:
+                  type: string
+                  description: ''
+                  example: sit
+                middlename:
+                  type: string
+                  description: ''
+                  example: non
+                lastname:
+                  type: string
+                  description: ''
+                  example: animi
+                email:
+                  type: string
+                  description: ''
+                  example: est
+                password:
+                  type: string
+                  description: ''
+                  example: qui
+                password_confirmation:
+                  type: string
+                  description: ''
+                  example: quis
+                group_id:
+                  type: integer
+                  description: ''
+                  example: 11
+              required:
+                - firstname
+                - lastname
+                - email
+                - password
+      security: []
+  '/v1/email/verify/{id}':
+    get:
+      summary: 'Mark the authenticated user’s email address as verified.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the verify.'
+        example: eaque
+        required: true
+        schema:
+          type: string
+  '/v1/email/resend/{id}':
+    get:
+      summary: 'Resend the email verification notification.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the resend.'
+        example: cupiditate
+        required: true
+        schema:
+          type: string
 tags:
   -
     name: Authentication
+    description: ''
+  -
+    name: Endpoints
     description: ''
 components:
   securitySchemes:

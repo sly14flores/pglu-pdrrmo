@@ -86,6 +86,22 @@ Logout user</a>
                     </li>
                                                     </ul>
                             </ul>
+                    <ul id="tocify-header-3" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="endpoints">
+                    <a href="#endpoints">Endpoints</a>
+                </li>
+                                    <ul id="tocify-subheader-endpoints" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="endpoints-POSTv1-registration">
+                        <a href="#endpoints-POSTv1-registration">User Sign Up</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-GETv1-email-verify--id-">
+                        <a href="#endpoints-GETv1-email-verify--id-">Mark the authenticated user’s email address as verified.</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="endpoints-GETv1-email-resend--id-">
+                        <a href="#endpoints-GETv1-email-resend--id-">Resend the email verification notification.</a>
+                    </li>
+                                                    </ul>
+                            </ul>
         
                         
             </div>
@@ -96,7 +112,7 @@ Logout user</a>
                             <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
                     </ul>
         <ul class="toc-footer" id="last-updated">
-        <li>Last updated: March 20 2022</li>
+        <li>Last updated: March 27 2022</li>
     </ul>
 </div>
 
@@ -140,8 +156,8 @@ Login using email and password</h2>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"email\": \"nisi\",
-    \"password\": \"molestiae\"
+    \"email\": \"labore\",
+    \"password\": \"impedit\"
 }"
 </code></pre></div>
 
@@ -157,8 +173,8 @@ const headers = {
 };
 
 let body = {
-    "email": "nisi",
-    "password": "molestiae"
+    "email": "labore",
+    "password": "impedit"
 };
 
 fetch(url, {
@@ -216,7 +232,7 @@ fetch(url, {
                 <input type="text"
                name="email"
                data-endpoint="POSTv1-auth-login"
-               value="nisi"
+               value="labore"
                data-component="body" hidden>
     <br>
 
@@ -226,7 +242,7 @@ fetch(url, {
                 <input type="text"
                name="password"
                data-endpoint="POSTv1-auth-login"
-               value="molestiae"
+               value="impedit"
                data-component="body" hidden>
     <br>
 
@@ -323,6 +339,369 @@ fetch(url, {
                                                                 data-component="header"></label>
         </p>
                 </form>
+
+        <h1 id="endpoints">Endpoints</h1>
+
+    
+
+            <h2 id="endpoints-POSTv1-registration">User Sign Up</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTv1-registration">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://api.pdrrmo.local/v1/registration" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"firstname\": \"sit\",
+    \"middlename\": \"non\",
+    \"lastname\": \"animi\",
+    \"email\": \"est\",
+    \"password\": \"qui\",
+    \"password_confirmation\": \"quis\",
+    \"group_id\": 11
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://api.pdrrmo.local/v1/registration"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "firstname": "sit",
+    "middlename": "non",
+    "lastname": "animi",
+    "email": "est",
+    "password": "qui",
+    "password_confirmation": "quis",
+    "group_id": 11
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTv1-registration">
+</span>
+<span id="execution-results-POSTv1-registration" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTv1-registration"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTv1-registration"></code></pre>
+</span>
+<span id="execution-error-POSTv1-registration" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTv1-registration"></code></pre>
+</span>
+<form id="form-POSTv1-registration" data-method="POST"
+      data-path="v1/registration"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTv1-registration', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTv1-registration"
+                    onclick="tryItOut('POSTv1-registration');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTv1-registration"
+                    onclick="cancelTryOut('POSTv1-registration');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTv1-registration" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>v1/registration</code></b>
+        </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>firstname</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="firstname"
+               data-endpoint="POSTv1-registration"
+               value="sit"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>middlename</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="middlename"
+               data-endpoint="POSTv1-registration"
+               value="non"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>lastname</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="lastname"
+               data-endpoint="POSTv1-registration"
+               value="animi"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="email"
+               data-endpoint="POSTv1-registration"
+               value="est"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="password"
+               data-endpoint="POSTv1-registration"
+               value="qui"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>password_confirmation</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="password_confirmation"
+               data-endpoint="POSTv1-registration"
+               value="quis"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>group_id</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+                <input type="number"
+               name="group_id"
+               data-endpoint="POSTv1-registration"
+               value="11"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+        </form>
+
+            <h2 id="endpoints-GETv1-email-verify--id-">Mark the authenticated user’s email address as verified.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETv1-email-verify--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://api.pdrrmo.local/v1/email/verify/eaque" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://api.pdrrmo.local/v1/email/verify/eaque"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETv1-email-verify--id-">
+    </span>
+<span id="execution-results-GETv1-email-verify--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETv1-email-verify--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETv1-email-verify--id-"></code></pre>
+</span>
+<span id="execution-error-GETv1-email-verify--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETv1-email-verify--id-"></code></pre>
+</span>
+<form id="form-GETv1-email-verify--id-" data-method="GET"
+      data-path="v1/email/verify/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETv1-email-verify--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETv1-email-verify--id-"
+                    onclick="tryItOut('GETv1-email-verify--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETv1-email-verify--id-"
+                    onclick="cancelTryOut('GETv1-email-verify--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETv1-email-verify--id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>v1/email/verify/{id}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="id"
+               data-endpoint="GETv1-email-verify--id-"
+               value="eaque"
+               data-component="url" hidden>
+    <br>
+<p>The ID of the verify.</p>
+            </p>
+                    </form>
+
+            <h2 id="endpoints-GETv1-email-resend--id-">Resend the email verification notification.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETv1-email-resend--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://api.pdrrmo.local/v1/email/resend/cupiditate" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://api.pdrrmo.local/v1/email/resend/cupiditate"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETv1-email-resend--id-">
+    </span>
+<span id="execution-results-GETv1-email-resend--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETv1-email-resend--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETv1-email-resend--id-"></code></pre>
+</span>
+<span id="execution-error-GETv1-email-resend--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETv1-email-resend--id-"></code></pre>
+</span>
+<form id="form-GETv1-email-resend--id-" data-method="GET"
+      data-path="v1/email/resend/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETv1-email-resend--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETv1-email-resend--id-"
+                    onclick="tryItOut('GETv1-email-resend--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETv1-email-resend--id-"
+                    onclick="cancelTryOut('GETv1-email-resend--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETv1-email-resend--id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>v1/email/resend/{id}</code></b>
+        </p>
+                <p>
+            <label id="auth-GETv1-email-resend--id-" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETv1-email-resend--id-"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="id"
+               data-endpoint="GETv1-email-resend--id-"
+               value="cupiditate"
+               data-component="url" hidden>
+    <br>
+<p>The ID of the resend.</p>
+            </p>
+                    </form>
 
     
 

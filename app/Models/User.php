@@ -8,7 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
+use Illuminate\Support\Facades\Hash;
+
 use App\Traits\TraitUuid;
+
+use App\Notifications\VerifyApiEmail;
 
 class User extends Authenticatable
 {
@@ -48,4 +52,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'is_super_admin' => 'boolean',
     ];
+
+    /**
+     * Send email verification
+     */
+    public function sendApiEmailVerificationNotification()
+    {
+		$when = now()->addSeconds(5);
+        $this->notify((new VerifyApiEmail)->delay($when));
+    }
+
+    public function isEmailVerified()
+    {
+        return $this->email_verified_at != null;
+    }
+
+    public function isDefaultPassword()
+    {
+        return Hash::check(env('DEFAULT_PASSWORD',12345678),$this->password);
+    }
 }

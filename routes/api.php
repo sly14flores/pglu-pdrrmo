@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\api\LoginController;
+use App\Http\Controllers\api\UserSignUpController;
+use App\Http\Controllers\api\VerificationApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,10 @@ use App\Http\Controllers\api\LoginController;
 |
 */
 
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
 Route::prefix('v1')->group(function() {
 
     Route::prefix('auth')->group(function() {
@@ -23,8 +29,12 @@ Route::prefix('v1')->group(function() {
         Route::post('logout', [LoginController::class, 'logout']);
     });
 
-});
+    Route::post('registration', UserSignUpController::class);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    /**
+     * Email confirmation routes
+     */
+    Route::get('email/verify/{id}', [VerificationApiController::class, 'verify'])->name('verificationapi.verify');
+    Route::get('email/resend/{id}', [VerificationApiController::class, 'resend'])->name('verificationapi.resend');
+
 });

@@ -28,6 +28,7 @@ class LoginResource extends JsonResource
             'group_id' => (is_null($this->group))?null:$this->group->id,
             // 'group_name' => (is_null($this->group))?null:$this->group->name,
             'default_password' => $this->default_password,
+            'email_verified' => $this->email_verified,
             // 'role' => $authorizations->decode($role),
         ];
     }

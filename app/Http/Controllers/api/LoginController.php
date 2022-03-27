@@ -9,7 +9,6 @@ use App\Models\User;
 use App\Traits\Messages;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 use App\Http\Resources\LoginResource;
 
@@ -54,7 +53,8 @@ class LoginController extends Controller
         $token = Auth::user()->createToken('authToken');
         $user = User::find(Auth::id());
         $user->token = $token->accessToken;
-        $user->default_password = $this->isDefaultPassword($user->password);
+        $user->default_password = $user->isDefaultPassword();
+        $user->email_verified = $user->isEmailVerified();
 
         $data = new LoginResource($user);
 
@@ -78,11 +78,6 @@ class LoginController extends Controller
             return $this->jsonSuccessLogout();
         }
         return $this->jsonFailedResponse(null, 500, 'Something went wrong.');
-    }
-
-    public function isDefaultPassword($password)
-    {
-        return Hash::check(env('DEFAULT_PASSWORD',12345678),$password);
     }
 
 }
