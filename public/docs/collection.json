@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "PDRRMO",
-        "_postman_id": "9c703e5e-0a49-47fc-b7b3-8dbf03064236",
+        "_postman_id": "0675561e-ae00-44f4-baaa-b143dd6fa0a6",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -41,7 +41,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"labore\",\"password\":\"impedit\"}"
+                            "raw": "{\"email\":\"nulla\",\"password\":\"hic\"}"
                         },
                         "description": "",
                         "auth": {
@@ -103,7 +103,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"firstname\":\"sit\",\"middlename\":\"non\",\"lastname\":\"animi\",\"email\":\"est\",\"password\":\"qui\",\"password_confirmation\":\"quis\",\"group_id\":11}"
+                            "raw": "{\"firstname\":\"molestias\",\"middlename\":\"excepturi\",\"lastname\":\"et\",\"email\":\"cum\",\"password\":\"rerum\",\"password_confirmation\":\"qui\",\"group_id\":19}"
                         },
                         "description": "",
                         "auth": {
@@ -124,7 +124,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "eaque",
+                                    "value": "voluptatem",
                                     "description": "The ID of the verify."
                                 }
                             ]
@@ -160,7 +160,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "cupiditate",
+                                    "value": "nisi",
                                     "description": "The ID of the resend."
                                 }
                             ]
@@ -178,6 +178,74 @@
                         ],
                         "body": null,
                         "description": ""
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Passwords",
+            "description": "",
+            "item": [
+                {
+                    "name": "Send email reset link",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "v1\/password\/link",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/v1\/password\/link"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"neque\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Reset Password",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "v1\/password\/reset",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/v1\/password\/reset"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"id\":\"distinctio\",\"token\":\"voluptates\",\"password\":\"recusandae\",\"password_confirmation\":\"qui\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
                     },
                     "response": []
                 }

@@ -39,11 +39,11 @@ paths:
                 email:
                   type: string
                   description: ''
-                  example: labore
+                  example: nulla
                 password:
                   type: string
                   description: ''
-                  example: impedit
+                  example: hic
               required:
                 - email
                 - password
@@ -109,31 +109,31 @@ paths:
                 firstname:
                   type: string
                   description: ''
-                  example: sit
+                  example: molestias
                 middlename:
                   type: string
                   description: ''
-                  example: non
+                  example: excepturi
                 lastname:
                   type: string
                   description: ''
-                  example: animi
+                  example: et
                 email:
                   type: string
                   description: ''
-                  example: est
+                  example: cum
                 password:
                   type: string
                   description: ''
-                  example: qui
+                  example: rerum
                 password_confirmation:
                   type: string
                   description: ''
-                  example: quis
+                  example: qui
                 group_id:
                   type: integer
                   description: ''
-                  example: 11
+                  example: 19
               required:
                 - firstname
                 - lastname
@@ -168,7 +168,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the verify.'
-        example: eaque
+        example: voluptatem
         required: true
         schema:
           type: string
@@ -206,16 +206,106 @@ paths:
         in: path
         name: id
         description: 'The ID of the resend.'
-        example: cupiditate
+        example: nisi
         required: true
         schema:
           type: string
+  /v1/password/link:
+    post:
+      summary: 'Send email reset link'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Passwords
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: ''
+                  example: neque
+              required:
+                - email
+      security: []
+  /v1/password/reset:
+    post:
+      summary: 'Reset Password'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Passwords
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: ''
+                  example: distinctio
+                token:
+                  type: string
+                  description: ''
+                  example: voluptates
+                password:
+                  type: string
+                  description: ''
+                  example: recusandae
+                password_confirmation:
+                  type: string
+                  description: ''
+                  example: qui
+              required:
+                - id
+                - token
+                - password
+                - password_confirmation
+      security: []
 tags:
   -
     name: Authentication
     description: ''
   -
     name: Endpoints
+    description: ''
+  -
+    name: Passwords
     description: ''
 components:
   securitySchemes:
