@@ -22,49 +22,49 @@ endpoints:
         name: firstname
         description: ''
         required: true
-        example: sit
+        example: maxime
         type: string
         custom: []
       middlename:
         name: middlename
         description: ''
         required: false
-        example: non
+        example: impedit
         type: string
         custom: []
       lastname:
         name: lastname
         description: ''
         required: true
-        example: animi
+        example: quis
         type: string
         custom: []
       email:
         name: email
         description: ''
         required: true
-        example: est
+        example: fugiat
         type: string
         custom: []
       password:
         name: password
         description: ''
         required: true
-        example: qui
+        example: eius
         type: string
         custom: []
       password_confirmation:
         name: password_confirmation
         description: ''
         required: false
-        example: quis
+        example: placeat
         type: string
         custom: []
       group_id:
         name: group_id
         description: ''
         required: false
-        example: 11
+        example: 2
         type: integer
         custom: []
     responses: []
@@ -86,7 +86,7 @@ endpoints:
         name: id
         description: 'The ID of the verify.'
         required: true
-        example: eaque
+        example: sint
         type: string
         custom: []
     queryParameters: []
@@ -111,7 +111,7 @@ endpoints:
         name: id
         description: 'The ID of the resend.'
         required: true
-        example: cupiditate
+        example: repellat
         type: string
         custom: []
     queryParameters: []

@@ -39,11 +39,11 @@ paths:
                 email:
                   type: string
                   description: ''
-                  example: labore
+                  example: non
                 password:
                   type: string
                   description: ''
-                  example: impedit
+                  example: facere
               required:
                 - email
                 - password
@@ -109,31 +109,31 @@ paths:
                 firstname:
                   type: string
                   description: ''
-                  example: sit
+                  example: maxime
                 middlename:
                   type: string
                   description: ''
-                  example: non
+                  example: impedit
                 lastname:
                   type: string
                   description: ''
-                  example: animi
+                  example: quis
                 email:
                   type: string
                   description: ''
-                  example: est
+                  example: fugiat
                 password:
                   type: string
                   description: ''
-                  example: qui
+                  example: eius
                 password_confirmation:
                   type: string
                   description: ''
-                  example: quis
+                  example: placeat
                 group_id:
                   type: integer
                   description: ''
-                  example: 11
+                  example: 2
               required:
                 - firstname
                 - lastname
@@ -168,7 +168,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the verify.'
-        example: eaque
+        example: sint
         required: true
         schema:
           type: string
@@ -206,16 +206,106 @@ paths:
         in: path
         name: id
         description: 'The ID of the resend.'
-        example: cupiditate
+        example: repellat
         required: true
         schema:
           type: string
+  /v1/password/link:
+    post:
+      summary: 'Send email reset link'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Passwords
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: ''
+                  example: ab
+              required:
+                - email
+      security: []
+  /v1/password/reset:
+    post:
+      summary: 'Reset Password'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Passwords
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: ''
+                  example: quia
+                token:
+                  type: string
+                  description: ''
+                  example: eaque
+                password:
+                  type: string
+                  description: ''
+                  example: deserunt
+                password_confirmation:
+                  type: string
+                  description: ''
+                  example: perspiciatis
+              required:
+                - id
+                - token
+                - password
+                - password_confirmation
+      security: []
 tags:
   -
     name: Authentication
     description: ''
   -
     name: Endpoints
+    description: ''
+  -
+    name: Passwords
     description: ''
 components:
   securitySchemes:
