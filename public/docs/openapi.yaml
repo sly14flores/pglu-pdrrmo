@@ -39,11 +39,11 @@ paths:
                 email:
                   type: string
                   description: ''
-                  example: non
+                  example: nulla
                 password:
                   type: string
                   description: ''
-                  example: facere
+                  example: hic
               required:
                 - email
                 - password
@@ -109,31 +109,31 @@ paths:
                 firstname:
                   type: string
                   description: ''
-                  example: maxime
+                  example: molestias
                 middlename:
                   type: string
                   description: ''
-                  example: impedit
+                  example: excepturi
                 lastname:
                   type: string
                   description: ''
-                  example: quis
+                  example: et
                 email:
                   type: string
                   description: ''
-                  example: fugiat
+                  example: cum
                 password:
                   type: string
                   description: ''
-                  example: eius
+                  example: rerum
                 password_confirmation:
                   type: string
                   description: ''
-                  example: placeat
+                  example: qui
                 group_id:
                   type: integer
                   description: ''
-                  example: 2
+                  example: 19
               required:
                 - firstname
                 - lastname
@@ -168,7 +168,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the verify.'
-        example: sint
+        example: voluptatem
         required: true
         schema:
           type: string
@@ -206,7 +206,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the resend.'
-        example: repellat
+        example: nisi
         required: true
         schema:
           type: string
@@ -242,7 +242,7 @@ paths:
                 email:
                   type: string
                   description: ''
-                  example: ab
+                  example: neque
               required:
                 - email
       security: []
@@ -278,19 +278,19 @@ paths:
                 id:
                   type: string
                   description: ''
-                  example: quia
+                  example: distinctio
                 token:
                   type: string
                   description: ''
-                  example: eaque
+                  example: voluptates
                 password:
                   type: string
                   description: ''
-                  example: deserunt
+                  example: recusandae
                 password_confirmation:
                   type: string
                   description: ''
-                  example: perspiciatis
+                  example: qui
               required:
                 - id
                 - token

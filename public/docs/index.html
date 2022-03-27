@@ -169,8 +169,8 @@ Login using email and password</h2>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"email\": \"non\",
-    \"password\": \"facere\"
+    \"email\": \"nulla\",
+    \"password\": \"hic\"
 }"
 </code></pre></div>
 
@@ -186,8 +186,8 @@ const headers = {
 };
 
 let body = {
-    "email": "non",
-    "password": "facere"
+    "email": "nulla",
+    "password": "hic"
 };
 
 fetch(url, {
@@ -245,7 +245,7 @@ fetch(url, {
                 <input type="text"
                name="email"
                data-endpoint="POSTv1-auth-login"
-               value="non"
+               value="nulla"
                data-component="body" hidden>
     <br>
 
@@ -255,7 +255,7 @@ fetch(url, {
                 <input type="text"
                name="password"
                data-endpoint="POSTv1-auth-login"
-               value="facere"
+               value="hic"
                data-component="body" hidden>
     <br>
 
@@ -374,13 +374,13 @@ fetch(url, {
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"firstname\": \"maxime\",
-    \"middlename\": \"impedit\",
-    \"lastname\": \"quis\",
-    \"email\": \"fugiat\",
-    \"password\": \"eius\",
-    \"password_confirmation\": \"placeat\",
-    \"group_id\": 2
+    \"firstname\": \"molestias\",
+    \"middlename\": \"excepturi\",
+    \"lastname\": \"et\",
+    \"email\": \"cum\",
+    \"password\": \"rerum\",
+    \"password_confirmation\": \"qui\",
+    \"group_id\": 19
 }"
 </code></pre></div>
 
@@ -396,13 +396,13 @@ const headers = {
 };
 
 let body = {
-    "firstname": "maxime",
-    "middlename": "impedit",
-    "lastname": "quis",
-    "email": "fugiat",
-    "password": "eius",
-    "password_confirmation": "placeat",
-    "group_id": 2
+    "firstname": "molestias",
+    "middlename": "excepturi",
+    "lastname": "et",
+    "email": "cum",
+    "password": "rerum",
+    "password_confirmation": "qui",
+    "group_id": 19
 };
 
 fetch(url, {
@@ -460,7 +460,7 @@ fetch(url, {
                 <input type="text"
                name="firstname"
                data-endpoint="POSTv1-registration"
-               value="maxime"
+               value="molestias"
                data-component="body" hidden>
     <br>
 
@@ -470,7 +470,7 @@ fetch(url, {
                 <input type="text"
                name="middlename"
                data-endpoint="POSTv1-registration"
-               value="impedit"
+               value="excepturi"
                data-component="body" hidden>
     <br>
 
@@ -480,7 +480,7 @@ fetch(url, {
                 <input type="text"
                name="lastname"
                data-endpoint="POSTv1-registration"
-               value="quis"
+               value="et"
                data-component="body" hidden>
     <br>
 
@@ -490,7 +490,7 @@ fetch(url, {
                 <input type="text"
                name="email"
                data-endpoint="POSTv1-registration"
-               value="fugiat"
+               value="cum"
                data-component="body" hidden>
     <br>
 
@@ -500,7 +500,7 @@ fetch(url, {
                 <input type="text"
                name="password"
                data-endpoint="POSTv1-registration"
-               value="eius"
+               value="rerum"
                data-component="body" hidden>
     <br>
 
@@ -510,7 +510,7 @@ fetch(url, {
                 <input type="text"
                name="password_confirmation"
                data-endpoint="POSTv1-registration"
-               value="placeat"
+               value="qui"
                data-component="body" hidden>
     <br>
 
@@ -520,7 +520,7 @@ fetch(url, {
                 <input type="number"
                name="group_id"
                data-endpoint="POSTv1-registration"
-               value="2"
+               value="19"
                data-component="body" hidden>
     <br>
 
@@ -540,14 +540,14 @@ fetch(url, {
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://api.pdrrmo.local/v1/email/verify/sint" \
+    --get "http://api.pdrrmo.local/v1/email/verify/voluptatem" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://api.pdrrmo.local/v1/email/verify/sint"
+    "http://api.pdrrmo.local/v1/email/verify/voluptatem"
 );
 
 const headers = {
@@ -609,7 +609,7 @@ fetch(url, {
                 <input type="text"
                name="id"
                data-endpoint="GETv1-email-verify--id-"
-               value="sint"
+               value="voluptatem"
                data-component="url" hidden>
     <br>
 <p>The ID of the verify.</p>
@@ -630,7 +630,7 @@ fetch(url, {
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://api.pdrrmo.local/v1/email/resend/repellat" \
+    --get "http://api.pdrrmo.local/v1/email/resend/nisi" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -638,7 +638,7 @@ fetch(url, {
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://api.pdrrmo.local/v1/email/resend/repellat"
+    "http://api.pdrrmo.local/v1/email/resend/nisi"
 );
 
 const headers = {
@@ -709,7 +709,7 @@ fetch(url, {
                 <input type="text"
                name="id"
                data-endpoint="GETv1-email-resend--id-"
-               value="repellat"
+               value="nisi"
                data-component="url" hidden>
     <br>
 <p>The ID of the resend.</p>
@@ -737,7 +737,7 @@ fetch(url, {
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"email\": \"ab\"
+    \"email\": \"neque\"
 }"
 </code></pre></div>
 
@@ -753,7 +753,7 @@ const headers = {
 };
 
 let body = {
-    "email": "ab"
+    "email": "neque"
 };
 
 fetch(url, {
@@ -811,7 +811,7 @@ fetch(url, {
                 <input type="text"
                name="email"
                data-endpoint="POSTv1-password-link"
-               value="ab"
+               value="neque"
                data-component="body" hidden>
     <br>
 
@@ -835,10 +835,10 @@ fetch(url, {
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"id\": \"quia\",
-    \"token\": \"eaque\",
-    \"password\": \"deserunt\",
-    \"password_confirmation\": \"perspiciatis\"
+    \"id\": \"distinctio\",
+    \"token\": \"voluptates\",
+    \"password\": \"recusandae\",
+    \"password_confirmation\": \"qui\"
 }"
 </code></pre></div>
 
@@ -854,10 +854,10 @@ const headers = {
 };
 
 let body = {
-    "id": "quia",
-    "token": "eaque",
-    "password": "deserunt",
-    "password_confirmation": "perspiciatis"
+    "id": "distinctio",
+    "token": "voluptates",
+    "password": "recusandae",
+    "password_confirmation": "qui"
 };
 
 fetch(url, {
@@ -915,7 +915,7 @@ fetch(url, {
                 <input type="text"
                name="id"
                data-endpoint="POSTv1-password-reset"
-               value="quia"
+               value="distinctio"
                data-component="body" hidden>
     <br>
 
@@ -925,7 +925,7 @@ fetch(url, {
                 <input type="text"
                name="token"
                data-endpoint="POSTv1-password-reset"
-               value="eaque"
+               value="voluptates"
                data-component="body" hidden>
     <br>
 
@@ -935,7 +935,7 @@ fetch(url, {
                 <input type="text"
                name="password"
                data-endpoint="POSTv1-password-reset"
-               value="deserunt"
+               value="recusandae"
                data-component="body" hidden>
     <br>
 
@@ -945,7 +945,7 @@ fetch(url, {
                 <input type="text"
                name="password_confirmation"
                data-endpoint="POSTv1-password-reset"
-               value="perspiciatis"
+               value="qui"
                data-component="body" hidden>
     <br>
 

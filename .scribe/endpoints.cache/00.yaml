@@ -25,14 +25,14 @@ endpoints:
         name: email
         description: ''
         required: true
-        example: non
+        example: nulla
         type: string
         custom: []
       password:
         name: password
         description: ''
         required: true
-        example: facere
+        example: hic
         type: string
         custom: []
     responses: []

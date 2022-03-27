@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "PDRRMO",
-        "_postman_id": "1cd9fc1c-fa11-4fd4-ad7a-6ca117c08821",
+        "_postman_id": "0675561e-ae00-44f4-baaa-b143dd6fa0a6",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -41,7 +41,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"non\",\"password\":\"facere\"}"
+                            "raw": "{\"email\":\"nulla\",\"password\":\"hic\"}"
                         },
                         "description": "",
                         "auth": {
@@ -103,7 +103,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"firstname\":\"maxime\",\"middlename\":\"impedit\",\"lastname\":\"quis\",\"email\":\"fugiat\",\"password\":\"eius\",\"password_confirmation\":\"placeat\",\"group_id\":2}"
+                            "raw": "{\"firstname\":\"molestias\",\"middlename\":\"excepturi\",\"lastname\":\"et\",\"email\":\"cum\",\"password\":\"rerum\",\"password_confirmation\":\"qui\",\"group_id\":19}"
                         },
                         "description": "",
                         "auth": {
@@ -124,7 +124,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "sint",
+                                    "value": "voluptatem",
                                     "description": "The ID of the verify."
                                 }
                             ]
@@ -160,7 +160,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "repellat",
+                                    "value": "nisi",
                                     "description": "The ID of the resend."
                                 }
                             ]
@@ -209,7 +209,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"ab\"}"
+                            "raw": "{\"email\":\"neque\"}"
                         },
                         "description": "",
                         "auth": {
@@ -240,7 +240,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"id\":\"quia\",\"token\":\"eaque\",\"password\":\"deserunt\",\"password_confirmation\":\"perspiciatis\"}"
+                            "raw": "{\"id\":\"distinctio\",\"token\":\"voluptates\",\"password\":\"recusandae\",\"password_confirmation\":\"qui\"}"
                         },
                         "description": "",
                         "auth": {
