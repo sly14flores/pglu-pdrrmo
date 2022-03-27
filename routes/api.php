@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\api\LoginController;
 use App\Http\Controllers\api\UserSignUpController;
+use App\Http\Controllers\api\VerificationApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +30,11 @@ Route::prefix('v1')->group(function() {
     });
 
     Route::post('registration', UserSignUpController::class);
+
+    /**
+     * Email confirmation routes
+     */
+    Route::get('email/verify/{id}', [VerificationApiController::class, 'verify'])->name('verificationapi.verify');
+    Route::get('email/resend/{id}', [VerificationApiController::class, 'resend'])->name('verificationapi.resend');
 
 });

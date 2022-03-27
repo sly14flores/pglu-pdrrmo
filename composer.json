@@ -13,7 +13,9 @@
         "laravel/framework": "^9.2",
         "laravel/passport": "^10.3",
         "laravel/sanctum": "^2.14",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "mailjet/laravel-mailjet": "^3.0",
+        "symfony/http-client": "^6.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

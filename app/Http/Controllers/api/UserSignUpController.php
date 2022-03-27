@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 use App\Traits\Messages;
 use App\Models\User;
@@ -48,17 +49,36 @@ class UserSignUpController extends Controller
 
         $data = $validator->valid();
         $data['is_super_admin'] = 0;
-        $data['password'] = Hash::make(env('USER_PASSWORD','12345678'));
+        $data['password'] = Hash::make($data['password']);
 
-        $user = new User;
-        $user->fill($data);
-        $user->save();
+        DB::beginTransaction();
 
-        /**
-         * Send email validation
-         */
+        try {
 
-        return $this->jsonSuccessResponse(null, 200, "Registration Successful");
+            $user = new User;
+            $user->fill($data);
+            $user->save();
+
+            /**
+             * Send email validation
+             */
+            $user->sendApiEmailVerificationNotification();
+
+            DB::commit();
+
+            return $this->jsonSuccessResponse(null, 200, "Registration Successful");
+
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+
+            report($e);
+
+			return $this->jsonFailedResponse([
+                $e->getMessage()
+            ], 500, 'Something went wrong.');
+
+        }
 
     }
 }

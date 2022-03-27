@@ -10,48 +10,11 @@
     ],
     "info": {
         "name": "PDRRMO",
-        "_postman_id": "eda1280f-163c-4290-823c-a3b00affa4c3",
+        "_postman_id": "9c703e5e-0a49-47fc-b7b3-8dbf03064236",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
     "item": [
-        {
-            "name": "Endpoints",
-            "description": "",
-            "item": [
-                {
-                    "name": "User Sign Up",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "v1\/registration",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/v1\/registration"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"firstname\":\"et\",\"middlename\":\"quo\",\"lastname\":\"voluptatem\",\"email\":\"omnis\",\"password\":\"eos\",\"password_confirmation\":\"ut\",\"group_id\":3}"
-                        },
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                }
-            ]
-        },
         {
             "name": "Authentication",
             "description": "",
@@ -78,7 +41,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"laudantium\",\"password\":\"recusandae\"}"
+                            "raw": "{\"email\":\"labore\",\"password\":\"impedit\"}"
                         },
                         "description": "",
                         "auth": {
@@ -97,6 +60,112 @@
                             "raw": "{{baseUrl}}\/v1\/auth\/logout"
                         },
                         "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "User Sign Up",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "v1\/registration",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/v1\/registration"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"firstname\":\"sit\",\"middlename\":\"non\",\"lastname\":\"animi\",\"email\":\"est\",\"password\":\"qui\",\"password_confirmation\":\"quis\",\"group_id\":11}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Mark the authenticated user\u2019s email address as verified.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "v1\/email\/verify\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/v1\/email\/verify\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "eaque",
+                                    "description": "The ID of the verify."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Resend the email verification notification.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "v1\/email\/resend\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/v1\/email\/resend\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "cupiditate",
+                                    "description": "The ID of the resend."
+                                }
+                            ]
+                        },
+                        "method": "GET",
                         "header": [
                             {
                                 "key": "Content-Type",
