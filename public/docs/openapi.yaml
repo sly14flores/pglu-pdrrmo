@@ -7,6 +7,93 @@ servers:
   -
     url: 'http://api.pdrrmo.local'
 paths:
+  /v1/password/link:
+    post:
+      summary: 'Send email reset link'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Passwords
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: ''
+                  example: quas
+              required:
+                - email
+      security: []
+  /v1/password/reset:
+    post:
+      summary: 'Reset Password'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Passwords
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: ''
+                  example: sequi
+                token:
+                  type: string
+                  description: ''
+                  example: iste
+                password:
+                  type: string
+                  description: ''
+                  example: sed
+                password_confirmation:
+                  type: string
+                  description: ''
+                  example: molestiae
+              required:
+                - id
+                - token
+                - password
+                - password_confirmation
+      security: []
   /v1/auth/login:
     post:
       summary: "Login user\n\nLogin using email and password"
@@ -39,11 +126,11 @@ paths:
                 email:
                   type: string
                   description: ''
-                  example: nulla
+                  example: ex
                 password:
                   type: string
                   description: ''
-                  example: hic
+                  example: adipisci
               required:
                 - email
                 - password
@@ -109,31 +196,31 @@ paths:
                 firstname:
                   type: string
                   description: ''
-                  example: molestias
+                  example: repellat
                 middlename:
                   type: string
                   description: ''
-                  example: excepturi
+                  example: nesciunt
                 lastname:
                   type: string
                   description: ''
-                  example: et
+                  example: porro
                 email:
                   type: string
                   description: ''
-                  example: cum
+                  example: et
                 password:
                   type: string
                   description: ''
-                  example: rerum
+                  example: fugit
                 password_confirmation:
                   type: string
                   description: ''
-                  example: qui
+                  example: eaque
                 group_id:
                   type: integer
                   description: ''
-                  example: 19
+                  example: 1
               required:
                 - firstname
                 - lastname
@@ -168,7 +255,7 @@ paths:
         in: path
         name: id
         description: 'The ID of the verify.'
-        example: voluptatem
+        example: ipsam
         required: true
         schema:
           type: string
@@ -206,106 +293,19 @@ paths:
         in: path
         name: id
         description: 'The ID of the resend.'
-        example: nisi
+        example: libero
         required: true
         schema:
           type: string
-  /v1/password/link:
-    post:
-      summary: 'Send email reset link'
-      description: ''
-      parameters:
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses: {  }
-      tags:
-        - Passwords
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                  description: ''
-                  example: neque
-              required:
-                - email
-      security: []
-  /v1/password/reset:
-    post:
-      summary: 'Reset Password'
-      description: ''
-      parameters:
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses: {  }
-      tags:
-        - Passwords
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                id:
-                  type: string
-                  description: ''
-                  example: distinctio
-                token:
-                  type: string
-                  description: ''
-                  example: voluptates
-                password:
-                  type: string
-                  description: ''
-                  example: recusandae
-                password_confirmation:
-                  type: string
-                  description: ''
-                  example: qui
-              required:
-                - id
-                - token
-                - password
-                - password_confirmation
-      security: []
 tags:
+  -
+    name: Passwords
+    description: ''
   -
     name: Authentication
     description: ''
   -
     name: Endpoints
-    description: ''
-  -
-    name: Passwords
     description: ''
 components:
   securitySchemes:

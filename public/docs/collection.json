@@ -10,11 +10,79 @@
     ],
     "info": {
         "name": "PDRRMO",
-        "_postman_id": "0675561e-ae00-44f4-baaa-b143dd6fa0a6",
+        "_postman_id": "869612ac-4a6d-4eb4-9e4b-1fa114cde09e",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
     "item": [
+        {
+            "name": "Passwords",
+            "description": "",
+            "item": [
+                {
+                    "name": "Send email reset link",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "v1\/password\/link",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/v1\/password\/link"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"quas\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Reset Password",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "v1\/password\/reset",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/v1\/password\/reset"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"id\":\"sequi\",\"token\":\"iste\",\"password\":\"sed\",\"password_confirmation\":\"molestiae\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
         {
             "name": "Authentication",
             "description": "",
@@ -41,7 +109,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"nulla\",\"password\":\"hic\"}"
+                            "raw": "{\"email\":\"ex\",\"password\":\"adipisci\"}"
                         },
                         "description": "",
                         "auth": {
@@ -103,7 +171,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"firstname\":\"molestias\",\"middlename\":\"excepturi\",\"lastname\":\"et\",\"email\":\"cum\",\"password\":\"rerum\",\"password_confirmation\":\"qui\",\"group_id\":19}"
+                            "raw": "{\"firstname\":\"repellat\",\"middlename\":\"nesciunt\",\"lastname\":\"porro\",\"email\":\"et\",\"password\":\"fugit\",\"password_confirmation\":\"eaque\",\"group_id\":1}"
                         },
                         "description": "",
                         "auth": {
@@ -124,7 +192,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "voluptatem",
+                                    "value": "ipsam",
                                     "description": "The ID of the verify."
                                 }
                             ]
@@ -160,7 +228,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "nisi",
+                                    "value": "libero",
                                     "description": "The ID of the resend."
                                 }
                             ]
@@ -178,74 +246,6 @@
                         ],
                         "body": null,
                         "description": ""
-                    },
-                    "response": []
-                }
-            ]
-        },
-        {
-            "name": "Passwords",
-            "description": "",
-            "item": [
-                {
-                    "name": "Send email reset link",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "v1\/password\/link",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/v1\/password\/link"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"email\":\"neque\"}"
-                        },
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "Reset Password",
-                    "request": {
-                        "url": {
-                            "host": "{{baseUrl}}",
-                            "path": "v1\/password\/reset",
-                            "query": [],
-                            "raw": "{{baseUrl}}\/v1\/password\/reset"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"id\":\"distinctio\",\"token\":\"voluptates\",\"password\":\"recusandae\",\"password_confirmation\":\"qui\"}"
-                        },
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
                     },
                     "response": []
                 }

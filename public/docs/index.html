@@ -70,6 +70,19 @@
                                                 </ul>
                     
                     <ul id="tocify-header-2" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="passwords">
+                    <a href="#passwords">Passwords</a>
+                </li>
+                                    <ul id="tocify-subheader-passwords" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="passwords-POSTv1-password-link">
+                        <a href="#passwords-POSTv1-password-link">Send email reset link</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="passwords-POSTv1-password-reset">
+                        <a href="#passwords-POSTv1-password-reset">Reset Password</a>
+                    </li>
+                                                    </ul>
+                            </ul>
+                    <ul id="tocify-header-3" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="authentication">
                     <a href="#authentication">Authentication</a>
                 </li>
@@ -86,7 +99,7 @@ Logout user</a>
                     </li>
                                                     </ul>
                             </ul>
-                    <ul id="tocify-header-3" class="tocify-header">
+                    <ul id="tocify-header-4" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="endpoints">
                     <a href="#endpoints">Endpoints</a>
                 </li>
@@ -99,19 +112,6 @@ Logout user</a>
                     </li>
                                     <li class="tocify-item level-2" data-unique="endpoints-GETv1-email-resend--id-">
                         <a href="#endpoints-GETv1-email-resend--id-">Resend the email verification notification.</a>
-                    </li>
-                                                    </ul>
-                            </ul>
-                    <ul id="tocify-header-4" class="tocify-header">
-                <li class="tocify-item level-1" data-unique="passwords">
-                    <a href="#passwords">Passwords</a>
-                </li>
-                                    <ul id="tocify-subheader-passwords" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="passwords-POSTv1-password-link">
-                        <a href="#passwords-POSTv1-password-link">Send email reset link</a>
-                    </li>
-                                    <li class="tocify-item level-2" data-unique="passwords-POSTv1-password-reset">
-                        <a href="#passwords-POSTv1-password-reset">Reset Password</a>
                     </li>
                                                     </ul>
                             </ul>
@@ -146,6 +146,242 @@ You can switch the language used with the tabs at the top right (or from the nav
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.</p>
 
+        <h1 id="passwords">Passwords</h1>
+
+    
+
+            <h2 id="passwords-POSTv1-password-link">Send email reset link</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTv1-password-link">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://api.pdrrmo.local/v1/password/link" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"email\": \"quas\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://api.pdrrmo.local/v1/password/link"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "quas"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTv1-password-link">
+</span>
+<span id="execution-results-POSTv1-password-link" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTv1-password-link"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTv1-password-link"></code></pre>
+</span>
+<span id="execution-error-POSTv1-password-link" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTv1-password-link"></code></pre>
+</span>
+<form id="form-POSTv1-password-link" data-method="POST"
+      data-path="v1/password/link"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTv1-password-link', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTv1-password-link"
+                    onclick="tryItOut('POSTv1-password-link');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTv1-password-link"
+                    onclick="cancelTryOut('POSTv1-password-link');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTv1-password-link" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>v1/password/link</code></b>
+        </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="email"
+               data-endpoint="POSTv1-password-link"
+               value="quas"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+        </form>
+
+            <h2 id="passwords-POSTv1-password-reset">Reset Password</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTv1-password-reset">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://api.pdrrmo.local/v1/password/reset" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"id\": \"sequi\",
+    \"token\": \"iste\",
+    \"password\": \"sed\",
+    \"password_confirmation\": \"molestiae\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://api.pdrrmo.local/v1/password/reset"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "id": "sequi",
+    "token": "iste",
+    "password": "sed",
+    "password_confirmation": "molestiae"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTv1-password-reset">
+</span>
+<span id="execution-results-POSTv1-password-reset" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTv1-password-reset"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTv1-password-reset"></code></pre>
+</span>
+<span id="execution-error-POSTv1-password-reset" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTv1-password-reset"></code></pre>
+</span>
+<form id="form-POSTv1-password-reset" data-method="POST"
+      data-path="v1/password/reset"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTv1-password-reset', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTv1-password-reset"
+                    onclick="tryItOut('POSTv1-password-reset');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTv1-password-reset"
+                    onclick="cancelTryOut('POSTv1-password-reset');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTv1-password-reset" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>v1/password/reset</code></b>
+        </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>id</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="id"
+               data-endpoint="POSTv1-password-reset"
+               value="sequi"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>token</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="token"
+               data-endpoint="POSTv1-password-reset"
+               value="iste"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="password"
+               data-endpoint="POSTv1-password-reset"
+               value="sed"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>password_confirmation</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="password_confirmation"
+               data-endpoint="POSTv1-password-reset"
+               value="molestiae"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+        </form>
+
         <h1 id="authentication">Authentication</h1>
 
     
@@ -169,8 +405,8 @@ Login using email and password</h2>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"email\": \"nulla\",
-    \"password\": \"hic\"
+    \"email\": \"ex\",
+    \"password\": \"adipisci\"
 }"
 </code></pre></div>
 
@@ -186,8 +422,8 @@ const headers = {
 };
 
 let body = {
-    "email": "nulla",
-    "password": "hic"
+    "email": "ex",
+    "password": "adipisci"
 };
 
 fetch(url, {
@@ -245,7 +481,7 @@ fetch(url, {
                 <input type="text"
                name="email"
                data-endpoint="POSTv1-auth-login"
-               value="nulla"
+               value="ex"
                data-component="body" hidden>
     <br>
 
@@ -255,7 +491,7 @@ fetch(url, {
                 <input type="text"
                name="password"
                data-endpoint="POSTv1-auth-login"
-               value="hic"
+               value="adipisci"
                data-component="body" hidden>
     <br>
 
@@ -374,13 +610,13 @@ fetch(url, {
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"firstname\": \"molestias\",
-    \"middlename\": \"excepturi\",
-    \"lastname\": \"et\",
-    \"email\": \"cum\",
-    \"password\": \"rerum\",
-    \"password_confirmation\": \"qui\",
-    \"group_id\": 19
+    \"firstname\": \"repellat\",
+    \"middlename\": \"nesciunt\",
+    \"lastname\": \"porro\",
+    \"email\": \"et\",
+    \"password\": \"fugit\",
+    \"password_confirmation\": \"eaque\",
+    \"group_id\": 1
 }"
 </code></pre></div>
 
@@ -396,13 +632,13 @@ const headers = {
 };
 
 let body = {
-    "firstname": "molestias",
-    "middlename": "excepturi",
-    "lastname": "et",
-    "email": "cum",
-    "password": "rerum",
-    "password_confirmation": "qui",
-    "group_id": 19
+    "firstname": "repellat",
+    "middlename": "nesciunt",
+    "lastname": "porro",
+    "email": "et",
+    "password": "fugit",
+    "password_confirmation": "eaque",
+    "group_id": 1
 };
 
 fetch(url, {
@@ -460,7 +696,7 @@ fetch(url, {
                 <input type="text"
                name="firstname"
                data-endpoint="POSTv1-registration"
-               value="molestias"
+               value="repellat"
                data-component="body" hidden>
     <br>
 
@@ -470,7 +706,7 @@ fetch(url, {
                 <input type="text"
                name="middlename"
                data-endpoint="POSTv1-registration"
-               value="excepturi"
+               value="nesciunt"
                data-component="body" hidden>
     <br>
 
@@ -480,7 +716,7 @@ fetch(url, {
                 <input type="text"
                name="lastname"
                data-endpoint="POSTv1-registration"
-               value="et"
+               value="porro"
                data-component="body" hidden>
     <br>
 
@@ -490,7 +726,7 @@ fetch(url, {
                 <input type="text"
                name="email"
                data-endpoint="POSTv1-registration"
-               value="cum"
+               value="et"
                data-component="body" hidden>
     <br>
 
@@ -500,7 +736,7 @@ fetch(url, {
                 <input type="text"
                name="password"
                data-endpoint="POSTv1-registration"
-               value="rerum"
+               value="fugit"
                data-component="body" hidden>
     <br>
 
@@ -510,7 +746,7 @@ fetch(url, {
                 <input type="text"
                name="password_confirmation"
                data-endpoint="POSTv1-registration"
-               value="qui"
+               value="eaque"
                data-component="body" hidden>
     <br>
 
@@ -520,7 +756,7 @@ fetch(url, {
                 <input type="number"
                name="group_id"
                data-endpoint="POSTv1-registration"
-               value="19"
+               value="1"
                data-component="body" hidden>
     <br>
 
@@ -540,14 +776,14 @@ fetch(url, {
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://api.pdrrmo.local/v1/email/verify/voluptatem" \
+    --get "http://api.pdrrmo.local/v1/email/verify/ipsam" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://api.pdrrmo.local/v1/email/verify/voluptatem"
+    "http://api.pdrrmo.local/v1/email/verify/ipsam"
 );
 
 const headers = {
@@ -609,7 +845,7 @@ fetch(url, {
                 <input type="text"
                name="id"
                data-endpoint="GETv1-email-verify--id-"
-               value="voluptatem"
+               value="ipsam"
                data-component="url" hidden>
     <br>
 <p>The ID of the verify.</p>
@@ -630,7 +866,7 @@ fetch(url, {
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://api.pdrrmo.local/v1/email/resend/nisi" \
+    --get "http://api.pdrrmo.local/v1/email/resend/libero" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -638,7 +874,7 @@ fetch(url, {
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://api.pdrrmo.local/v1/email/resend/nisi"
+    "http://api.pdrrmo.local/v1/email/resend/libero"
 );
 
 const headers = {
@@ -709,248 +945,12 @@ fetch(url, {
                 <input type="text"
                name="id"
                data-endpoint="GETv1-email-resend--id-"
-               value="nisi"
+               value="libero"
                data-component="url" hidden>
     <br>
 <p>The ID of the resend.</p>
             </p>
                     </form>
-
-        <h1 id="passwords">Passwords</h1>
-
-    
-
-            <h2 id="passwords-POSTv1-password-link">Send email reset link</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-POSTv1-password-link">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "http://api.pdrrmo.local/v1/password/link" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"email\": \"neque\"
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://api.pdrrmo.local/v1/password/link"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "email": "neque"
-};
-
-fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre></div>
-
-</span>
-
-<span id="example-responses-POSTv1-password-link">
-</span>
-<span id="execution-results-POSTv1-password-link" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-POSTv1-password-link"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTv1-password-link"></code></pre>
-</span>
-<span id="execution-error-POSTv1-password-link" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTv1-password-link"></code></pre>
-</span>
-<form id="form-POSTv1-password-link" data-method="POST"
-      data-path="v1/password/link"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTv1-password-link', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTv1-password-link"
-                    onclick="tryItOut('POSTv1-password-link');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTv1-password-link"
-                    onclick="cancelTryOut('POSTv1-password-link');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTv1-password-link" hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>v1/password/link</code></b>
-        </p>
-                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-        <p>
-            <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-                <input type="text"
-               name="email"
-               data-endpoint="POSTv1-password-link"
-               value="neque"
-               data-component="body" hidden>
-    <br>
-
-        </p>
-        </form>
-
-            <h2 id="passwords-POSTv1-password-reset">Reset Password</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-POSTv1-password-reset">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "http://api.pdrrmo.local/v1/password/reset" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"id\": \"distinctio\",
-    \"token\": \"voluptates\",
-    \"password\": \"recusandae\",
-    \"password_confirmation\": \"qui\"
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://api.pdrrmo.local/v1/password/reset"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "id": "distinctio",
-    "token": "voluptates",
-    "password": "recusandae",
-    "password_confirmation": "qui"
-};
-
-fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre></div>
-
-</span>
-
-<span id="example-responses-POSTv1-password-reset">
-</span>
-<span id="execution-results-POSTv1-password-reset" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-POSTv1-password-reset"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTv1-password-reset"></code></pre>
-</span>
-<span id="execution-error-POSTv1-password-reset" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTv1-password-reset"></code></pre>
-</span>
-<form id="form-POSTv1-password-reset" data-method="POST"
-      data-path="v1/password/reset"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTv1-password-reset', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTv1-password-reset"
-                    onclick="tryItOut('POSTv1-password-reset');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTv1-password-reset"
-                    onclick="cancelTryOut('POSTv1-password-reset');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTv1-password-reset" hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>v1/password/reset</code></b>
-        </p>
-                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-        <p>
-            <b><code>id</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-                <input type="text"
-               name="id"
-               data-endpoint="POSTv1-password-reset"
-               value="distinctio"
-               data-component="body" hidden>
-    <br>
-
-        </p>
-                <p>
-            <b><code>token</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-                <input type="text"
-               name="token"
-               data-endpoint="POSTv1-password-reset"
-               value="voluptates"
-               data-component="body" hidden>
-    <br>
-
-        </p>
-                <p>
-            <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-                <input type="text"
-               name="password"
-               data-endpoint="POSTv1-password-reset"
-               value="recusandae"
-               data-component="body" hidden>
-    <br>
-
-        </p>
-                <p>
-            <b><code>password_confirmation</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-                <input type="text"
-               name="password_confirmation"
-               data-endpoint="POSTv1-password-reset"
-               value="qui"
-               data-component="body" hidden>
-    <br>
-
-        </p>
-        </form>
 
     
 
