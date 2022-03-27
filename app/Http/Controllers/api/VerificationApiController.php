@@ -91,10 +91,6 @@ class VerificationApiController extends Controller
             return $this->jsonErrorResourceNotFound();
         }
 
-//		if (Gate::denies('user-email-resend', $user)) {
-//            return $this->jsonErrorUnauthorizedAccess();
-//        }
-
         if ($user->isEmailVerified()) {
             return $this->jsonSuccessResponse(null, 200, 'Email already verified.');
         }
