@@ -26,16 +26,16 @@ class UserSignUpController extends Controller
      * @bodyParam lastname string required
      * @bodyParam email string required
      * @bodyParam password string required
-     * @bodyParam password_confirmation string
+     * @bodyParam password_confirmation string required
      *
      */
     public function __invoke(Request $request)
     {
         $rules = [
-            'firstname' => 'string',
+            'firstname' => 'required|string',
             'middlename' => 'string',
-            'lastname' => 'string',
-            'email' => ['string', 'email', 'unique:users'],
+            'lastname' => 'required|string',
+            'email' => ['required', 'string', 'email', 'unique:users'],
             'password' => ['required','min:8','confirmed'],
             'password_confirmation' => ['required','string','min:8','same:password'],
             'group_id' => 'integer',

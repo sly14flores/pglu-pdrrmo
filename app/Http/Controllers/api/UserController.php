@@ -58,10 +58,10 @@ class UserController extends Controller
     private function rules($isNew,$user=null)
     {
         $rules = [
-            'firstname' => 'string',
+            'firstname' => 'required|string',
             'middlename' => 'string',
-            'lastname' => 'string',
-            'email' => ['string', 'email', 'unique:users'],
+            'lastname' => 'required|string',
+            'email' => ['required', 'string', 'email', 'unique:users'],
             'group_id' => 'integer',
         ];
 

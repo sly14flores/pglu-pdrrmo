@@ -9,6 +9,9 @@ use App\Http\Controllers\api\VerificationApiController;
 use App\Http\Controllers\api\ResetPasswordController;
 
 use App\Http\Controllers\api\UserController;
+use App\Http\Controllers\api\GroupController;
+use App\Http\Controllers\api\ResponseTypeController;
+use App\Http\Controllers\api\CommunicationModeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,11 +56,56 @@ Route::prefix('v1')->group(function() {
     ],[
         'only' => ['index']
     ]);
-
     Route::apiResources([
         'user' => UserController::class,
     ],[
         'except' => ['index']
     ]);
+
+    /**
+     * Groups
+     */
+    Route::apiResources([
+        'groups' => GroupController::class,
+    ],[
+        'only' => ['index']
+    ]);
+    Route::apiResources([
+        'group' => GroupController::class,
+    ],[
+        'except' => ['index']
+    ]);
+
+    Route::prefix('maintenance')->group(function() {
+
+        /**
+         * Response Types
+         */
+        Route::apiResources([
+            'responsetypes' => ResponseTypeController::class,
+        ],[
+            'only' => ['index']
+        ]);
+        Route::apiResources([
+            'responsetype' => ResponseTypeController::class,
+        ],[
+            'except' => ['index']
+        ]);
+
+        /**
+         * Communication Modes
+         */
+        Route::apiResources([
+            'communicationmodes' => CommunicationModeController::class,
+        ],[
+            'only' => ['index']
+        ]);
+        Route::apiResources([
+            'communicationmode' => CommunicationModeController::class,
+        ],[
+            'except' => ['index']
+        ]);
+
+    });
 
 });
