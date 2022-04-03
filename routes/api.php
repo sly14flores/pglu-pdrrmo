@@ -8,6 +8,8 @@ use App\Http\Controllers\api\UserSignUpController;
 use App\Http\Controllers\api\VerificationApiController;
 use App\Http\Controllers\api\ResetPasswordController;
 
+use App\Http\Controllers\api\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -42,5 +44,20 @@ Route::prefix('v1')->group(function() {
         Route::post('link', [ResetPasswordController::class, 'sendResetLinkEmail']);
         Route::post('reset', [ResetPasswordController::class, 'resetPassword']);
     });
+
+    /**
+     * Users
+     */
+    Route::apiResources([
+        'users' => UserController::class,
+    ],[
+        'only' => ['index']
+    ]);
+
+    Route::apiResources([
+        'user' => UserController::class,
+    ],[
+        'except' => ['index']
+    ]);
 
 });
