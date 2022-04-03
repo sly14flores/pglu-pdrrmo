@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 use App\Traits\Messages;
 use App\Traits\Dumper;
@@ -54,7 +55,7 @@ class UserController extends Controller
         //
     }
 
-    private function rules($isNew)
+    private function rules($isNew,$user=null)
     {
         $rules = [
             'firstname' => 'string',
@@ -63,6 +64,10 @@ class UserController extends Controller
             'email' => ['string', 'email', 'unique:users'],
             'group_id' => 'integer',
         ];
+
+        if (!$isNew) {
+            $rules['email'] = Rule::unique('users')->ignore($user);
+        }
 
         return $rules;
     }
@@ -135,14 +140,25 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @group Users
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Get user
+     * 
+     * Show User Information
+     * 
+     * @authenticated
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+
+        if (is_null($user)) {
+			return $this->jsonErrorResourceNotFound();
+        }
+
+		$data = new UserResource($user);
+
+        return $this->jsonSuccessResponse($data, 200);
     }
 
     /**
@@ -157,26 +173,61 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @group Users
+     * 
+     * Edit user
+     * 
+     * Update user information
+     * 
+     * @bodyParam firstname string required
+     * @bodyParam middlename string
+     * @bodyParam lastname string
+     * @bodyParam email string
+     * @bodyParam group_id integer
+     * 
+     * @authenticated
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+
+        if (is_null($user)) {
+			return $this->jsonErrorResourceNotFound();
+        }
+
+        $validator = Validator::make($request->all(), $this->rules(false,$user));
+
+        if ($validator->fails()) {
+            return $this->jsonErrorDataValidation();
+        }
+
+        $data = $validator->valid();
+        $user->fill($data);
+        $user->save();
+
+        return $this->jsonSuccessResponse(null, 200, "User info succesfully updated");
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @group Users
+     * 
+     * Delete User
+     * 
+     * Delete user information
+     * 
+     * @authenticated
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+
+        if (is_null($user)) {
+			return $this->jsonErrorResourceNotFound();
+        }  
+
+        $user->delete();
+
+        return $this->jsonDeleteSuccessResponse(); 
     }
 
 }
