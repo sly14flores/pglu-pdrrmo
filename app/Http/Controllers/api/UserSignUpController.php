@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use App\Traits\Messages;
 use App\Models\User;
 
+use App\Http\Resources\LoginResource;
 use App\Http\Resources\UserSignUpResource;
 
 class UserSignUpController extends Controller
@@ -70,7 +71,17 @@ class UserSignUpController extends Controller
 
             DB::commit();
 
-            return $this->jsonSuccessResponse(null, 200, "Registration Successful");
+            /**
+             * Login user
+             */
+            $token = $user->createToken('authToken');
+            $user->token = $token->accessToken;
+            $user->default_password = $user->isDefaultPassword();
+            $user->email_verified = $user->isEmailVerified();
+    
+            $data = new LoginResource($user);
+
+            return $this->jsonSuccessResponse($data, 200, "Registration Successful");
 
         } catch (\Exception $e) {
 
