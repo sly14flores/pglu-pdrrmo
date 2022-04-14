@@ -26,7 +26,7 @@ class LoginResource extends JsonResource
             'lastname' => $this->lastname,
             'token' => $this->token,
             'group_id' => (is_null($this->group))?null:$this->group->id,
-            // 'group_name' => (is_null($this->group))?null:$this->group->name,
+            'group_name' => (is_null($this->group))?'No group':$this->group->name,
             'default_password' => $this->default_password,
             'email_verified' => $this->email_verified,
             // 'role' => $authorizations->decode($role),
