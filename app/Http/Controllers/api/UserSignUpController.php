@@ -41,10 +41,14 @@ class UserSignUpController extends Controller
             'group_id' => 'integer',
         ];
 
-        $validator = Validator::make($request->all(), $rules);
+        $messages = [
+            'email.unique' => 'Email already exists'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
-            return $this->jsonErrorDataValidation();
+            return $this->jsonErrorDataValidation($validator->errors());
         }
 
         $data = $validator->valid();
