@@ -7,6 +7,7 @@ use App\Http\Controllers\api\LoginController;
 use App\Http\Controllers\api\UserSignUpController;
 use App\Http\Controllers\api\VerificationApiController;
 use App\Http\Controllers\api\ResetPasswordController;
+use App\Http\Controllers\api\ChangePasswordController;
 
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\GroupController;
@@ -46,6 +47,7 @@ Route::prefix('v1')->group(function() {
     Route::prefix('password')->group(function() {
         Route::post('link', [ResetPasswordController::class, 'sendResetLinkEmail']);
         Route::post('reset', [ResetPasswordController::class, 'resetPassword']);
+        Route::put('change', [ChangePasswordController::class, 'update']);
     });
 
     /**
