@@ -197,7 +197,7 @@ class ResetPasswordController extends Controller
      * 
      * Reset Password
      * 
-     * @bodyParam id string required
+     * @bodyParam email string required
      * @bodyParam token string required
      * @bodyParam password string required
      * @bodyParam password_confirmation string required
@@ -215,7 +215,7 @@ class ResetPasswordController extends Controller
 
         $data = $validator->valid();
 
-		$user = User::find($request->id);
+		$user = User::where('email',$request->email)->first();
 		
 		if (is_null($user)) {
             return $this->jsonFailedResponse(null, 422, 'User does not exist.');
@@ -230,8 +230,7 @@ class ResetPasswordController extends Controller
             return $this->jsonFailedResponse(null, 422, 'Password cannot be the same with old password.');
 		}
 
-        $payload = $request->only('password', 'password_confirmation', 'token');
-        $payload['email'] = $user->email;
+        $payload = $request->only('password', 'password_confirmation', 'token', 'email');
 
 		$status = Password::reset(
 			$payload,
@@ -256,7 +255,7 @@ class ResetPasswordController extends Controller
 	{
 		return [
             'token' => ['required'],		
-            // 'email' => ['required','email'],
+            'email' => ['required','email'],
             'password' => ['required','min:8','confirmed'],
             'password_confirmation' => ['required','string','min:8','same:password']
         ];
