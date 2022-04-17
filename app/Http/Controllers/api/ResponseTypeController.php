@@ -57,6 +57,7 @@ class ResponseTypeController extends Controller
         $rules = [
             'name' => 'required|string',
             'description' => 'string',
+            'short_name' => 'string',
         ];
 
         return $rules;
@@ -78,6 +79,7 @@ class ResponseTypeController extends Controller
      *
      * @bodyParam name string required
      * @bodyParam description string
+     * @bodyParam short_name string
      *
      * @authenticated
      */

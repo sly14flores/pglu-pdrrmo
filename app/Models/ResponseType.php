@@ -19,5 +19,6 @@ class ResponseType extends Model
     protected $fillable = [
         'name',
         'description',
+        'shot_name',
     ];
 }
