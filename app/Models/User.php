@@ -11,12 +11,13 @@ use Laravel\Passport\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
 
 use App\Traits\TraitUuid;
+use \OwenIt\Auditing\Contracts\Auditable;
 
 use App\Notifications\VerifyApiEmail;
 
-class User extends Authenticatable
+class User extends Authenticatable implements Auditable
 {
-    use HasApiTokens, HasFactory, Notifiable, TraitUuid;
+    use HasApiTokens, HasFactory, Notifiable, TraitUuid, \OwenIt\Auditing\Auditable;
 
     /**
      * The attributes that are mass assignable.
