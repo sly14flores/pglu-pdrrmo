@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\CommunicationMode;
 use App\Models\ResponseType;
+use App\Models\Group;
 
 use App\Traits\Messages;
 use App\Traits\Dumper;
@@ -51,4 +52,21 @@ class SelectionsController extends Controller
 
         return $this->jsonSuccessResponse($data, 200);
     }
+
+    /**
+     * @group Selections
+     * 
+     * Groups selection
+     * 
+     * For dropdown or select data
+     * 
+     * @authenticated
+     */
+    public function Groups()
+    {
+        $data = Group::all(['id','name']);
+
+        return $this->jsonSuccessResponse($data, 200);
+    }
+
 }
