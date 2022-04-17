@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Traits\TraitUuid;
+use \OwenIt\Auditing\Contracts\Auditable;
 
-class Group extends Model
+class Group extends Model implements Auditable
 {
-    use HasFactory, TraitUuid;
+    use HasFactory, TraitUuid, \OwenIt\Auditing\Auditable;
 
     /**
      * The attributes that are mass assignable.

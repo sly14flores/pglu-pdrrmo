@@ -179,6 +179,8 @@ return [
 
         Mailjet\LaravelMailjet\MailjetServiceProvider::class,
 
+        OwenIt\Auditing\AuditingServiceProvider::class,
+
     ],
 
     /*
