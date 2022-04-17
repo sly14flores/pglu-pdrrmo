@@ -46,6 +46,7 @@ return [
         'user_agent' => OwenIt\Auditing\Resolvers\UserAgentResolver::class,
         'url'        => OwenIt\Auditing\Resolvers\UrlResolver::class,
         'user_id'    => App\AuditResolvers\UserResolver::class,
+        'user_type'    => App\AuditResolvers\UserTypeResolver::class,
     ],
 
     /*
