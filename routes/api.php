@@ -8,6 +8,7 @@ use App\Http\Controllers\api\UserSignUpController;
 use App\Http\Controllers\api\VerificationApiController;
 use App\Http\Controllers\api\ResetPasswordController;
 use App\Http\Controllers\api\ChangePasswordController;
+use App\Http\Controllers\api\SelectionsController;
 
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\GroupController;
@@ -107,6 +108,16 @@ Route::prefix('v1')->group(function() {
         ],[
             'except' => ['index']
         ]);
+
+    });
+
+    /**
+     * Selections
+     */
+    Route::prefix('selections')->group(function() {
+
+        Route::get('communication-modes', [SelectionsController::class, 'communicationModes']);
+        Route::get('response-types', [SelectionsController::class, 'responseTypes']);
 
     });
 
