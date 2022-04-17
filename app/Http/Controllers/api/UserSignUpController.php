@@ -39,7 +39,7 @@ class UserSignUpController extends Controller
             'email' => ['required', 'string', 'email', 'unique:users'],
             'password' => ['required','min:8','confirmed'],
             'password_confirmation' => ['required','string','min:8','same:password'],
-            'group_id' => 'integer',
+            'group_id' => 'string',
         ];
 
         $messages = [
