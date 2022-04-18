@@ -124,8 +124,8 @@ Route::prefix('v1')->group(function() {
 
 });
 
-Route::prefix('api')->group(function() {
+// Route::prefix('api')->group(function() {
 
-    Route::get('v1/email/verify/{id}', [VerificationApiController::class, 'verify'])->name('verification.verify');
+//     Route::get('v1/email/verify/{id}', [VerificationApiController::class, 'verify'])->name('verification.verify');
 
-});
+// });
