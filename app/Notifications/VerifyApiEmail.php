@@ -32,13 +32,7 @@ class VerifyApiEmail extends VerifyEmailBase implements ShouldQueue
             'verificationapi.verify', Carbon::now()->addMinutes(60), ['id' => $notifiable->getKey()]
         );
 
-        if (App::environment('staging', 'production')) {
-            $temporarySignedURL =  URL::temporarySignedRoute(
-                'verification.verify', Carbon::now()->addMinutes(60), ['id' => $notifiable->getKey()]
-            );
-        };
-
-        // $this->dumpToSlack($temporarySignedURL);
+        $this->dumpToSlack($temporarySignedURL);
 
         // return $frontend_route_url . 'queryURL=' . urlencode($temporarySignedURL);
         $ex = explode("verify",$temporarySignedURL);
