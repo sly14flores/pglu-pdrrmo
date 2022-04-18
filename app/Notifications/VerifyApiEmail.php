@@ -25,8 +25,7 @@ class VerifyApiEmail extends VerifyEmailBase implements ShouldQueue
     protected function verificationUrl($notifiable)
     {
         /** Frontend URL for confirming Emails */
-        // $frontend_route_url = env('FRONTEND_URL') . '/verify-email/?';
-        $frontend_route_url = '/verify-email/?';
+        $frontend_route_url = env('FRONTEND_URL') . '/verify-email/?';
 
         $temporarySignedURL =  URL::temporarySignedRoute(
             'verificationapi.verify', Carbon::now()->addMinutes(60), ['id' => $notifiable->getKey()]
@@ -35,7 +34,9 @@ class VerifyApiEmail extends VerifyEmailBase implements ShouldQueue
         // $this->dumpToSlack($temporarySignedURL);
 
         // return $frontend_route_url . 'queryURL=' . urlencode($temporarySignedURL);
-        return $frontend_route_url . 'queryURL=' . $temporarySignedURL;
+        $ex = explode("verify",$temporarySignedURL);
+        
+        return $frontend_route_url . 'queryURL=' . $ex[1];
     }
 
     /**
