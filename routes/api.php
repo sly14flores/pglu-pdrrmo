@@ -30,95 +30,99 @@ use App\Http\Controllers\api\CommunicationModeController;
 //     return $request->user();
 // });
 
-Route::prefix('v1')->group(function() {
+Route::prefix('api')->group(function() {
 
-    Route::prefix('auth')->group(function() {
-        Route::post('login', [LoginController::class, 'login']);
-        Route::post('logout', [LoginController::class, 'logout']);
-    });
+    Route::prefix('v1')->group(function() {
 
-    Route::post('registration', UserSignUpController::class);
+        Route::prefix('auth')->group(function() {
+            Route::post('login', [LoginController::class, 'login']);
+            Route::post('logout', [LoginController::class, 'logout']);
+        });
 
-    /**
-     * Email confirmation routes
-     */
-    Route::get('email/verify/{id}', [VerificationApiController::class, 'verify'])->name('verificationapi.verify');
-    Route::get('email/resend/{id}', [VerificationApiController::class, 'resend'])->name('verificationapi.resend');
-
-    Route::prefix('password')->group(function() {
-        Route::post('link', [ResetPasswordController::class, 'sendResetLinkEmail']);
-        Route::post('reset', [ResetPasswordController::class, 'resetPassword']);
-        Route::put('change', [ChangePasswordController::class, 'update']);
-    });
-
-    /**
-     * Users
-     */
-    Route::apiResources([
-        'users' => UserController::class,
-    ],[
-        'only' => ['index']
-    ]);
-    Route::apiResources([
-        'user' => UserController::class,
-    ],[
-        'except' => ['index']
-    ]);
-
-    /**
-     * Groups
-     */
-    Route::apiResources([
-        'groups' => GroupController::class,
-    ],[
-        'only' => ['index']
-    ]);
-    Route::apiResources([
-        'group' => GroupController::class,
-    ],[
-        'except' => ['index']
-    ]);
-
-    Route::prefix('maintenance')->group(function() {
+        Route::post('registration', UserSignUpController::class);
 
         /**
-         * Response Types
+         * Email confirmation routes
+         */
+        Route::get('email/verify/{id}', [VerificationApiController::class, 'verify'])->name('verificationapi.verify');
+        Route::get('email/resend/{id}', [VerificationApiController::class, 'resend'])->name('verificationapi.resend');
+
+        Route::prefix('password')->group(function() {
+            Route::post('link', [ResetPasswordController::class, 'sendResetLinkEmail']);
+            Route::post('reset', [ResetPasswordController::class, 'resetPassword']);
+            Route::put('change', [ChangePasswordController::class, 'update']);
+        });
+
+        /**
+         * Users
          */
         Route::apiResources([
-            'responsetypes' => ResponseTypeController::class,
+            'users' => UserController::class,
         ],[
             'only' => ['index']
         ]);
         Route::apiResources([
-            'responsetype' => ResponseTypeController::class,
+            'user' => UserController::class,
         ],[
             'except' => ['index']
         ]);
 
         /**
-         * Communication Modes
+         * Groups
          */
         Route::apiResources([
-            'communicationmodes' => CommunicationModeController::class,
+            'groups' => GroupController::class,
         ],[
             'only' => ['index']
         ]);
         Route::apiResources([
-            'communicationmode' => CommunicationModeController::class,
+            'group' => GroupController::class,
         ],[
             'except' => ['index']
         ]);
 
-    });
+        Route::prefix('maintenance')->group(function() {
 
-    /**
-     * Selections
-     */
-    Route::prefix('selections')->group(function() {
+            /**
+             * Response Types
+             */
+            Route::apiResources([
+                'responsetypes' => ResponseTypeController::class,
+            ],[
+                'only' => ['index']
+            ]);
+            Route::apiResources([
+                'responsetype' => ResponseTypeController::class,
+            ],[
+                'except' => ['index']
+            ]);
 
-        Route::get('communication-modes', [SelectionsController::class, 'communicationModes']);
-        Route::get('response-types', [SelectionsController::class, 'responseTypes']);
-        Route::get('groups', [SelectionsController::class, 'groups']);
+            /**
+             * Communication Modes
+             */
+            Route::apiResources([
+                'communicationmodes' => CommunicationModeController::class,
+            ],[
+                'only' => ['index']
+            ]);
+            Route::apiResources([
+                'communicationmode' => CommunicationModeController::class,
+            ],[
+                'except' => ['index']
+            ]);
+
+        });
+
+        /**
+         * Selections
+         */
+        Route::prefix('selections')->group(function() {
+
+            Route::get('communication-modes', [SelectionsController::class, 'communicationModes']);
+            Route::get('response-types', [SelectionsController::class, 'responseTypes']);
+            Route::get('groups', [SelectionsController::class, 'groups']);
+
+        });
 
     });
 
