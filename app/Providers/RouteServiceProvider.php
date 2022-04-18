@@ -31,17 +31,22 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
-            if (App::environment('local')) {
-                Route::prefix('api')
-                    ->middleware('api')
-                    ->group(base_path('routes/api.php'));
-            }
 
-            if (App::environment('staging', 'production')) {
-                Route::domain(env('API_DOMAIN'))
-                    ->middleware('api')
-                    ->group(base_path('routes/api.php'));
-            }
+            Route::domain(env('API_DOMAIN'))
+            ->middleware('api')
+            ->group(base_path('routes/api.php'));
+
+            // if (App::environment('local')) {
+            //     Route::prefix('api')
+            //         ->middleware('api')
+            //         ->group(base_path('routes/api.php'));
+            // }
+
+            // if (App::environment('staging', 'production')) {
+            //     Route::domain(env('API_DOMAIN'))
+            //         ->middleware('api')
+            //         ->group(base_path('routes/api.php'));
+            // }
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));

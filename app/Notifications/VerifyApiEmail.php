@@ -9,6 +9,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Auth\Notifications\VerifyEmail as VerifyEmailBase;
+use Illuminate\Support\Facades\App;
 
 use App\Traits\Dumper;
 
@@ -35,9 +36,13 @@ class VerifyApiEmail extends VerifyEmailBase implements ShouldQueue
 
         // return $frontend_route_url . 'queryURL=' . urlencode($temporarySignedURL);
         $ex = explode("verify",$temporarySignedURL);
-        
-        return $frontend_route_url . 'queryURL=' . $temporarySignedURL;
-        // return $frontend_route_url . 'queryURL=' . $ex[1];
+        $params = "/v1/email/verify".$ex[1];
+        if (App::environment('staging', 'production')) {
+            $params = "/api".$params;
+        }
+
+        return $frontend_route_url . 'queryURL=' . $params;
+        // return $frontend_route_url . 'queryURL=' . $temporarySignedURL;
     }
 
     /**
