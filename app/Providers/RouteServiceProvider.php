@@ -32,9 +32,13 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->routes(function () {
 
-            Route::domain(env('API_DOMAIN'))
-            ->middleware('api')
-            ->group(base_path('routes/api.php'));
+            // Route::domain(env('API_DOMAIN'))
+            // ->middleware('api')
+            // ->group(base_path('routes/api.php'));
+
+            Route::prefix('api')
+                ->middleware('api')
+                ->group(base_path('routes/api.php'));
 
             // if (App::environment('local')) {
             //     Route::prefix('api')
