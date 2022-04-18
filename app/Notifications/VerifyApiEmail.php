@@ -29,7 +29,7 @@ class VerifyApiEmail extends VerifyEmailBase implements ShouldQueue
         $frontend_route_url = env('FRONTEND_URL') . '/verify-email/?';
 
         $temporarySignedURL =  URL::temporarySignedRoute(
-            'verification.verify', Carbon::now()->addMinutes(60), ['id' => $notifiable->getKey()]
+            'verificationapi.verify', Carbon::now()->addMinutes(60), ['id' => $notifiable->getKey()]
         );
 
         $this->dumpToSlack($temporarySignedURL);
