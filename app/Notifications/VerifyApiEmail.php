@@ -36,7 +36,8 @@ class VerifyApiEmail extends VerifyEmailBase implements ShouldQueue
         // return $frontend_route_url . 'queryURL=' . urlencode($temporarySignedURL);
         $ex = explode("verify",$temporarySignedURL);
         
-        return $frontend_route_url . 'queryURL=' . $ex[1];
+        return $frontend_route_url . 'queryURL=' . $temporarySignedURL;
+        // return $frontend_route_url . 'queryURL=' . $ex[1];
     }
 
     /**
