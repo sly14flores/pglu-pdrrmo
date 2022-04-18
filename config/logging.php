@@ -114,6 +114,30 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'be_errors_local' => [
+            'driver' => 'slack',
+            'url' => env('SLACK_BE_LOG_ERRORS_LOCAL_CHANNEL'),
+            'username' => 'sly@christian.com.ph',
+            'emoji' => ':boom:',
+            'level' => env('LOG_LEVEL', 'critical'),
+        ],         
+
+        'be_errors_live' => [
+            'driver' => 'slack',
+            'url' => env('SLACK_BE_LOG_ERRORS_LIVE_CHANNEL'),
+            'username' => 'sly@christian.com.ph',
+            'emoji' => ':boom:',
+            'level' => env('LOG_LEVEL', 'critical'),
+        ],
+
+        'dump_debug' => [
+            'driver' => 'slack',
+            'url' => env('LOG_SLACK_DUMP_URL'),
+            'username' => 'sly@christian.com.ph',
+            'emoji' => ':boom:',
+            'level' => env('LOG_LEVEL', 'critical'),
+        ],
     ],
 
 ];
