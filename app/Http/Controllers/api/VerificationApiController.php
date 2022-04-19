@@ -34,10 +34,6 @@ class VerificationApiController extends Controller
      */
     public function verify(Request $request)
     {
-        // $this->dumpToSlack($request);
-        // $this->dumpToSlack(parse_url($request->headers->get('origin'),  PHP_URL_HOST));
-
-        return [parse_url($request->headers->get('origin'),  PHP_URL_HOST)];
 
         $userID = $request['id'];
         $user = User::find($userID);
