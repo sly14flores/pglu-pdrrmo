@@ -34,6 +34,7 @@ class VerificationApiController extends Controller
      */
     public function verify(Request $request)
     {
+        $this->dumpToSlack($request['id']);
         $this->dumpToSlack($request->all());
 
         $userID = $request['id'];
