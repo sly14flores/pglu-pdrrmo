@@ -13,11 +13,12 @@ use App\Models\User;
 use Carbon\Carbon;
 
 use App\Traits\Messages;
+use App\Traits\Dumper;
 
 class VerificationApiController extends Controller
 {
 
-    use Messages;
+    use Messages, Dumper;
 
     public function __construct()
     {
@@ -33,6 +34,8 @@ class VerificationApiController extends Controller
      */
     public function verify(Request $request)
     {
+        $this->dumpToSlack($request->all());
+
         $userID = $request['id'];
         $user = User::find($userID);
 
