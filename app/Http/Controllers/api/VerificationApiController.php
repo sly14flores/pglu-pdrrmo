@@ -22,7 +22,7 @@ class VerificationApiController extends Controller
 
     public function __construct()
     {
-        // $this->middleware('signed')->only('verify');
+        $this->middleware('signed')->only('verify');
     }
 
     /**
