@@ -22,7 +22,7 @@ class VerificationApiController extends Controller
 
     public function __construct()
     {
-        $this->middleware('signed')->only('verify');
+        // $this->middleware('signed')->only('verify');
     }
 
     /**
@@ -34,8 +34,7 @@ class VerificationApiController extends Controller
      */
     public function verify(Request $request)
     {
-        $this->dumpToSlack($request['id']);
-        $this->dumpToSlack($request->all());
+        $this->dumpToSlack($request);
 
         $userID = $request['id'];
         $user = User::find($userID);
