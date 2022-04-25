@@ -59,10 +59,10 @@ class UserController extends Controller
     {
         $rules = [
             'firstname' => 'required|string',
-            'middlename' => 'string',
+            // 'middlename' => 'string',
             'lastname' => 'required|string',
             'email' => ['required', 'string', 'email', 'unique:users'],
-            'group_id' => 'integer',
+            'group_id' => 'string',
         ];
 
         if (!$isNew) {
@@ -90,7 +90,7 @@ class UserController extends Controller
      * @bodyParam middlename string
      * @bodyParam lastname string
      * @bodyParam email string
-     * @bodyParam group_id integer
+     * @bodyParam group_id string
      *
      * @authenticated
      */
@@ -99,7 +99,7 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), $this->rules(true));
 
         if ($validator->fails()) {
-            return $this->jsonErrorDataValidation();
+            return $this->jsonErrorDataValidation($validator->errors());
         }
 
         $data = $validator->valid();
