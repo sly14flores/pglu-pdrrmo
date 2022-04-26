@@ -72,4 +72,9 @@ class User extends Authenticatable implements Auditable
     {
         return Hash::check(env('DEFAULT_PASSWORD',12345678),$this->password);
     }
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
 }
