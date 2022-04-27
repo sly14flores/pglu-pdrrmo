@@ -64,6 +64,7 @@ Route::prefix('v1')->group(function() {
     ],[
         'except' => ['index']
     ]);
+    Route::delete('users', [UserController::class, 'batchDelete']);
 
     /**
      * Groups
