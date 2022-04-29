@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use Carbon\Carbon;
 
 use App\Traits\Messages;
 use App\Traits\Dumper;
@@ -32,13 +33,45 @@ class UserController extends Controller
      * Users list
      *
      * Paginated list of users
+     * @urlParam page integer
      *
      * @authenticated 
      */
-    public function index()
+    public function index(Request $request)
     {
+        /**
+         * name: ""
+         * dates: []
+         * tags: [
+         *  groups: []
+         * ]
+         */
+        $filters = json_decode($request->filters,true);
+        $groupsTag = $filters['tags']['groups'];
+        $dates = $filters['dates'];
+        $name = $filters['name'];
 
-        $users = User::latest()->paginate(10);
+        $users = User::where([]);
+
+        if (count($groupsTag)) {
+            $users = User::whereIn('group_id',$groupsTag);
+        }
+
+        if (count($dates)) {
+            if (count($dates)==2) {
+                $startDate = Carbon::parse($dates[0])->format("Y-m-d 00:00:00");
+                $endDate = Carbon::parse($dates[1])->addDays(1)->format("Y-m-d 00:00:00");
+                $users = $users->whereBetween('created_at',[$startDate,$endDate]);
+            } else {
+                $users = $users->where('created_at',$dates);
+            }
+        }
+
+        if ($name!="") {
+            $users = $users->where(DB::raw("CONCAT(`firstname`, ' ', `lastname`)"), 'LIKE', "%".$name."%");
+        }
+
+        $users = $users->latest()->paginate(10);
 
         $data = new UserResourceCollection($users);
 
