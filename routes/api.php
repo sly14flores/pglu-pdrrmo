@@ -79,6 +79,7 @@ Route::prefix('v1')->group(function() {
     ],[
         'except' => ['index']
     ]);
+    Route::delete('groups', [GroupController::class, 'batchDelete']);
 
     Route::prefix('maintenance')->group(function() {
 
