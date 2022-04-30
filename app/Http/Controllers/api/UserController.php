@@ -47,9 +47,9 @@ class UserController extends Controller
          * ]
          */
         $filters = json_decode($request->filters,true);
-        $groupsTag = $filters['tags']['groups'];
-        $dates = $filters['dates'];
-        $name = $filters['name'];
+        $groupsTag = (isset($filters['tags'])) ? $filters['tags']['groups'] : [];
+        $dates = (isset($filters['dates']))?$filters['dates']:[];
+        $name = (isset($filters['name']))?$filters['name']:"";
 
         $users = User::where([]);
 
