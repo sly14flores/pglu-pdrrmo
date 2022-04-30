@@ -56,7 +56,7 @@ class GroupController extends Controller
     {
         $rules = [
             'name' => 'required|string',
-            'description' => 'string',
+            // 'description' => 'string',
         ];
 
         return $rules;

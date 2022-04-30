@@ -4,6 +4,8 @@ namespace App\Http\Resources\Groups;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+use Carbon\Carbon;
+
 class GroupResource extends JsonResource
 {
     /**
@@ -14,6 +16,12 @@ class GroupResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        // return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'description' => $this->description,
+            'created_at' => Carbon::parse($this->created_at)->format('F j, Y'),
+        ];
     }
 }
