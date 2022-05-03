@@ -218,7 +218,7 @@ class ResponseTypeController extends Controller
 
         $data = $validator->valid();
 
-        Group::destroy($data['ids']);
+        ResponseType::destroy($data['ids']);
 
         return $this->jsonDeleteSuccessResponse(); 
     }

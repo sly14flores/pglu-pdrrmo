@@ -218,7 +218,7 @@ class CommunicationModeController extends Controller
 
         $data = $validator->valid();
 
-        Group::destroy($data['ids']);
+        CommunicationMode::destroy($data['ids']);
 
         return $this->jsonDeleteSuccessResponse(); 
     }
