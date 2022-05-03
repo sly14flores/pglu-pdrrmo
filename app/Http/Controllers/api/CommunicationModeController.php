@@ -56,8 +56,8 @@ class CommunicationModeController extends Controller
     {
         $rules = [
             'name' => 'required|string',
-            'description' => 'string',
             'short_name' => 'string',
+            // 'description' => 'string',
         ];
 
         return $rules;
@@ -88,7 +88,7 @@ class CommunicationModeController extends Controller
         $validator = Validator::make($request->all(), $this->rules(true));
 
         if ($validator->fails()) {
-            return $this->jsonErrorDataValidation();
+            return $this->jsonErrorDataValidation($validator->errors());
         }
 
         $data = $validator->valid();
