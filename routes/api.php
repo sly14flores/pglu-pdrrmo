@@ -96,6 +96,7 @@ Route::prefix('v1')->group(function() {
         ],[
             'except' => ['index']
         ]);
+        Route::delete('responsetypes', [ResponseTypeController::class, 'batchDelete']);
 
         /**
          * Communication Modes
@@ -110,6 +111,7 @@ Route::prefix('v1')->group(function() {
         ],[
             'except' => ['index']
         ]);
+        Route::delete('communicationmodes', [CommunicationModeController::class, 'batchDelete']);
 
     });
 

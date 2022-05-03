@@ -4,6 +4,8 @@ namespace App\Http\Resources\Maintenance;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+use Carbon\Carbon;
+
 class ResponseTypeResource extends JsonResource
 {
     /**
@@ -14,6 +16,13 @@ class ResponseTypeResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        // return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'short_name' => $this->short_name,
+            'description' => $this->description,
+            'created_at' => Carbon::parse($this->created_at)->format('F j, Y'),
+        ];
     }
 }

@@ -187,4 +187,39 @@ class CommunicationModeController extends Controller
 
         return $this->jsonDeleteSuccessResponse(); 
     }
+
+    /**
+     * @group Maintenance->CommunicationModes
+     * 
+     * Batch Delete Communication Modes
+     * 
+     * Delete communication modes information by IDs
+     * 
+     * @bodyParam ids string[] required
+     * 
+     * @authenticated
+     */
+    public function batchDelete(Request $request)
+    {
+
+        $rules = [
+            'ids' => 'required|array',
+        ];
+
+        $messages = [
+            'ids.required' => 'No groups IDs provided'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return $this->jsonErrorDataValidation($validator->errors());
+        }
+
+        $data = $validator->valid();
+
+        Group::destroy($data['ids']);
+
+        return $this->jsonDeleteSuccessResponse(); 
+    }
 }
