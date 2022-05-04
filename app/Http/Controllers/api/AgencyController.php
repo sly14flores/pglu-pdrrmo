@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\Validator;
 use App\Traits\Messages;
 use App\Traits\Dumper;
 
-use App\Models\ResponseType;
-use App\Http\Resources\Maintenance\ResponseTypeResource;
-use App\Http\Resources\Maintenance\ResponseTypeResourceCollection;
+use App\Models\Agency;
+use App\Http\Resources\Maintenance\AgencyResource;
+use App\Http\Resources\Maintenance\AgencyResourceCollection;
 
-class ResponseTypeController extends Controller
+class AgencyController extends Controller
 {
     use Messages, Dumper;
 
@@ -24,20 +24,20 @@ class ResponseTypeController extends Controller
     }
 
     /**
-     * @group Maintenance->ResponseTypes
+     * @group Maintenance->Agencies
      *
-     * Response Types list
+     * Agencies list
      *
-     * Paginated list of response types
+     * Paginated list of agencies
      *
      * @authenticated 
      */
     public function index()
     {
 
-        $response_types = ResponseType::latest()->paginate(10);
+        $rows = Agency::latest()->paginate(10);
 
-        $data = new ResponseTypeResourceCollection($response_types);
+        $data = new AgencyResourceCollection($rows);
 
         return $this->jsonSuccessResponse($data, 200);
     }
@@ -52,11 +52,10 @@ class ResponseTypeController extends Controller
         //
     }
 
-    private function rules($isNew,$response_type=null)
+    private function rules($isNew,$communication_mode=null)
     {
         $rules = [
             'name' => 'required|string',
-            'short_name' => 'string',
             // 'description' => 'string',
         ];
 
@@ -71,15 +70,14 @@ class ResponseTypeController extends Controller
     }
 
     /**
-     * @group Maintenance->ResponseTypes
+     * @group Maintenance->Agencies
      * 
-     * Add new response type
+     * Add new agency
      * 
-     * Response type input
+     * Agency input
      *
      * @bodyParam name string required
      * @bodyParam description string
-     * @bodyParam short_name string
      *
      * @authenticated
      */
@@ -88,36 +86,36 @@ class ResponseTypeController extends Controller
         $validator = Validator::make($request->all(), $this->rules(true));
 
         if ($validator->fails()) {
-            return $this->jsonErrorDataValidation();
+            return $this->jsonErrorDataValidation($validator->errors());
         }
 
         $data = $validator->valid();
 
-        $response_type = new ResponseType;
-        $response_type->fill($data);
-        $response_type->save();
+        $model = new Agency;
+        $model->fill($data);
+        $model->save();
 
-        return $this->jsonSuccessResponse(null, 200, "Response type succesfully added");
+        return $this->jsonSuccessResponse(null, 200, "Agency succesfully added");
     }
 
     /**
-     * @group Maintenance->ResponseTypes
+     * @group Maintenance->Agencies
      *
-     * Get response type
+     * Get agency
      * 
-     * Show Response Type Information
+     * Show Agency Information
      * 
      * @authenticated
      */
     public function show($id)
     {
-        $response_type = ResponseType::find($id);
+        $model = Agency::find($id);
 
-        if (is_null($response_type)) {
+        if (is_null($model)) {
 			return $this->jsonErrorResourceNotFound();
         }
 
-		$data = new ResponseTypeResource($response_type);
+		$data = new AgencyResource($model);
 
         return $this->jsonSuccessResponse($data, 200);
     }
@@ -134,67 +132,66 @@ class ResponseTypeController extends Controller
     }
 
     /**
-     * @group Maintenance->ResponseTypes
+     * @group Maintenance->Agencies
      * 
-     * Edit response type
+     * Edit agency
      * 
-     * Update response type information
+     * Update agency information
      *
      * @bodyParam name string required
      * @bodyParam description string
-     * @bodyParam short_name string
      * 
      * @authenticated
      */
     public function update(Request $request, $id)
     {
-        $response_type = ResponseType::find($id);
+        $model = Agency::find($id);
 
-        if (is_null($response_type)) {
+        if (is_null($model)) {
 			return $this->jsonErrorResourceNotFound();
         }
 
-        $validator = Validator::make($request->all(), $this->rules(false,$response_type));
+        $validator = Validator::make($request->all(), $this->rules(false,$model));
 
         if ($validator->fails()) {
             return $this->jsonErrorDataValidation();
         }
 
         $data = $validator->valid();
-        $response_type->fill($data);
-        $response_type->save();
+        $model->fill($data);
+        $model->save();
 
-        return $this->jsonSuccessResponse(null, 200, "Response type info succesfully updated");
+        return $this->jsonSuccessResponse(null, 200, "Agency info succesfully updated");
     }
 
     /**
-     * @group Maintenance->ResponseTypes
+     * @group Maintenance->Agencies
      * 
-     * Delete Response Type
+     * Delete Agency
      * 
-     * Delete response type information
+     * Delete agency information
      * 
      * @authenticated
      */
     public function destroy($id)
     {
-        $response_type = ResponseType::find($id);
+        $model = Agency::find($id);
 
-        if (is_null($response_type)) {
+        if (is_null($model)) {
 			return $this->jsonErrorResourceNotFound();
         }
 
-        $response_type->delete();
+        $model->delete();
 
         return $this->jsonDeleteSuccessResponse(); 
     }
 
     /**
-     * @group Maintenance->ResponseTypes
+     * @group Maintenance->Agencies
      * 
-     * Batch Delete Response Types
+     * Batch Delete Agencies
      * 
-     * Delete response types information by IDs
+     * Delete agencies information by IDs
      * 
      * @bodyParam ids string[] required
      * 
@@ -219,7 +216,7 @@ class ResponseTypeController extends Controller
 
         $data = $validator->valid();
 
-        ResponseType::destroy($data['ids']);
+        Agency::destroy($data['ids']);
 
         return $this->jsonDeleteSuccessResponse(); 
     }

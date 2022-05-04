@@ -142,6 +142,7 @@ class CommunicationModeController extends Controller
      *
      * @bodyParam name string required
      * @bodyParam description string
+     * @bodyParam short_name string
      * 
      * @authenticated
      */
@@ -207,7 +208,7 @@ class CommunicationModeController extends Controller
         ];
 
         $messages = [
-            'ids.required' => 'No groups IDs provided'
+            'ids.required' => 'No IDs provided'
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);

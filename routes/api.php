@@ -14,6 +14,7 @@ use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\GroupController;
 use App\Http\Controllers\api\ResponseTypeController;
 use App\Http\Controllers\api\CommunicationModeController;
+use App\Http\Controllers\api\AgencyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -112,6 +113,21 @@ Route::prefix('v1')->group(function() {
             'except' => ['index']
         ]);
         Route::delete('communicationmodes', [CommunicationModeController::class, 'batchDelete']);
+
+        /**
+         * Agencies
+         */
+        Route::apiResources([
+            'agencies' => AgencyController::class,
+        ],[
+            'only' => ['index']
+        ]);
+        Route::apiResources([
+            'agency' => AgencyController::class,
+        ],[
+            'except' => ['index']
+        ]);
+        Route::delete('agencies', [AgencyController::class, 'batchDelete']);
 
     });
 

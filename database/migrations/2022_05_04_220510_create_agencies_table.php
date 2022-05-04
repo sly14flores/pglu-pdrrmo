@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('incidents', function (Blueprint $table) {
-            $table->uuid('response_type_id')->nullable()->after('id');
+        Schema::create('agencies', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('name')->nullable();
+            $table->string('description')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('incidents', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('agencies');
     }
 };
