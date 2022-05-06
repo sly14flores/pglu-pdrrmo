@@ -15,6 +15,7 @@ use App\Http\Controllers\api\GroupController;
 use App\Http\Controllers\api\ResponseTypeController;
 use App\Http\Controllers\api\CommunicationModeController;
 use App\Http\Controllers\api\AgencyController;
+use App\Http\Controllers\api\FacilityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -128,6 +129,21 @@ Route::prefix('v1')->group(function() {
             'except' => ['index']
         ]);
         Route::delete('agencies', [AgencyController::class, 'batchDelete']);
+
+        /**
+         * Facilities
+         */
+        Route::apiResources([
+            'facilities' => FacilityController::class,
+        ],[
+            'only' => ['index']
+        ]);
+        Route::apiResources([
+            'facility' => FacilityController::class,
+        ],[
+            'except' => ['index']
+        ]);
+        Route::delete('facilities', [FacilityController::class, 'batchDelete']);
 
     });
 
