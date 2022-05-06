@@ -24,20 +24,20 @@ class VehicleController extends Controller
     }
 
     /**
-     * @group Maintenance->Agencies
+     * @group Vehicles
      *
-     * Agencies list
+     * Vehicles list
      *
-     * Paginated list of agencies
+     * Paginated list of vehicles
      *
      * @authenticated 
      */
     public function index()
     {
 
-        $rows = Agency::latest()->paginate(10);
+        $rows = Vehicle::latest()->paginate(10);
 
-        $data = new AgencyResourceCollection($rows);
+        $data = new VehicleResourceCollection($rows);
 
         return $this->jsonSuccessResponse($data, 200);
     }
@@ -70,11 +70,11 @@ class VehicleController extends Controller
     }
 
     /**
-     * @group Maintenance->Agencies
+     * @group Vehicles
      * 
-     * Add new agency
+     * Add new vehicle
      * 
-     * Agency input
+     * Vehicle input
      *
      * @bodyParam name string required
      * @bodyParam description string
@@ -91,31 +91,31 @@ class VehicleController extends Controller
 
         $data = $validator->valid();
 
-        $model = new Agency;
+        $model = new Vehicle;
         $model->fill($data);
         $model->save();
 
-        return $this->jsonSuccessResponse(null, 200, "Agency succesfully added");
+        return $this->jsonSuccessResponse(null, 200, "Vehicle succesfully added");
     }
 
     /**
-     * @group Maintenance->Agencies
+     * @group Vehicles
      *
-     * Get agency
+     * Get vehicle
      * 
-     * Show Agency Information
+     * Show Vehicle Information
      * 
      * @authenticated
      */
     public function show($id)
     {
-        $model = Agency::find($id);
+        $model = Vehicle::find($id);
 
         if (is_null($model)) {
 			return $this->jsonErrorResourceNotFound();
         }
 
-		$data = new AgencyResource($model);
+		$data = new VehicleResource($model);
 
         return $this->jsonSuccessResponse($data, 200);
     }
@@ -132,11 +132,11 @@ class VehicleController extends Controller
     }
 
     /**
-     * @group Maintenance->Agencies
+     * @group Vehicles
      * 
-     * Edit agency
+     * Edit vehicle
      * 
-     * Update agency information
+     * Update vehicle information
      *
      * @bodyParam name string required
      * @bodyParam description string
@@ -145,7 +145,7 @@ class VehicleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $model = Agency::find($id);
+        $model = Vehicle::find($id);
 
         if (is_null($model)) {
 			return $this->jsonErrorResourceNotFound();
@@ -161,21 +161,21 @@ class VehicleController extends Controller
         $model->fill($data);
         $model->save();
 
-        return $this->jsonSuccessResponse(null, 200, "Agency info succesfully updated");
+        return $this->jsonSuccessResponse(null, 200, "Vehicle info succesfully updated");
     }
 
     /**
-     * @group Maintenance->Agencies
+     * @group Vehicles
      * 
-     * Delete Agency
+     * Delete Vehicle
      * 
-     * Delete agency information
+     * Delete vehicle information
      * 
      * @authenticated
      */
     public function destroy($id)
     {
-        $model = Agency::find($id);
+        $model = Vehicle::find($id);
 
         if (is_null($model)) {
 			return $this->jsonErrorResourceNotFound();
@@ -187,11 +187,11 @@ class VehicleController extends Controller
     }
 
     /**
-     * @group Maintenance->Agencies
+     * @group Vehicles
      * 
-     * Batch Delete Agencies
+     * Batch Delete Vehicles
      * 
-     * Delete agencies information by IDs
+     * Delete vehicles information by IDs
      * 
      * @bodyParam ids string[] required
      * 
@@ -216,7 +216,7 @@ class VehicleController extends Controller
 
         $data = $validator->valid();
 
-        Agency::destroy($data['ids']);
+        Vehicle::destroy($data['ids']);
 
         return $this->jsonDeleteSuccessResponse(); 
     }

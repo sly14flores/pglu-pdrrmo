@@ -12,6 +12,7 @@ use App\Http\Controllers\api\SelectionsController;
 
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\GroupController;
+use App\Http\Controllers\api\VehicleController;
 use App\Http\Controllers\api\ResponseTypeController;
 use App\Http\Controllers\api\CommunicationModeController;
 use App\Http\Controllers\api\AgencyController;
@@ -82,6 +83,22 @@ Route::prefix('v1')->group(function() {
         'except' => ['index']
     ]);
     Route::delete('groups', [GroupController::class, 'batchDelete']);
+
+    /**
+     * Vehicles
+     */
+    Route::apiResources([
+        'vehicles' => VehicleController::class,
+    ],[
+        'only' => ['index']
+    ]);
+    Route::apiResources([
+        'vehicle' => VehicleController::class,
+    ],[
+        'except' => ['index']
+    ]);
+    Route::delete('vehicles', [VehicleController::class, 'batchDelete']);
+
 
     Route::prefix('maintenance')->group(function() {
 
