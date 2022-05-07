@@ -9,6 +9,7 @@ use App\Http\Controllers\api\VerificationApiController;
 use App\Http\Controllers\api\ResetPasswordController;
 use App\Http\Controllers\api\ChangePasswordController;
 use App\Http\Controllers\api\SelectionsController;
+use App\Http\Controllers\api\AddressesController;
 
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\GroupController;
@@ -34,6 +35,15 @@ use App\Http\Controllers\api\FacilityController;
 // });
 
 Route::prefix('v1')->group(function() {
+
+    Route::prefix('address')->group(function() {
+
+        Route::get('regions', [AddressesController::class, 'regions']);
+        Route::get('provinces/{code}', [AddressesController::class, 'provinces']);
+        Route::get('cities/{code}', [AddressesController::class, 'cities']);
+        Route::get('barangays/{code}', [AddressesController::class, 'barangays']);
+
+    });
 
     Route::prefix('auth')->group(function() {
         Route::post('login', [LoginController::class, 'login']);
