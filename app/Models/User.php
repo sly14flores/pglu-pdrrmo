@@ -77,4 +77,14 @@ class User extends Authenticatable implements Auditable
     {
         return $this->belongsTo(Group::class);
     }
+
+    public function deployedStaffs()
+    {
+        return $this->belongsToMany(Incident::class, 'incident_staff', 'user_id', 'incident_id');
+    }
+
+    public function deployedAgents()
+    {
+        return $this->belongsToMany(Incident::class, 'incident_agent', 'user_id', 'incident_id');
+    }
 }

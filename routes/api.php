@@ -18,6 +18,7 @@ use App\Http\Controllers\api\ResponseTypeController;
 use App\Http\Controllers\api\CommunicationModeController;
 use App\Http\Controllers\api\AgencyController;
 use App\Http\Controllers\api\FacilityController;
+use App\Http\Controllers\api\IncidentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,6 +110,21 @@ Route::prefix('v1')->group(function() {
     ]);
     Route::delete('vehicles', [VehicleController::class, 'batchDelete']);
 
+    /**
+     * Incidents
+     */
+    Route::apiResources([
+        'incidents' => IncidentController::class,
+    ],[
+        'only' => ['index']
+    ]);
+    Route::apiResources([
+        'incident' => IncidentController::class,
+    ],[
+        'except' => ['index']
+    ]);
+    Route::delete('incidents', [IncidentController::class, 'batchDelete']);
+
 
     Route::prefix('maintenance')->group(function() {
 
@@ -182,6 +198,10 @@ Route::prefix('v1')->group(function() {
         Route::get('communication-modes', [SelectionsController::class, 'communicationModes']);
         Route::get('response-types', [SelectionsController::class, 'responseTypes']);
         Route::get('groups', [SelectionsController::class, 'groups']);
+        Route::get('users', [SelectionsController::class, 'users']);
+        Route::get('agencies', [SelectionsController::class, 'agencies']);
+        Route::get('facilities', [SelectionsController::class, 'facilities']);
+        Route::get('vehicles', [SelectionsController::class, 'vehicles']);
 
     });
 

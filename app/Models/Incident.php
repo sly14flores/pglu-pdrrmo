@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use App\Traits\TraitUuid;
 use \OwenIt\Auditing\Contracts\Auditable;
 
-class Incident extends Mode implements Auditable
+class Incident extends Model implements Auditable
 {
     use HasFactory, TraitUuid, \OwenIt\Auditing\Auditable;
 
@@ -55,12 +55,46 @@ class Incident extends Mode implements Auditable
 
     public function responseType()
     {
-        $this->belongTo(ResponseType::class);
+        return $this->belongTo(ResponseType::class);
     }
 
     public function communicationMode()
     {
-        $this->belongsTo(CommunicationMode::class);
+        return $this->belongsTo(CommunicationMode::class);
+    }
+
+    public function agencies()
+    {
+        return $this->belongsToMany(Agency::class, 'incident_agency', 'incident_id', 'agency_id')->withTimestamps();
+    }
+
+    public function facilities()
+    {
+        return $this->belongsToMany(Facility::class, 'incident_facility', 'incident_id', 'facility_id')->withTimestamps();
+    }
+
+    /**
+     * Staffs deployed
+     */
+    public function staffs()
+    {
+        return $this->belongsToMany(User::class, 'incident_staff', 'incident_id', 'user_id')->withTimestamps();
+    }
+
+    /**
+     * Agents
+     */
+    public function agents()
+    {
+        return $this->belongsToMany(User::class, 'incident_agent', 'incident_id', 'user_id')->withTimestamps();
+    }
+
+    /**
+     * Deployed vehicles
+     */
+    public function vehicles()
+    {
+        return $this->belongsToMany(Vehicle::class, 'incident_vehicle', 'incident_id', 'vehicle_id')->withTimestamps();
     }
 
 }

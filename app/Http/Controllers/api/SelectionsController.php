@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use App\Models\CommunicationMode;
 use App\Models\ResponseType;
 use App\Models\Group;
+use App\Models\User;
+use App\Models\Agency;
+use App\Models\Facility;
+use App\Models\Vehicle;
 
 use App\Traits\Messages;
 use App\Traits\Dumper;
@@ -65,6 +69,77 @@ class SelectionsController extends Controller
     public function Groups()
     {
         $data = Group::all(['id','name']);
+
+        return $this->jsonSuccessResponse($data, 200);
+    }
+
+    /**
+     * @group Selections
+     * 
+     * Users selection
+     * 
+     * For dropdown or select data
+     * 
+     * @authenticated
+     */
+    public function users()
+    {
+        $data = User::all();
+
+        $data = $data->map(function($d) {
+            return [
+                'id' => $d->id,
+                'name' => "{$d->firstname} {$d->lastname}"
+            ];
+        });
+
+        return $this->jsonSuccessResponse($data, 200);
+    }
+
+    /**
+     * @group Selections
+     * 
+     * Agencies selection
+     * 
+     * For dropdown or select data
+     * 
+     * @authenticated
+     */
+    public function agencies()
+    {
+        $data = Agency::all(['id','name']);
+
+        return $this->jsonSuccessResponse($data, 200);
+    }
+
+    /**
+     * @group Selections
+     * 
+     * Facilities selection
+     * 
+     * For dropdown or select data
+     * 
+     * @authenticated
+     */
+    public function facilities()
+    {
+        $data = Facility::all(['id','name']);
+
+        return $this->jsonSuccessResponse($data, 200);
+    }
+
+    /**
+     * @group Selections
+     * 
+     * Vehicles selection
+     * 
+     * For dropdown or select data
+     * 
+     * @authenticated
+     */
+    public function vehicles()
+    {
+        $data = Vehicle::all(['id','name']);
 
         return $this->jsonSuccessResponse($data, 200);
     }

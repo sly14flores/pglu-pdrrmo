@@ -21,4 +21,9 @@ class Vehicle extends Model implements Auditable
         'name',
         'description',
     ];
+
+    public function incidents()
+    {
+        return $this->belongsToMany(Incident::class);
+    }
 }
