@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 use App\Traits\Messages;
 use App\Traits\Dumper;
@@ -52,12 +53,16 @@ class GroupController extends Controller
         //
     }
 
-    private function rules($isNew,$group=null)
+    private function rules($isNew,$model=null)
     {
         $rules = [
-            'name' => 'required|string',
+            'name' => 'required|string|unique:groups',
             // 'description' => 'string',
         ];
+
+        if (!$isNew) {
+            $rules['name'] = Rule::unique('groups')->ignore($model);
+        }
 
         return $rules;
     }
@@ -86,7 +91,7 @@ class GroupController extends Controller
         $validator = Validator::make($request->all(), $this->rules(true));
 
         if ($validator->fails()) {
-            return $this->jsonErrorDataValidation();
+            return $this->jsonErrorDataValidation($validator->errors());
         }
 
         $data = $validator->valid();
@@ -154,7 +159,7 @@ class GroupController extends Controller
         $validator = Validator::make($request->all(), $this->rules(false,$group));
 
         if ($validator->fails()) {
-            return $this->jsonErrorDataValidation();
+            return $this->jsonErrorDataValidation($validator->errors());
         }
 
         $data = $validator->valid();

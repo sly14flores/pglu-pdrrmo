@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 use App\Traits\Messages;
 use App\Traits\Dumper;
@@ -52,13 +53,18 @@ class ResponseTypeController extends Controller
         //
     }
 
-    private function rules($isNew,$response_type=null)
+    private function rules($isNew,$model=null)
     {
         $rules = [
-            'name' => 'required|string',
-            'short_name' => 'string',
+            'name' => 'required|string|unique:response_types',
+            'short_name' => 'string|unique:response_types',
             // 'description' => 'string',
         ];
+
+        if (!$isNew) {
+            $rules['name'] = Rule::unique('response_types')->ignore($model);
+            $rules['short_name'] = Rule::unique('response_types')->ignore($model);
+        }
 
         return $rules;
     }
@@ -88,7 +94,7 @@ class ResponseTypeController extends Controller
         $validator = Validator::make($request->all(), $this->rules(true));
 
         if ($validator->fails()) {
-            return $this->jsonErrorDataValidation();
+            return $this->jsonErrorDataValidation($validator->errors());
         }
 
         $data = $validator->valid();
@@ -157,7 +163,7 @@ class ResponseTypeController extends Controller
         $validator = Validator::make($request->all(), $this->rules(false,$response_type));
 
         if ($validator->fails()) {
-            return $this->jsonErrorDataValidation();
+            return $this->jsonErrorDataValidation($validator->errors());
         }
 
         $data = $validator->valid();

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 use App\Traits\Messages;
 use App\Traits\Dumper;
@@ -52,13 +53,18 @@ class CommunicationModeController extends Controller
         //
     }
 
-    private function rules($isNew,$communication_mode=null)
+    private function rules($isNew,$model=null)
     {
         $rules = [
-            'name' => 'required|string',
-            'short_name' => 'string',
+            'name' => 'required|string|unique:communication_modes',
+            'short_name' => 'string|unique:communication_modes',
             // 'description' => 'string',
         ];
+
+        if (!$isNew) {
+            $rules['name'] = Rule::unique('communication_modes')->ignore($model);
+            $rules['short_name'] = Rule::unique('communication_modes')->ignore($model);
+        }
 
         return $rules;
     }
@@ -157,7 +163,7 @@ class CommunicationModeController extends Controller
         $validator = Validator::make($request->all(), $this->rules(false,$communication_mode));
 
         if ($validator->fails()) {
-            return $this->jsonErrorDataValidation();
+            return $this->jsonErrorDataValidation($validator->errors());
         }
 
         $data = $validator->valid();
