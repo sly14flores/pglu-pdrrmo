@@ -55,7 +55,7 @@ class Incident extends Model implements Auditable
 
     public function responseType()
     {
-        return $this->belongTo(ResponseType::class);
+        return $this->belongsTo(ResponseType::class);
     }
 
     public function communicationMode()

@@ -6,6 +6,13 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class IncidentResourceCollection extends ResourceCollection
 {
+    /**
+     * The resource that this resource collects.
+     *
+     * @var string
+     */
+    public $collects = 'App\Http\Resources\Incidents\IncidentsListResource';
+
     public function __construct($resource)
     {
         $this->pagination = [

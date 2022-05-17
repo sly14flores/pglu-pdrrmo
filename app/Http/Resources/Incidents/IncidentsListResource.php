@@ -6,7 +6,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 use Carbon\Carbon;
 
-class IncidentResource extends JsonResource
+class IncidentsListResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,13 +16,14 @@ class IncidentResource extends JsonResource
      */
     public function toArray($request)
     {
-        // return parent::toArray($request);
         return [
             'id' => $this->id,
             'response_type_id' => $this->response_type_id,
-            'incident_date' => $this->incident_date,
-            'incident_time' => $this->incident_time,
+            'response_type' => (is_null($this->responseType))?null:$this->responseType->name,
+            'incident_date' => Carbon::parse($this->incident_date)->format('F j, Y'),
+            'incident_time' => Carbon::parse($this->incident_time)->format('H:i A'),
             'communication_mode_id' => $this->communication_mode_id,
+            'communication_mode' => (is_null($this->communicationMode))?null:$this->communicationMode->name,
             'requestor_name' => $this->requestor_name,
             'number_of_casualty' => $this->number_of_casualty,
             'incident_status' => $this->incident_status,
@@ -40,11 +41,11 @@ class IncidentResource extends JsonResource
             'starting_mileage' => $this->starting_mileage,
             'incident_site_mileage' => $this->incident_site_mileage,
             'ending_mileage' => $this->ending_mileage,
-            'agencies' => $this->agencies()->get()->pluck('id'),
-            'facilities' => $this->facilities()->get()->pluck('id'),
-            'staffs' => $this->staffs()->get()->pluck('id'),
-            'agents' => $this->agents()->get()->pluck('id'),
-            'vehicles' => $this->vehicles()->get()->pluck('id'),
+            'agencies' => $this->agencies()->get(),
+            'facilities' => $this->facilities()->get(),
+            'staffs' => $this->staffs()->get(),
+            'agents' => $this->agents()->get(),
+            'vehicles' => $this->vehicles()->get(),
             'created_at' => Carbon::parse($this->created_at)->format('F j, Y'),
         ];
     }
