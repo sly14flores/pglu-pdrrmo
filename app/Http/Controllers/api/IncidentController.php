@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 use App\Traits\Messages;
 use App\Traits\Dumper;
@@ -142,6 +143,14 @@ class IncidentController extends Controller
         DB::beginTransaction();
 
         try {
+
+            $data['incident_time'] = Carbon::parse($data['incident_time'])->format('H:i:s');
+            $data['time_depart_from_base'] = Carbon::parse($data['time_depart_from_base'])->format('H:i:s');
+            $data['time_arrive_at_incident_site'] = Carbon::parse($data['time_arrive_at_incident_site'])->format('H:i:s');
+            $data['time_depart_from_incident_site'] = Carbon::parse($data['time_depart_from_incident_site'])->format('H:i:s');
+            $data['time_arrive_at_facility'] = Carbon::parse($data['time_arrive_at_facility'])->format('H:i:s');
+            $data['time_depart_from_facility'] = Carbon::parse($data['time_depart_from_facility'])->format('H:i:s');
+            $data['time_arrive_at_base'] = Carbon::parse($data['time_arrive_at_base'])->format('H:i:s');
         
             $model = new Incident;
             $model->fill($data);
@@ -269,6 +278,14 @@ class IncidentController extends Controller
         DB::beginTransaction();
 
         try {
+
+            $data['incident_time'] = Carbon::parse($data['incident_time'])->format('H:i:s');
+            $data['time_depart_from_base'] = Carbon::parse($data['time_depart_from_base'])->format('H:i:s');
+            $data['time_arrive_at_incident_site'] = Carbon::parse($data['time_arrive_at_incident_site'])->format('H:i:s');
+            $data['time_depart_from_incident_site'] = Carbon::parse($data['time_depart_from_incident_site'])->format('H:i:s');
+            $data['time_arrive_at_facility'] = Carbon::parse($data['time_arrive_at_facility'])->format('H:i:s');
+            $data['time_depart_from_facility'] = Carbon::parse($data['time_depart_from_facility'])->format('H:i:s');
+            $data['time_arrive_at_base'] = Carbon::parse($data['time_arrive_at_base'])->format('H:i:s');
         
             $model->fill($data);
             $model->save();
