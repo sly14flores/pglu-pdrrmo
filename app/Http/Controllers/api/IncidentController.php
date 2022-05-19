@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 use App\Traits\Messages;
 use App\Traits\Dumper;
@@ -59,7 +60,7 @@ class IncidentController extends Controller
             'incident_date' => 'required|string',
             'incident_time' => 'required|string',
             'communication_mode_id' => 'required|string',
-            'requestor_name' => 'string',
+            // 'requestor_name' => 'string',
             'number_of_casualty' => 'integer',
             'incident_status' => 'boolean',
             'place_of_incident' => 'required|string',
@@ -67,15 +68,15 @@ class IncidentController extends Controller
             'city_municipality' => 'required|string',
             'what_happened' => 'required|string',
             'facility_referral' => 'boolean',
-            'time_depart_from_base' => 'string',
-            'time_arrive_at_incident_site' => 'string',
-            'time_depart_from_incident_site' => 'string',
-            'time_arrive_at_facility' => 'string',
-            'time_depart_from_facility' => 'string',
-            'time_arrive_at_base' => 'string',
-            'starting_mileage' => 'integer',
-            'incident_site_mileage' => 'integer',
-            'ending_mileage' => 'integer',
+            // 'time_depart_from_base' => 'string',
+            // 'time_arrive_at_incident_site' => 'string',
+            // 'time_depart_from_incident_site' => 'string',
+            // 'time_arrive_at_facility' => 'string',
+            // 'time_depart_from_facility' => 'string',
+            // 'time_arrive_at_base' => 'string',
+            // 'starting_mileage' => 'integer',
+            // 'incident_site_mileage' => 'integer',
+            // 'ending_mileage' => 'integer',
             'agencies' => 'array',
             'facilities' => 'array',
             'staffs' => 'array',
@@ -142,6 +143,14 @@ class IncidentController extends Controller
         DB::beginTransaction();
 
         try {
+
+            $data['incident_time'] = Carbon::parse($data['incident_time'])->format('H:i:s');
+            $data['time_depart_from_base'] = Carbon::parse($data['time_depart_from_base'])->format('H:i:s');
+            $data['time_arrive_at_incident_site'] = Carbon::parse($data['time_arrive_at_incident_site'])->format('H:i:s');
+            $data['time_depart_from_incident_site'] = Carbon::parse($data['time_depart_from_incident_site'])->format('H:i:s');
+            $data['time_arrive_at_facility'] = Carbon::parse($data['time_arrive_at_facility'])->format('H:i:s');
+            $data['time_depart_from_facility'] = Carbon::parse($data['time_depart_from_facility'])->format('H:i:s');
+            $data['time_arrive_at_base'] = Carbon::parse($data['time_arrive_at_base'])->format('H:i:s');
         
             $model = new Incident;
             $model->fill($data);
@@ -269,6 +278,14 @@ class IncidentController extends Controller
         DB::beginTransaction();
 
         try {
+
+            $data['incident_time'] = Carbon::parse($data['incident_time'])->format('H:i:s');
+            $data['time_depart_from_base'] = Carbon::parse($data['time_depart_from_base'])->format('H:i:s');
+            $data['time_arrive_at_incident_site'] = Carbon::parse($data['time_arrive_at_incident_site'])->format('H:i:s');
+            $data['time_depart_from_incident_site'] = Carbon::parse($data['time_depart_from_incident_site'])->format('H:i:s');
+            $data['time_arrive_at_facility'] = Carbon::parse($data['time_arrive_at_facility'])->format('H:i:s');
+            $data['time_depart_from_facility'] = Carbon::parse($data['time_depart_from_facility'])->format('H:i:s');
+            $data['time_arrive_at_base'] = Carbon::parse($data['time_arrive_at_base'])->format('H:i:s');
         
             $model->fill($data);
             $model->save();

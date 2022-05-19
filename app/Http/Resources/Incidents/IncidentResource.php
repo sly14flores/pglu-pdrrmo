@@ -16,6 +16,8 @@ class IncidentResource extends JsonResource
      */
     public function toArray($request)
     {
+        $now = Carbon::now()->format('Y-m-d');
+
         // return parent::toArray($request);
         return [
             'id' => $this->id,
@@ -31,12 +33,12 @@ class IncidentResource extends JsonResource
             'city_municipality' => $this->city_municipality,
             'what_happened' => $this->what_happened,
             'facility_referral' => $this->facility_referral,
-            'time_depart_from_base' => $this->time_depart_from_base,
-            'time_arrive_at_incident_site' => $this->time_arrive_at_incident_site,
-            'time_depart_from_incident_site' => $this->time_depart_from_incident_site,
-            'time_arrive_at_facility' => $this->time_arrive_at_facility,
-            'time_depart_from_facility' => $this->time_depart_from_facility,
-            'time_arrive_at_base' => $this->time_arrive_at_base,
+            'time_depart_from_base' => Carbon::parse($this->time_depart_from_base)->format('h:i A'),
+            'time_arrive_at_incident_site' => Carbon::parse($this->time_arrive_at_incident_site)->format('h:i A'),
+            'time_depart_from_incident_site' => Carbon::parse($this->time_depart_from_incident_site)->format('h:i A'),
+            'time_arrive_at_facility' => Carbon::parse($this->time_arrive_at_facility)->format('h:i A'),
+            'time_depart_from_facility' => Carbon::parse($this->time_depart_from_facility)->format('h:i A'),
+            'time_arrive_at_base' => Carbon::parse($this->time_arrive_at_base)->format('h:i A'),
             'starting_mileage' => $this->starting_mileage,
             'incident_site_mileage' => $this->incident_site_mileage,
             'ending_mileage' => $this->ending_mileage,
