@@ -21,6 +21,7 @@ class IncidentResource extends JsonResource
         // return parent::toArray($request);
         return [
             'id' => $this->id,
+            'incident_type_id' => $this->incident_type_id,
             'response_type_id' => $this->response_type_id,
             'incident_date' => $this->incident_date,
             'incident_time' => $this->incident_time,

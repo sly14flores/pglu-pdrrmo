@@ -213,6 +213,7 @@ Route::prefix('v1')->group(function() {
 
         Route::get('communication-modes', [SelectionsController::class, 'communicationModes']);
         Route::get('response-types', [SelectionsController::class, 'responseTypes']);
+        Route::get('incident-types', [SelectionsController::class, 'incidentTypes']);
         Route::get('groups', [SelectionsController::class, 'groups']);
         Route::get('users', [SelectionsController::class, 'users']);
         Route::get('agencies', [SelectionsController::class, 'agencies']);

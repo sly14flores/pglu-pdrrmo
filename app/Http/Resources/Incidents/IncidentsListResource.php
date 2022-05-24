@@ -18,6 +18,8 @@ class IncidentsListResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'incident_type_id' => $this->incident_type_id,
+            'incident_type' => (is_null($this->incidentType))?null:$this->incidentType->name,            
             'response_type_id' => $this->response_type_id,
             'response_type' => (is_null($this->responseType))?null:$this->responseType->name,
             'incident_date' => Carbon::parse($this->incident_date)->format('F j, Y'),
