@@ -22,4 +22,9 @@ class CommunicationMode extends Model implements Auditable
         'description',
         'short_name',
     ];
+
+    public function incidents()
+    {
+        return $this->hasMany(Incident::class);
+    }
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\CommunicationMode;
 use App\Models\ResponseType;
+use App\Models\IncidentType;
 use App\Models\Group;
 use App\Models\User;
 use App\Models\Agency;
@@ -53,6 +54,22 @@ class SelectionsController extends Controller
     public function responseTypes()
     {
         $data = ResponseType::all(['id','name']);
+
+        return $this->jsonSuccessResponse($data, 200);
+    }
+
+    /**
+     * @group Selections
+     * 
+     * Incident types selection
+     * 
+     * For dropdown or select data
+     * 
+     * @authenticated
+     */
+    public function incidentTypes()
+    {
+        $data = IncidentType::all(['id','name']);
 
         return $this->jsonSuccessResponse($data, 200);
     }

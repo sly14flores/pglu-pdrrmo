@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Carbon\Carbon;
+
 use App\Traits\TraitUuid;
 use \OwenIt\Auditing\Contracts\Auditable;
 
-class ResponseType extends Model implements Auditable
+class IncidentType extends Model implements Auditable
 {
     use HasFactory, TraitUuid, \OwenIt\Auditing\Auditable;
 
