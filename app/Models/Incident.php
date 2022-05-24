@@ -20,6 +20,7 @@ class Incident extends Model implements Auditable
      * @var array<int, string>
      */
     protected $fillable = [
+        'incident_type_id',
         'response_type_id',
         'incident_date',
         'incident_time',
@@ -52,6 +53,11 @@ class Incident extends Model implements Auditable
         'incident_status' => 'boolean',
         'facility_referral' => 'boolean',
     ];
+
+    public function incidentType()
+    {
+        return $this->belongsTo(IncidentType::class);
+    }
 
     public function responseType()
     {
