@@ -87,4 +87,9 @@ class User extends Authenticatable implements Auditable
     {
         return $this->belongsToMany(Incident::class, 'incident_agent', 'user_id', 'incident_id');
     }
+
+    public function medicals()
+    {
+        return $this->belongsToMany(Medical::class, 'medical_medic', 'user_id', 'medical_id')->withTimestamps();
+    }
 }
