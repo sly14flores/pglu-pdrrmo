@@ -20,6 +20,7 @@ use App\Http\Controllers\api\IncidentTypeController;
 use App\Http\Controllers\api\AgencyController;
 use App\Http\Controllers\api\FacilityController;
 use App\Http\Controllers\api\IncidentController;
+use App\Http\Controllers\api\AssistanceTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -203,6 +204,21 @@ Route::prefix('v1')->group(function() {
             'except' => ['index']
         ]);
         Route::delete('facilities', [FacilityController::class, 'batchDelete']);
+
+        /**
+         * Assistance Types
+         */
+        Route::apiResources([
+            'assistancetypes' => AssistanceTypeController::class,
+        ],[
+            'only' => ['index']
+        ]);
+        Route::apiResources([
+            'assistancetype' => AssistanceTypeController::class,
+        ],[
+            'except' => ['index']
+        ]);
+        Route::delete('assistancetypes', [AssistanceTypeController::class, 'batchDelete']);
 
     });
 

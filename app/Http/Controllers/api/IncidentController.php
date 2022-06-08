@@ -63,9 +63,12 @@ class IncidentController extends Controller
             // 'requestor_name' => 'string',
             'number_of_casualty' => 'integer',
             'incident_status' => 'boolean',
-            'place_of_incident' => 'required|string',
+            'landmark' => 'required|string',
+            // 'street_purok_sitio' => 'string',
             'barangay' => 'required|string',
             'city_municipality' => 'required|string',
+            'province' => 'required|string',
+            'region' => 'required|string',
             'what_happened' => 'required|string',
             'facility_referral' => 'boolean',
             // 'time_depart_from_base' => 'string',
@@ -108,9 +111,12 @@ class IncidentController extends Controller
      * @bodyParam requestor_name string
      * @bodyParam number_of_casualty integer
      * @bodyParam incident_status boolean
-     * @bodyParam place_of_incident string required
+     * @bodyParam landmark string required
+     * @bodyParam street_purok_sitio string
      * @bodyParam barangay string required
      * @bodyParam city_municipality string required
+     * @bodyParam province string required
+     * @bodyParam region string required
      * @bodyParam what_happened string required
      * @bodyParam facility_referral boolean
      * @bodyParam time_depart_from_base string
