@@ -106,4 +106,12 @@ class Incident extends Model implements Auditable
         return $this->belongsToMany(Vehicle::class, 'incident_vehicle', 'incident_id', 'vehicle_id')->withTimestamps();
     }
 
+    /**
+     * Medicals
+     */
+    public function medicals()
+    {
+        return $this->hasMany(Medical::class);
+    }
+
 }
