@@ -14,7 +14,6 @@ class Medical extends Model implements Auditable
 {
     use HasFactory, TraitUuid, \OwenIt\Auditing\Auditable;
 
-
     /**
      * The attributes that are mass assignable.
      *
@@ -28,6 +27,11 @@ class Medical extends Model implements Auditable
      * @var array
      */
     protected $casts = [];
+
+    public function complaints()
+    {
+        return $this->belongsToMany(Complaint::class, 'medical_complaint', 'medical_id', 'complaint_id')->withTimestamps();
+    }
 
     public function interventions()
     {

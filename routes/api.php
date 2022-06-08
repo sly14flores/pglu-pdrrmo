@@ -22,6 +22,7 @@ use App\Http\Controllers\api\FacilityController;
 use App\Http\Controllers\api\IncidentController;
 use App\Http\Controllers\api\AssistanceTypeController;
 use App\Http\Controllers\api\InterventionController;
+use App\Http\Controllers\api\ComplaintController;
 
 /*
 |--------------------------------------------------------------------------
@@ -235,6 +236,21 @@ Route::prefix('v1')->group(function() {
             'except' => ['index']
         ]);
         Route::delete('interventions', [InterventionController::class, 'batchDelete']);
+
+        /**
+         * Complaints
+         */
+        Route::apiResources([
+            'complaints' => ComplaintController::class,
+        ],[
+            'only' => ['index']
+        ]);
+        Route::apiResources([
+            'complaint' => ComplaintController::class,
+        ],[
+            'except' => ['index']
+        ]);
+        Route::delete('complaints', [ComplaintController::class, 'batchDelete']);
 
     });
 

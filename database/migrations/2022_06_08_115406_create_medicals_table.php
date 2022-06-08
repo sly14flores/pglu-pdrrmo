@@ -27,7 +27,6 @@ return new class extends Migration
             $table->string('street_purok_sitio')->nullable();
             $table->string('transport')->nullable();
             $table->uuid('facility_id')->nullable();
-            $table->string('complaint')->nullable();
             $table->timestamps();
         });
     }
