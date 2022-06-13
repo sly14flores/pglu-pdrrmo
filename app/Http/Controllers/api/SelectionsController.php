@@ -13,6 +13,8 @@ use App\Models\User;
 use App\Models\Agency;
 use App\Models\Facility;
 use App\Models\Vehicle;
+use App\Models\Intervention;
+use App\Models\Complaint;
 
 use App\Traits\Messages;
 use App\Traits\Dumper;
@@ -157,6 +159,38 @@ class SelectionsController extends Controller
     public function vehicles()
     {
         $data = Vehicle::all(['id','name']);
+
+        return $this->jsonSuccessResponse($data, 200);
+    }
+
+    /**
+     * @group Selections
+     * 
+     * Interventions selection
+     * 
+     * For dropdown or select data
+     * 
+     * @authenticated
+     */
+    public function interventions()
+    {
+        $data = Intervention::all(['id','name']);
+
+        return $this->jsonSuccessResponse($data, 200);
+    }
+
+    /**
+     * @group Selections
+     * 
+     * Complaints selection
+     * 
+     * For dropdown or select data
+     * 
+     * @authenticated
+     */
+    public function complaints()
+    {
+        $data = Complaint::all(['id','name']);
 
         return $this->jsonSuccessResponse($data, 200);
     }

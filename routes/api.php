@@ -267,6 +267,8 @@ Route::prefix('v1')->group(function() {
         Route::get('agencies', [SelectionsController::class, 'agencies']);
         Route::get('facilities', [SelectionsController::class, 'facilities']);
         Route::get('vehicles', [SelectionsController::class, 'vehicles']);
+        Route::get('interventions', [SelectionsController::class, 'interventions']);
+        Route::get('complaints', [SelectionsController::class, 'complaints']);
 
     });
 
