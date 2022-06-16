@@ -109,6 +109,7 @@ class IncidentController extends Controller
             'region' => ['string','required'],
             'province' => ['string','required'],
             'city_municipality' => ['string','required'],
+            'barangay' => ['string','required'],
             'street_purok_sitio' => ['string','nullable'],
             'transport' => ['string','required'],
             'facility_id' => ['string','required'],
