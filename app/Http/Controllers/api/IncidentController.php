@@ -85,12 +85,39 @@ class IncidentController extends Controller
             'staffs' => 'array',
             'agents' => 'array',
             'vehicles' => 'array',
+            'has_medical' => 'boolean',
         ];
 
         return $rules;
     }
 
     private function rulesMessages($isNew)
+    {
+        $messages = [];
+
+        return $messages;
+    }
+
+    private function medicalRules()
+    {
+        $rules = [
+            'noi_moi' => ['string','required'],
+            'is_covid19' => ['booelan','required'],
+            'patient_name' => ['string','required'],
+            'age' => ['integer','required'],
+            'gender' => ['string','required'],
+            'region' => ['string','required'],
+            'province' => ['string','required'],
+            'city_municipality' => ['string','required'],
+            'street_purok_sitio' => ['string','nullable'],
+            'transport' => ['string','required'],
+            'facility_id' => ['string','required'],
+        ];
+
+        return $rules;
+    }
+
+    private function medicalRulesMessages()
     {
         $messages = [];
 
@@ -176,6 +203,25 @@ class IncidentController extends Controller
             }
             if (isset($data['vehicles'])) {
                 $model->vehicles()->sync($data['vehicles']);
+            }
+
+            /**
+             * Medical
+             */
+            if ($request->has_medical) {
+
+                $childModel = new Medical;
+                $childValidator = Validator::make($request->medical, $this->medicalRules());
+
+                if ($childValidator->fails()) {
+                    return $this->jsonErrorDataValidation($childValidator->errors());
+                }
+
+                $childData = $childValidator->valid();
+
+                $childModel->fill($childData);
+                $model->medical()->save($childModel);
+
             }
 
             DB::commit();
