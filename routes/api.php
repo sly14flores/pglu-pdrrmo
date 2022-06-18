@@ -23,6 +23,7 @@ use App\Http\Controllers\api\IncidentController;
 use App\Http\Controllers\api\AssistanceTypeController;
 use App\Http\Controllers\api\InterventionController;
 use App\Http\Controllers\api\ComplaintController;
+use App\Http\Controllers\api\TransportTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -252,6 +253,21 @@ Route::prefix('v1')->group(function() {
         ]);
         Route::delete('complaints', [ComplaintController::class, 'batchDelete']);
 
+        /**
+         * Transport Types
+         */
+        Route::apiResources([
+            'transporttypes' => TransportTypeController::class,
+        ],[
+            'only' => ['index']
+        ]);
+        Route::apiResources([
+            'transporttype' => TransportTypeController::class,
+        ],[
+            'except' => ['index']
+        ]);
+        Route::delete('transporttypes', [TransportTypeController::class, 'batchDelete']);
+
     });
 
     /**
@@ -267,6 +283,9 @@ Route::prefix('v1')->group(function() {
         Route::get('agencies', [SelectionsController::class, 'agencies']);
         Route::get('facilities', [SelectionsController::class, 'facilities']);
         Route::get('vehicles', [SelectionsController::class, 'vehicles']);
+        Route::get('transport-types', [SelectionsController::class, 'transportTypes']);
+        Route::get('interventions', [SelectionsController::class, 'interventions']);
+        Route::get('complaints', [SelectionsController::class, 'complaints']);
 
     });
 

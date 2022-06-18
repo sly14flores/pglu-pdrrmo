@@ -18,7 +18,45 @@ class IncidentResource extends JsonResource
     {
         $now = Carbon::now()->format('Y-m-d');
 
-        // return parent::toArray($request);
+        $medical = [
+            'id' => '',
+            'noi_moi' => '',
+            'is_covid19' => false,
+            'patient_name' => '',
+            'age' => '',
+            'gender' => '',
+            'region' => '',
+            'province' => '',
+            'city_municipality' => '',
+            'barangay' => '',
+            'street_purok_sitio' => '',
+            'transport_type_id' => '',
+            'facility_id' => '',
+            'complaints' => [],
+            'interventions' => [],
+            'medics' => [],
+        ];
+        if ($this->medical != null) {
+            $medical = [
+                'id' => $this->medical->id,
+                'noi_moi' => $this->medical->noi_moi,
+                'is_covid19' => $this->medical->is_covid19,
+                'patient_name' => $this->medical->patient_name,
+                'age' => $this->medical->age,
+                'gender' => $this->medical->gender,
+                'region' => $this->medical->region,
+                'province' => $this->medical->province,
+                'city_municipality' => $this->medical->city_municipality,
+                'barangay' => $this->medical->barangay,
+                'street_purok_sitio' => $this->medical->street_purok_sitio,
+                'transport_type_id' => $this->medical->transport_type_id,
+                'facility_id' => $this->medical->facility_id,
+                'complaints' => $this->medical->complaints()->get()->pluck('id'),
+                'interventions' => $this->medical->interventions()->get()->pluck('id'),
+                'medics' => $this->medical->medics()->get()->pluck('id'),
+            ];
+        }
+
         return [
             'id' => $this->id,
             'incident_type_id' => $this->incident_type_id,
@@ -51,6 +89,8 @@ class IncidentResource extends JsonResource
             'staffs' => $this->staffs()->get()->pluck('id'),
             'agents' => $this->agents()->get()->pluck('id'),
             'vehicles' => $this->vehicles()->get()->pluck('id'),
+            'has_medical' => $this->medical != null,
+            'medical' => $medical,
             'created_at' => Carbon::parse($this->created_at)->format('F j, Y'),
         ];
     }

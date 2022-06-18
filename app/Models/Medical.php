@@ -19,14 +19,43 @@ class Medical extends Model implements Auditable
      *
      * @var array<int, string>
      */
-    protected $fillable = [];
+    protected $fillable = [
+        // 'incident_id',
+        'noi_moi',
+        'is_covid19',
+        'patient_name',
+        'age',
+        'gender',
+        'region',
+        'province',
+        'city_municipality',
+        'barangay',
+        'street_purok_sitio',
+        'transport_type_id',
+        'facility_id',
+    ];
 
     /**
      * The attributes that should be cast.
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'is_covid19' => 'boolean',
+    ];
+
+    public function transport()
+    {
+        return $this->belongsTo(TransportType::class);
+    }
+
+    /**
+     * Receiving facility
+     */
+    public function facility()
+    {
+        return $this->belongsTo(Facility::class);
+    }
 
     public function complaints()
     {
@@ -41,6 +70,11 @@ class Medical extends Model implements Auditable
     public function medics()
     {
         return $this->belongsToMany(User::class, 'medical_medic', 'medical_id', 'user_id')->withTimestamps();
+    }
+
+    public function incident()
+    {
+        return $this->belongsTo(Incident::class);
     }
 
 }
