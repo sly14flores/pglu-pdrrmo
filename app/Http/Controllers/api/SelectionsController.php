@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Models\Agency;
 use App\Models\Facility;
 use App\Models\Vehicle;
+use App\Models\TransportType;
 use App\Models\Intervention;
 use App\Models\Complaint;
 
@@ -159,6 +160,22 @@ class SelectionsController extends Controller
     public function vehicles()
     {
         $data = Vehicle::all(['id','name']);
+
+        return $this->jsonSuccessResponse($data, 200);
+    }
+
+    /**
+     * @group Selections
+     * 
+     * Transport types selection
+     * 
+     * For dropdown or select data
+     * 
+     * @authenticated
+     */
+    public function transportTypes()
+    {
+        $data = TransportType::all(['id','name']);
 
         return $this->jsonSuccessResponse($data, 200);
     }
