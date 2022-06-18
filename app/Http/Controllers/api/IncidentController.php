@@ -376,6 +376,43 @@ class IncidentController extends Controller
                 $model->vehicles()->sync($data['vehicles']);
             }
 
+            /**
+             * Medical
+             */
+            if ($request->has_medical) {
+
+                $medical_id = $request->medical['id'];
+
+                $childModel = new Medical;
+                if ($medical_id!=null) {
+                    $childModel = Medical::find($medical_id);
+                }
+
+                $childValidator = Validator::make($request->medical, $this->medicalRules());
+
+                if ($childValidator->fails()) {
+                    return $this->jsonErrorDataValidation($childValidator->errors());
+                }
+
+                $childData = $childValidator->valid();
+
+                $childModel->fill($childData);
+                $model->medical()->save($childModel);
+
+                if (isset($childData['complaints'])) {
+                    $childModel->complaints()->sync($childData['complaints']);
+                }
+
+                if (isset($childData['interventions'])) {
+                    $childModel->interventions()->sync($childData['interventions']);
+                }
+
+                if (isset($childData['medics'])) {
+                    $childModel->medics()->sync($childData['medics']);
+                }
+
+            }
+
             DB::commit();
 
             return $this->jsonSuccessResponse(null, 200, "Incident info succesfully updated");
