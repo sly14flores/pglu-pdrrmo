@@ -16,6 +16,8 @@ use App\Models\Incident;
 use App\Http\Resources\Incidents\IncidentResource;
 use App\Http\Resources\Incidents\IncidentResourceCollection;
 
+use App\Models\Medical;
+
 class IncidentController extends Controller
 {
     use Messages, Dumper;
@@ -102,7 +104,7 @@ class IncidentController extends Controller
     {
         $rules = [
             'noi_moi' => ['string','required'],
-            'is_covid19' => ['booelan','required'],
+            'is_covid19' => ['boolean','required'],
             'patient_name' => ['string','required'],
             'age' => ['integer','required'],
             'gender' => ['string','required'],
@@ -111,8 +113,11 @@ class IncidentController extends Controller
             'city_municipality' => ['string','required'],
             'barangay' => ['string','required'],
             'street_purok_sitio' => ['string','nullable'],
-            'transport' => ['string','required'],
+            'transport_type_id' => ['string','required'],
             'facility_id' => ['string','required'],
+            'complaints' => ['array','required'],
+            'interventions' => ['array','required'],
+            'medics' => ['array','required'],
         ];
 
         return $rules;
@@ -222,6 +227,18 @@ class IncidentController extends Controller
 
                 $childModel->fill($childData);
                 $model->medical()->save($childModel);
+
+                if (isset($childData['complaints'])) {
+                    $childModel->complaints()->sync($childData['complaints']);
+                }
+
+                if (isset($childData['interventions'])) {
+                    $childModel->interventions()->sync($childData['interventions']);
+                }
+
+                if (isset($childData['medics'])) {
+                    $childModel->medics()->sync($childData['medics']);
+                }
 
             }
 
