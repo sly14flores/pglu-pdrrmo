@@ -5,17 +5,14 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
-
 use App\Traits\Messages;
 use App\Traits\Dumper;
 
-use App\Models\Complaint;
-use App\Http\Resources\Maintenance\ComplaintResource;
-use App\Http\Resources\Maintenance\ComplaintResourceCollection;
+use App\Models\TransportType;
+use App\Http\Resources\Maintenance\TransportTypeResource;
+use App\Http\Resources\Maintenance\TransportTypeResourceCollection;
 
-class ComplaintController extends Controller
+class TransportTypeController extends Controller
 {
     use Messages, Dumper;
 
@@ -25,20 +22,20 @@ class ComplaintController extends Controller
     }
 
     /**
-     * @group Maintenance->Complaints
+     * @group Maintenance->Transport Types
      *
-     * Complaint list
+     * Transport type list
      *
-     * Paginated list of complaint
+     * Paginated list of transport type
      *
      * @authenticated 
      */
     public function index()
     {
 
-        $results = Complaint::latest()->paginate(10);
+        $results = TransportType::latest()->paginate(10);
 
-        $data = new ComplaintResourceCollection($results);
+        $data = new TransportTypeResourceCollection($results);
 
         return $this->jsonSuccessResponse($data, 200);
     }
@@ -56,14 +53,14 @@ class ComplaintController extends Controller
     private function rules($isNew,$model=null)
     {
         $rules = [
-            'name' => 'required|string|unique:complaints',
-            // 'short_name' => 'string|unique:complaints',
+            'name' => 'required|string|unique:transport_types',
+            // 'short_name' => 'string|unique:transport_types',
             // 'description' => 'string',
         ];
 
         if (!$isNew) {
-            $rules['name'] = Rule::unique('complaints')->ignore($model);
-            // $rules['short_name'] = Rule::unique('complaints')->ignore($model);
+            $rules['name'] = Rule::unique('transport_types')->ignore($model);
+            // $rules['short_name'] = Rule::unique('transport_types')->ignore($model);
         }
 
         return $rules;
@@ -77,11 +74,11 @@ class ComplaintController extends Controller
     }
 
     /**
-     * @group Maintenance->Complaints
+     * @group Maintenance->Transport Types
      * 
-     * Add new complaint
+     * Add new transport type
      * 
-     * Complaint input
+     * Transport type input
      *
      * @bodyParam name string required
      * @bodyParam description string
@@ -98,31 +95,31 @@ class ComplaintController extends Controller
 
         $data = $validator->valid();
 
-        $model = new Complaint;
+        $model = new TransportType;
         $model->fill($data);
         $model->save();
 
-        return $this->jsonSuccessResponse(null, 200, "Complaint succesfully added");
+        return $this->jsonSuccessResponse(null, 200, "Transport type succesfully added");
     }
 
     /**
-     * @group Maintenance->Complaints
+     * @group Maintenance->Transport Types
      *
-     * Get complaint
+     * Get transport type
      * 
-     * Show Complaint Information
+     * Show Transport Type Information
      * 
      * @authenticated
      */
     public function show($id)
     {
-        $model = Complaint::find($id);
+        $model = TransportType::find($id);
 
         if (is_null($model)) {
 			return $this->jsonErrorResourceNotFound();
         }
 
-		$data = new ComplaintResource($model);
+		$data = new TransportTypeResource($model);
 
         return $this->jsonSuccessResponse($data, 200);
     }
@@ -139,11 +136,11 @@ class ComplaintController extends Controller
     }
 
     /**
-     * @group Maintenance->Complaints
+     * @group Maintenance->Transport Types
      * 
-     * Edit complaint
+     * Edit transport type
      * 
-     * Update complaint information
+     * Update transport type information
      *
      * @bodyParam name string required
      * @bodyParam description string
@@ -152,7 +149,7 @@ class ComplaintController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $model = Complaint::find($id);
+        $model = TransportType::find($id);
 
         if (is_null($model)) {
 			return $this->jsonErrorResourceNotFound();
@@ -168,21 +165,21 @@ class ComplaintController extends Controller
         $model->fill($data);
         $model->save();
 
-        return $this->jsonSuccessResponse(null, 200, "Complaint info succesfully updated");
+        return $this->jsonSuccessResponse(null, 200, "Transport type info succesfully updated");
     }
 
     /**
-     * @group Maintenance->Complaints
+     * @group Maintenance->Transport Types
      * 
-     * Delete Complaint
+     * Delete Transport Type
      * 
-     * Delete Complaint information
+     * Delete Transport Type information
      * 
      * @authenticated
      */
     public function destroy($id)
     {
-        $model = Complaint::find($id);
+        $model = TransportType::find($id);
 
         if (is_null($model)) {
 			return $this->jsonErrorResourceNotFound();
@@ -194,11 +191,11 @@ class ComplaintController extends Controller
     }
 
     /**
-     * @group Maintenance->Complaints
+     * @group Maintenance->Transport Types
      * 
-     * Batch Delete Complaint
+     * Batch Delete Transport Type
      * 
-     * Delete complaint information by IDs
+     * Delete transport type information by IDs
      * 
      * @bodyParam ids string[] required
      * 
@@ -223,7 +220,7 @@ class ComplaintController extends Controller
 
         $data = $validator->valid();
 
-        Complaint::destroy($data['ids']);
+        TransportType::destroy($data['ids']);
 
         return $this->jsonDeleteSuccessResponse(); 
     }

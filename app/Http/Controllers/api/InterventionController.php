@@ -57,13 +57,13 @@ class InterventionController extends Controller
     {
         $rules = [
             'name' => 'required|string|unique:interventions',
-            'short_name' => 'string|unique:interventions',
+            // 'short_name' => 'string|unique:interventions',
             // 'description' => 'string',
         ];
 
         if (!$isNew) {
             $rules['name'] = Rule::unique('interventions')->ignore($model);
-            $rules['short_name'] = Rule::unique('interventions')->ignore($model);
+            // $rules['short_name'] = Rule::unique('interventions')->ignore($model);
         }
 
         return $rules;
@@ -85,7 +85,6 @@ class InterventionController extends Controller
      *
      * @bodyParam name string required
      * @bodyParam description string
-     * @bodyParam short_name string
      *
      * @authenticated
      */
@@ -148,7 +147,6 @@ class InterventionController extends Controller
      *
      * @bodyParam name string required
      * @bodyParam description string
-     * @bodyParam short_name string
      * 
      * @authenticated
      */
