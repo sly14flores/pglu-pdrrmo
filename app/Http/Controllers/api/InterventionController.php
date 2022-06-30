@@ -102,7 +102,7 @@ class InterventionController extends Controller
         $model->fill($data);
         $model->save();
 
-        return $this->jsonSuccessResponse(null, 200, "Intervention succesfully added");
+        return $this->jsonSuccessResponse($model, 200, "Intervention succesfully added");
     }
 
     /**
