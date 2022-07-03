@@ -102,7 +102,7 @@ class ComplaintController extends Controller
         $model->fill($data);
         $model->save();
 
-        return $this->jsonSuccessResponse(null, 200, "Complaint succesfully added");
+        return $this->jsonSuccessResponse($model, 200, "Complaint succesfully added");
     }
 
     /**
