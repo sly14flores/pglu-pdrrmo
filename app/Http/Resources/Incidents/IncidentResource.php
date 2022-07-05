@@ -52,8 +52,11 @@ class IncidentResource extends JsonResource
                 'transport_type_id' => $this->medical->transport_type_id,
                 'facility_id' => $this->medical->facility_id,
                 'complaints' => $this->medical->complaints()->get()->pluck('id'),
+                '_complaints' => $this->medical->complaints()->get()->pluck('name'),
                 'interventions' => $this->medical->interventions()->get()->pluck('id'),
+                '_interventions' => $this->medical->interventions()->get()->pluck('name'),
                 'medics' => $this->medical->medics()->get()->pluck('id'),
+                '_medics' => $this->medical->medics()->get(['firstname','lastname']),
             ];
         }
 
@@ -85,10 +88,15 @@ class IncidentResource extends JsonResource
             'incident_site_mileage' => $this->incident_site_mileage,
             'ending_mileage' => $this->ending_mileage,
             'agencies' => $this->agencies()->get()->pluck('id'),
+            '_agencies' => $this->agencies()->get()->pluck('name'),
             'facilities' => $this->facilities()->get()->pluck('id'),
+            '_facilities' => $this->facilities()->get()->pluck('name'),
             'staffs' => $this->staffs()->get()->pluck('id'),
+            '_staffs' => $this->staffs()->get(['firstname','lastname']),
             'agents' => $this->agents()->get()->pluck('id'),
+            '_agents' => $this->agents()->get(['firstname','lastname']),
             'vehicles' => $this->vehicles()->get()->pluck('id'),
+            '_vehicles' => $this->vehicles()->get()->pluck('name'),
             'has_medical' => $this->medical != null,
             'medical' => $medical,
             'created_at' => Carbon::parse($this->created_at)->format('F j, Y'),
