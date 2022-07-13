@@ -33,6 +33,8 @@ class Medical extends Model implements Auditable
         'street_purok_sitio',
         'transport_type_id',
         'facility_id',
+        'complaints',
+        'interventions',
     ];
 
     /**
@@ -57,15 +59,15 @@ class Medical extends Model implements Auditable
         return $this->belongsTo(Facility::class);
     }
 
-    public function complaints()
-    {
-        return $this->belongsToMany(Complaint::class, 'medical_complaint', 'medical_id', 'complaint_id')->withTimestamps();
-    }
+    // public function complaints()
+    // {
+    //     return $this->belongsToMany(Complaint::class, 'medical_complaint', 'medical_id', 'complaint_id')->withTimestamps();
+    // }
 
-    public function interventions()
-    {
-        return $this->belongsToMany(Intervention::class, 'medical_intervention', 'medical_id', 'intervention_id')->withTimestamps();
-    }
+    // public function interventions()
+    // {
+    //     return $this->belongsToMany(Intervention::class, 'medical_intervention', 'medical_id', 'intervention_id')->withTimestamps();
+    // }
 
     public function medics()
     {
