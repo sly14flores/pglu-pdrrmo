@@ -115,8 +115,8 @@ class IncidentController extends Controller
             'street_purok_sitio' => ['string','nullable'],
             'transport_type_id' => ['string','required'],
             'facility_id' => ['string','required'],
-            'complaints' => ['array','required'],
-            'interventions' => ['array','required'],
+            'complaints' => ['string','required'],
+            'interventions' => ['string','required'],
             'medics' => ['array','required'],
         ];
 
