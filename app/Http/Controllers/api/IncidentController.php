@@ -228,13 +228,13 @@ class IncidentController extends Controller
                 $childModel->fill($childData);
                 $model->medical()->save($childModel);
 
-                if (isset($childData['complaints'])) {
-                    $childModel->complaints()->sync($childData['complaints']);
-                }
+                // if (isset($childData['complaints'])) {
+                //     $childModel->complaints()->sync($childData['complaints']);
+                // }
 
-                if (isset($childData['interventions'])) {
-                    $childModel->interventions()->sync($childData['interventions']);
-                }
+                // if (isset($childData['interventions'])) {
+                //     $childModel->interventions()->sync($childData['interventions']);
+                // }
 
                 if (isset($childData['medics'])) {
                     $childModel->medics()->sync($childData['medics']);
@@ -399,13 +399,13 @@ class IncidentController extends Controller
                 $childModel->fill($childData);
                 $model->medical()->save($childModel);
 
-                if (isset($childData['complaints'])) {
-                    $childModel->complaints()->sync($childData['complaints']);
-                }
+                // if (isset($childData['complaints'])) {
+                //     $childModel->complaints()->sync($childData['complaints']);
+                // }
 
-                if (isset($childData['interventions'])) {
-                    $childModel->interventions()->sync($childData['interventions']);
-                }
+                // if (isset($childData['interventions'])) {
+                //     $childModel->interventions()->sync($childData['interventions']);
+                // }
 
                 if (isset($childData['medics'])) {
                     $childModel->medics()->sync($childData['medics']);
