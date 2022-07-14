@@ -115,8 +115,8 @@ class IncidentController extends Controller
             'street_purok_sitio' => ['string','nullable'],
             'transport_type_id' => ['string','required'],
             'facility_id' => ['string','required'],
-            'complaints' => ['array','required'],
-            'interventions' => ['array','required'],
+            'complaints' => ['string','required'],
+            'interventions' => ['string','required'],
             'medics' => ['array','required'],
         ];
 
@@ -228,13 +228,13 @@ class IncidentController extends Controller
                 $childModel->fill($childData);
                 $model->medical()->save($childModel);
 
-                if (isset($childData['complaints'])) {
-                    $childModel->complaints()->sync($childData['complaints']);
-                }
+                // if (isset($childData['complaints'])) {
+                //     $childModel->complaints()->sync($childData['complaints']);
+                // }
 
-                if (isset($childData['interventions'])) {
-                    $childModel->interventions()->sync($childData['interventions']);
-                }
+                // if (isset($childData['interventions'])) {
+                //     $childModel->interventions()->sync($childData['interventions']);
+                // }
 
                 if (isset($childData['medics'])) {
                     $childModel->medics()->sync($childData['medics']);
@@ -399,13 +399,13 @@ class IncidentController extends Controller
                 $childModel->fill($childData);
                 $model->medical()->save($childModel);
 
-                if (isset($childData['complaints'])) {
-                    $childModel->complaints()->sync($childData['complaints']);
-                }
+                // if (isset($childData['complaints'])) {
+                //     $childModel->complaints()->sync($childData['complaints']);
+                // }
 
-                if (isset($childData['interventions'])) {
-                    $childModel->interventions()->sync($childData['interventions']);
-                }
+                // if (isset($childData['interventions'])) {
+                //     $childModel->interventions()->sync($childData['interventions']);
+                // }
 
                 if (isset($childData['medics'])) {
                     $childModel->medics()->sync($childData['medics']);
