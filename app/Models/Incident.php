@@ -114,4 +114,24 @@ class Incident extends Model implements Auditable
         return $this->hasOne(Medical::class);
     }
 
+    public function incidentRegion()
+    {
+        return $this->belongsTo(PhilippineRegion::class, 'region', 'region_code');
+    }
+
+    public function incidentProvince()
+    {
+        return $this->belongsTo(PhilippineProvince::class, 'province', 'province_code');
+    }
+
+    public function incidentCity()
+    {
+        return $this->belongsTo(PhilippineCity::class, 'city_municipality', 'city_municipality_code');
+    }
+
+    public function incidentBarangay()
+    {
+        return $this->belongsTo(PhilippineBarangay::class, 'barangay', 'barangay_code');
+    }
+
 }

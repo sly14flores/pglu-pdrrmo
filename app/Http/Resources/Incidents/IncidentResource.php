@@ -31,6 +31,7 @@ class IncidentResource extends JsonResource
             'barangay' => '',
             'street_purok_sitio' => '',
             'transport_type_id' => '',
+            'transport_type' => '',
             'facility_id' => '',
             // 'complaints' => [],
             // 'interventions' => [],
@@ -52,7 +53,9 @@ class IncidentResource extends JsonResource
                 'barangay' => $this->medical->barangay,
                 'street_purok_sitio' => $this->medical->street_purok_sitio,
                 'transport_type_id' => $this->medical->transport_type_id,
+                'transport_type' => $this->medical->transport->name ?? '',
                 'facility_id' => $this->medical->facility_id,
+                'facility' => $this->medical->facility->name ?? '',
                 // 'complaints' => $this->medical->complaints()->get()->pluck('id'),
                 // '_complaints' => $this->medical->complaints()->get()->pluck('name'),
                 // 'interventions' => $this->medical->interventions()->get()->pluck('id'),
@@ -64,22 +67,29 @@ class IncidentResource extends JsonResource
             ];
         }
 
+        $street_purok_sitio = ($this->street_purok_sitio!=null)?$this->street_purok_sitio.' ':'';
+
         return [
             'id' => $this->id,
             'incident_type_id' => $this->incident_type_id,
+            'incident_type' => $this->incidentType->name,
             'response_type_id' => $this->response_type_id,
+            'response_type' => $this->responseType->name,
             'incident_date' => $this->incident_date,
             'incident_time' => $this->incident_time,
             'communication_mode_id' => $this->communication_mode_id,
+            'communication_mode' => $this->communicationMode->name,
             'requestor_name' => $this->requestor_name,
             'number_of_casualty' => $this->number_of_casualty,
             'incident_status' => $this->incident_status,
             'landmark' => $this->landmark,
+            'address' => "{$street_purok_sitio}{$this->incidentBarangay->barangay_description}, {$this->incidentCity->city_municipality_description}, {$this->incidentProvince->province_description}",
             'street_purok_sitio' => $this->street_purok_sitio,
             'barangay' => $this->barangay,
             'city_municipality' => $this->city_municipality,
             'province' => $this->province,
             'region' => $this->region,
+            'region_name' => $this->incidentRegion->region_description,
             'what_happened' => $this->what_happened,
             'facility_referral' => $this->facility_referral,
             'time_depart_from_base' => Carbon::parse($this->time_depart_from_base)->format('h:i A'),
