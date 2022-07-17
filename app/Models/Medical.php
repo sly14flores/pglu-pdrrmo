@@ -46,9 +46,9 @@ class Medical extends Model implements Auditable
         'is_covid19' => 'boolean',
     ];
 
-    public function transport()
+    public function transportType()
     {
-        return $this->belongsTo(TransportType::class);
+        return $this->belongsTo(TransportType::class, 'transport_type_id');
     }
 
     /**
@@ -77,6 +77,26 @@ class Medical extends Model implements Auditable
     public function incident()
     {
         return $this->belongsTo(Incident::class);
+    }
+
+    public function medicalRegion()
+    {
+        return $this->belongsTo(PhilippineRegion::class, 'region', 'region_code');
+    }
+
+    public function medicalProvince()
+    {
+        return $this->belongsTo(PhilippineProvince::class, 'province', 'province_code');
+    }
+
+    public function medicalCity()
+    {
+        return $this->belongsTo(PhilippineCity::class, 'city_municipality', 'city_municipality_code');
+    }
+
+    public function medicalBarangay()
+    {
+        return $this->belongsTo(PhilippineBarangay::class, 'barangay', 'barangay_code');
     }
 
 }
