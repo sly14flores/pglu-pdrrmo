@@ -244,7 +244,7 @@ class IncidentController extends Controller
 
             DB::commit();
 
-            return $this->jsonSuccessResponse(null, 200, "Incident succesfully added");
+            return $this->jsonSuccessResponse($model, 200, "Incident succesfully added");
 
         } catch (\Expection $e) {
 
