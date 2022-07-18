@@ -35,7 +35,7 @@ class Incident extends Model implements Auditable
         'province',
         'region',
         'what_happened',
-        'facility_referral',
+        // 'facility_referral',
         'time_depart_from_base',
         'time_arrive_at_incident_site',
         'time_depart_from_incident_site',
@@ -54,7 +54,7 @@ class Incident extends Model implements Auditable
      */
     protected $casts = [
         'incident_status' => 'boolean',
-        'facility_referral' => 'boolean',
+        // 'facility_referral' => 'boolean',
     ];
 
     public function incidentType()
