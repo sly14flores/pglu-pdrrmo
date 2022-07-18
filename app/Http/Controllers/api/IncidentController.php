@@ -72,7 +72,6 @@ class IncidentController extends Controller
             'province' => 'required|string',
             'region' => 'required|string',
             'what_happened' => 'required|string',
-            'facility_referral' => 'boolean',
             // 'time_depart_from_base' => 'string',
             // 'time_arrive_at_incident_site' => 'string',
             // 'time_depart_from_incident_site' => 'string',
@@ -113,8 +112,9 @@ class IncidentController extends Controller
             'city_municipality' => ['string','required'],
             'barangay' => ['string','required'],
             'street_purok_sitio' => ['string','nullable'],
+            'facility_referral' => 'boolean',
             'transport_type_id' => ['string','required'],
-            'facility_id' => ['string','required'],
+            'facility_id' => ['string','nullable'],
             'complaints' => ['string','required'],
             'interventions' => ['string','required'],
             'medics' => ['array','required'],
@@ -151,7 +151,6 @@ class IncidentController extends Controller
      * @bodyParam province string required
      * @bodyParam region string required
      * @bodyParam what_happened string required
-     * @bodyParam facility_referral boolean
      * @bodyParam time_depart_from_base string
      * @bodyParam time_arrive_at_incident_site string
      * @bodyParam time_depart_from_incident_site string

@@ -31,6 +31,7 @@ class Medical extends Model implements Auditable
         'city_municipality',
         'barangay',
         'street_purok_sitio',
+        'facility_referral',
         'transport_type_id',
         'facility_id',
         'complaints',
@@ -44,6 +45,7 @@ class Medical extends Model implements Auditable
      */
     protected $casts = [
         'is_covid19' => 'boolean',
+        'facility_referral' => 'boolean',
     ];
 
     public function transportType()

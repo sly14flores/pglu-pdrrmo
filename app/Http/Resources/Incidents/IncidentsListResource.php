@@ -36,7 +36,6 @@ class IncidentsListResource extends JsonResource
             'province' => $this->province,
             'region' => $this->region,
             'what_happened' => $this->what_happened,
-            'facility_referral' => $this->facility_referral,
             'time_depart_from_base' => $this->time_depart_from_base,
             'time_arrive_at_incident_site' => $this->time_arrive_at_incident_site,
             'time_depart_from_incident_site' => $this->time_depart_from_incident_site,
