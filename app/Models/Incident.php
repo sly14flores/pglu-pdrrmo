@@ -109,9 +109,9 @@ class Incident extends Model implements Auditable
     /**
      * Medicals
      */
-    public function medical()
+    public function medicals()
     {
-        return $this->hasOne(Medical::class);
+        return $this->hasMany(Medical::class);
     }
 
     public function incidentRegion()
