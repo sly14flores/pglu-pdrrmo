@@ -78,10 +78,22 @@ class IncidentResource extends JsonResource
 
         $incident_street_purok_sitio = ($this->street_purok_sitio!=null)?$this->street_purok_sitio.' ':'';
 
+        $vehicles = $this->vehicles()->get();
+
+        // 'time_depart_from_base' => Carbon::parse($this->time_depart_from_base)->format('h:i A'),
+        // 'time_arrive_at_incident_site' => Carbon::parse($this->time_arrive_at_incident_site)->format('h:i A'),
+        // 'time_depart_from_incident_site' => Carbon::parse($this->time_depart_from_incident_site)->format('h:i A'),
+        // 'time_arrive_at_facility' => Carbon::parse($this->time_arrive_at_facility)->format('h:i A'),
+        // 'time_depart_from_facility' => Carbon::parse($this->time_depart_from_facility)->format('h:i A'),
+        // 'time_arrive_at_base' => Carbon::parse($this->time_arrive_at_base)->format('h:i A'),
+        // 'starting_mileage' => $this->starting_mileage,
+        // 'incident_site_mileage' => $this->incident_site_mileage,
+        // 'ending_mileage' => $this->ending_mileage,
+
         return [
             'id' => $this->id,
             'incident_type_id' => $this->incident_type_id,
-            'incident_type' => $this->incidentType->name,
+            'incident_type' => $this->incidentType->name ?? '',
             'response_type_id' => $this->response_type_id,
             'response_type' => $this->responseType->name,
             'incident_date' => $this->incident_date,
@@ -102,15 +114,6 @@ class IncidentResource extends JsonResource
             'region' => $this->region,
             'region_name' => $this->incidentRegion->region_description,
             'what_happened' => $this->what_happened,
-            'time_depart_from_base' => Carbon::parse($this->time_depart_from_base)->format('h:i A'),
-            'time_arrive_at_incident_site' => Carbon::parse($this->time_arrive_at_incident_site)->format('h:i A'),
-            'time_depart_from_incident_site' => Carbon::parse($this->time_depart_from_incident_site)->format('h:i A'),
-            'time_arrive_at_facility' => Carbon::parse($this->time_arrive_at_facility)->format('h:i A'),
-            'time_depart_from_facility' => Carbon::parse($this->time_depart_from_facility)->format('h:i A'),
-            'time_arrive_at_base' => Carbon::parse($this->time_arrive_at_base)->format('h:i A'),
-            'starting_mileage' => $this->starting_mileage,
-            'incident_site_mileage' => $this->incident_site_mileage,
-            'ending_mileage' => $this->ending_mileage,
             'agencies' => $this->agencies()->get()->pluck('id'),
             '_agencies' => $this->agencies()->get()->pluck('name'),
             'facilities' => $this->facilities()->get()->pluck('id'),
@@ -123,6 +126,7 @@ class IncidentResource extends JsonResource
             '_vehicles' => $this->vehicles()->get()->pluck('name'),
             'has_medical' => $this->medical != null,
             'medical' => $medical,
+            'vehicles' => $vehicles,
             'created_at' => Carbon::parse($this->created_at)->format('F j, Y'),
         ];
     }

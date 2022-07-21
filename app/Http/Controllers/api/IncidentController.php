@@ -58,29 +58,21 @@ class IncidentController extends Controller
     private function rules($isNew,$model=null)
     {
         $rules = [
+            'incident_type_id' => 'required|string',
             'response_type_id' => 'required|string',
             'incident_date' => 'required|string',
             'incident_time' => 'required|string',
             'communication_mode_id' => 'required|string',
-            // 'requestor_name' => 'string',
+            'requestor_name' => 'string|nullable',
             'number_of_casualty' => 'integer',
             'incident_status' => 'boolean',
             'landmark' => 'required|string',
-            // 'street_purok_sitio' => 'string',
+            'street_purok_sitio' => 'string|nullable',
             'barangay' => 'required|string',
             'city_municipality' => 'required|string',
             'province' => 'required|string',
             'region' => 'required|string',
             'what_happened' => 'required|string',
-            // 'time_depart_from_base' => 'string',
-            // 'time_arrive_at_incident_site' => 'string',
-            // 'time_depart_from_incident_site' => 'string',
-            // 'time_arrive_at_facility' => 'string',
-            // 'time_depart_from_facility' => 'string',
-            // 'time_arrive_at_base' => 'string',
-            // 'starting_mileage' => 'integer',
-            // 'incident_site_mileage' => 'integer',
-            // 'ending_mileage' => 'integer',
             'agencies' => 'array',
             'facilities' => 'array',
             'staffs' => 'array',
@@ -137,6 +129,7 @@ class IncidentController extends Controller
      * 
      * Incident input
      *
+     * @bodyParam incident_type_id string required
      * @bodyParam response_type_id string required
      * @bodyParam incident_date date required
      * @bodyParam incident_time time required
@@ -151,20 +144,21 @@ class IncidentController extends Controller
      * @bodyParam province string required
      * @bodyParam region string required
      * @bodyParam what_happened string required
-     * @bodyParam time_depart_from_base string
-     * @bodyParam time_arrive_at_incident_site string
-     * @bodyParam time_depart_from_incident_site string
-     * @bodyParam time_arrive_at_facility string
-     * @bodyParam time_depart_from_facility string
-     * @bodyParam time_arrive_at_base string
-     * @bodyParam starting_mileage integer
-     * @bodyParam incident_site_mileage integer
-     * @bodyParam ending_mileage integer
      * @bodyParam agencies string[]
      * @bodyParam facilities string[]
      * @bodyParam staffs string[]
      * @bodyParam agents string[]
-     * @bodyParam vehicles string[]
+     * @bodyParam vehicles object[]
+     * @bodyParam vehicles[].id string
+     * @bodyParam vehicles[].time_depart_from_base string
+     * @bodyParam vehicles[].time_arrive_at_incident_site string
+     * @bodyParam vehicles[].time_depart_from_incident_site string
+     * @bodyParam vehicles[].time_arrive_at_facility string
+     * @bodyParam vehicles[].time_depart_from_facility string
+     * @bodyParam vehicles[].time_arrive_at_base string
+     * @bodyParam vehicles[].starting_mileage string
+     * @bodyParam vehicles[].incident_site_mileage string
+     * @bodyParam vehicles[].ending_mileage string
      *
      * @authenticated
      */
@@ -183,12 +177,6 @@ class IncidentController extends Controller
         try {
 
             $data['incident_time'] = Carbon::parse($data['incident_time'])->format('H:i:s');
-            $data['time_depart_from_base'] = Carbon::parse($data['time_depart_from_base'])->format('H:i:s');
-            $data['time_arrive_at_incident_site'] = Carbon::parse($data['time_arrive_at_incident_site'])->format('H:i:s');
-            $data['time_depart_from_incident_site'] = Carbon::parse($data['time_depart_from_incident_site'])->format('H:i:s');
-            $data['time_arrive_at_facility'] = Carbon::parse($data['time_arrive_at_facility'])->format('H:i:s');
-            $data['time_depart_from_facility'] = Carbon::parse($data['time_depart_from_facility'])->format('H:i:s');
-            $data['time_arrive_at_base'] = Carbon::parse($data['time_arrive_at_base'])->format('H:i:s');
         
             $model = new Incident;
             $model->fill($data);
@@ -207,7 +195,22 @@ class IncidentController extends Controller
                 $model->agents()->sync($data['agents']);
             }
             if (isset($data['vehicles'])) {
-                $model->vehicles()->sync($data['vehicles']);
+                $vehicles = $data['vehicles'];
+                $syncs = [];
+                foreach ($vehicles as $vehicle) {
+                    $syncs[$vehicle['id']] = [
+                        'time_depart_from_base' => Carbon::parse($vehicle['time_depart_from_base'])->format('H:i:s'),
+                        'time_arrive_at_incident_site' => Carbon::parse($vehicle['time_arrive_at_incident_site'])->format('H:i:s'),
+                        'time_depart_from_incident_site' => Carbon::parse($vehicle['time_depart_from_incident_site'])->format('H:i:s'),
+                        'time_arrive_at_facility' => Carbon::parse($vehicle['time_arrive_at_facility'])->format('H:i:s'),
+                        'time_depart_from_facility' => Carbon::parse($vehicle['time_depart_from_facility'])->format('H:i:s'),
+                        'time_arrive_at_base' => Carbon::parse($vehicle['time_arrive_at_base'])->format('H:i:s'),
+                        'starting_mileage' => $vehicle['starting_mileage'],
+                        'incident_site_mileage' => $vehicle['incident_site_mileage'],
+                        'ending_mileage' => $vehicle['ending_mileage'],
+                    ];
+                }
+                $model->vehicles()->sync($syncs);
             }
 
             /**
