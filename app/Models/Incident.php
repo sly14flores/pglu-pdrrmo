@@ -103,7 +103,8 @@ class Incident extends Model implements Auditable
      */
     public function vehicles()
     {
-        return $this->belongsToMany(Vehicle::class, 'incident_vehicle', 'incident_id', 'vehicle_id')->withTimestamps();
+        return $this->belongsToMany(Vehicle::class, 'incident_vehicle', 'incident_id', 'vehicle_id')->withTimestamps()
+        ->withPivot('time_depart_from_base','time_arrive_at_incident_site','time_depart_from_incident_site','time_arrive_at_facility','time_depart_from_facility','time_arrive_at_base','starting_mileage','incident_site_mileage','ending_mileage');
     }
 
     /**

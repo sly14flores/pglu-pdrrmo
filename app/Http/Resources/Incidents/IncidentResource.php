@@ -80,6 +80,12 @@ class IncidentResource extends JsonResource
 
         $vehicles = $this->vehicles()->get();
 
+        if ($vehicles->count()) {
+            $vehicles = $vehicles->transform(function($item, $key) {
+                return $item;
+            });
+        }
+
         // 'time_depart_from_base' => Carbon::parse($this->time_depart_from_base)->format('h:i A'),
         // 'time_arrive_at_incident_site' => Carbon::parse($this->time_arrive_at_incident_site)->format('h:i A'),
         // 'time_depart_from_incident_site' => Carbon::parse($this->time_depart_from_incident_site)->format('h:i A'),
