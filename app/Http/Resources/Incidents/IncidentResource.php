@@ -16,64 +16,67 @@ class IncidentResource extends JsonResource
      */
     public function toArray($request)
     {
-        $now = Carbon::now()->format('Y-m-d');
+        // $now = Carbon::now()->format('Y-m-d');
 
-        $medical = [
-            'id' => '',
-            'noi_moi' => '',
-            'is_covid19' => false,
-            'patient_name' => '',
-            'age' => '',
-            'gender' => '',
-            'address' => '',
-            'region' => '',
-            'region_name' => '',
-            'province' => '',
-            'city_municipality' => '',
-            'barangay' => '',
-            'street_purok_sitio' => '',
-            'facility_referral' => false,
-            'transport_type_id' => '',
-            'transport_type' => '',
-            'facility_id' => '',
-            // 'complaints' => [],
-            // 'interventions' => [],
-            'complaints' => '',
-            'interventions' => '',
-            'medics' => [],
-        ];
-        if ($this->medical != null) {
+        // $medical = [
+        //     'id' => '',
+        //     'noi_moi' => '',
+        //     'is_covid19' => false,
+        //     'patient_name' => '',
+        //     'age' => '',
+        //     'gender' => '',
+        //     'address' => '',
+        //     'region' => '',
+        //     'region_name' => '',
+        //     'province' => '',
+        //     'city_municipality' => '',
+        //     'barangay' => '',
+        //     'street_purok_sitio' => '',
+        //     'facility_referral' => false,
+        //     'transport_type_id' => '',
+        //     'transport_type' => '',
+        //     'facility_id' => '',
+        //     // 'complaints' => [],
+        //     // 'interventions' => [],
+        //     'complaints' => '',
+        //     'interventions' => '',
+        //     'medics' => [],
+        // ];
 
-            $medical_street_purok_sitio = ($this->medical->street_purok_sitio!=null)?$this->medical->street_purok_sitio.' ':'';
+        $medicals = $this->medicals()->get();
 
-            $medical = [
-                'id' => $this->medical->id,
-                'noi_moi' => $this->medical->noi_moi,
-                'is_covid19' => $this->medical->is_covid19,
-                'patient_name' => $this->medical->patient_name,
-                'age' => $this->medical->age,
-                'gender' => $this->medical->gender,
-                'address' => "{$medical_street_purok_sitio}{$this->medical->medicalBarangay->barangay_description}, {$this->medical->medicalCity->city_municipality_description}, {$this->medical->medicalProvince->province_description}",
-                'region' => $this->medical->region,
-                'region_name' => $this->medical->medicalRegion->region_description,
-                'province' => $this->medical->province,
-                'city_municipality' => $this->medical->city_municipality,
-                'barangay' => $this->medical->barangay,
-                'street_purok_sitio' => $this->medical->street_purok_sitio,
-                'facility_referral' => $this->medical->facility_referral,
-                'transport_type_id' => $this->medical->transport_type_id,
-                'transport_type' => $this->medical->transportType->name,
-                'facility_id' => $this->medical->facility_id ?? '',
-                'facility' => $this->medical->facility->name ?? '',
-                // 'complaints' => $this->medical->complaints()->get()->pluck('id'),
-                // '_complaints' => $this->medical->complaints()->get()->pluck('name'),
-                // 'interventions' => $this->medical->interventions()->get()->pluck('id'),
-                // '_interventions' => $this->medical->interventions()->get()->pluck('name'),
-                'complaints' => $this->medical->complaints,
-                'interventions' => $this->medical->interventions,
-                'medics' => $this->medical->medics()->get()->pluck('id'),
-                '_medics' => $this->medical->medics()->get(['firstname','lastname']),
-            ];
+        if ($medicals->count()) {
+            $medicals = $medicals->transform(function($medical, $key) {
+
+                $medical_street_purok_sitio = ($medical->street_purok_sitio!=null)?$medical->street_purok_sitio.' ':'';
+
+                $value = [
+                    'id' => $medical->id,
+                    'noi_moi' => $medical->noi_moi,
+                    'is_covid19' => $medical->is_covid19,
+                    'patient_name' => $medical->patient_name,
+                    'age' => $medical->age,
+                    'gender' => $medical->gender,
+                    'address' => "{$medical_street_purok_sitio}{$medical->medicalBarangay->barangay_description}, {$medical->medicalCity->city_municipality_description}, {$medical->medicalProvince->province_description}",
+                    'region' => $medical->region,
+                    'region_name' => $medical->medicalRegion->region_description,
+                    'province' => $medical->province,
+                    'city_municipality' => $medical->city_municipality,
+                    'barangay' => $medical->barangay,
+                    'street_purok_sitio' => $medical->street_purok_sitio,
+                    'facility_referral' => $medical->facility_referral,
+                    'transport_type_id' => $medical->transport_type_id,
+                    'transport_type' => $medical->transportType->name,
+                    'facility_id' => $medical->facility_id ?? '',
+                    'facility' => $medical->facility->name ?? '',
+                    'complaints' => $medical->complaints,
+                    'interventions' => $medical->interventions,
+                    'medics' => $medical->medics()->get()->pluck('id'),
+                    '_medics' => $medical->medics()->get(['firstname','lastname']),
+                ];
+
+                return $value;
+            });
         }
 
         $incident_street_purok_sitio = ($this->street_purok_sitio!=null)?$this->street_purok_sitio.' ':'';
@@ -81,20 +84,25 @@ class IncidentResource extends JsonResource
         $vehicles = $this->vehicles()->get();
 
         if ($vehicles->count()) {
-            $vehicles = $vehicles->transform(function($item, $key) {
-                return $item;
+            $vehicles = $vehicles->transform(function($vehicle, $key) {
+
+                $value = [
+                    'vehicle_id' => $vehicle->id,
+                    'vehicle_name' => $vehicle->name,
+                    'time_depart_from_base' => Carbon::parse($vehicle->pivot->time_depart_from_base)->format('h:i A'),
+                    'time_arrive_at_incident_site' => Carbon::parse($vehicle->pivot->time_arrive_at_incident_site)->format('h:i A'),
+                    'time_depart_from_incident_site' => Carbon::parse($vehicle->pivot->time_depart_from_incident_site)->format('h:i A'),
+                    'time_arrive_at_facility' => Carbon::parse($vehicle->pivot->time_arrive_at_facility)->format('h:i A'),
+                    'time_depart_from_facility' => Carbon::parse($vehicle->pivot->time_depart_from_facility)->format('h:i A'),
+                    'time_arrive_at_base' => Carbon::parse($vehicle->pivot->time_arrive_at_base)->format('h:i A'),
+                    'starting_mileage' => $vehicle->pivot->starting_mileage,
+                    'incident_site_mileage' => $vehicle->pivot->incident_site_mileage,
+                    'ending_mileage' => $vehicle->pivot->ending_mileage,
+                ];
+
+                return $value;
             });
         }
-
-        // 'time_depart_from_base' => Carbon::parse($this->time_depart_from_base)->format('h:i A'),
-        // 'time_arrive_at_incident_site' => Carbon::parse($this->time_arrive_at_incident_site)->format('h:i A'),
-        // 'time_depart_from_incident_site' => Carbon::parse($this->time_depart_from_incident_site)->format('h:i A'),
-        // 'time_arrive_at_facility' => Carbon::parse($this->time_arrive_at_facility)->format('h:i A'),
-        // 'time_depart_from_facility' => Carbon::parse($this->time_depart_from_facility)->format('h:i A'),
-        // 'time_arrive_at_base' => Carbon::parse($this->time_arrive_at_base)->format('h:i A'),
-        // 'starting_mileage' => $this->starting_mileage,
-        // 'incident_site_mileage' => $this->incident_site_mileage,
-        // 'ending_mileage' => $this->ending_mileage,
 
         return [
             'id' => $this->id,
@@ -131,8 +139,9 @@ class IncidentResource extends JsonResource
             'vehicles' => $this->vehicles()->get()->pluck('id'),
             '_vehicles' => $this->vehicles()->get()->pluck('name'),
             'has_medical' => $this->medical != null,
-            'medical' => $medical,
+            'medicals' => $medicals,
             'vehicles' => $vehicles,
+            'delete_medicals' => [],
             'created_at' => Carbon::parse($this->created_at)->format('F j, Y'),
         ];
     }

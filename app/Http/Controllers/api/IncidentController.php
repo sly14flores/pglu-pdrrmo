@@ -234,26 +234,26 @@ class IncidentController extends Controller
             /**
              * Medical
              */
-            // $medicals = $request->medicals;
-            // if (count($medicals)) {
-            //     foreach ($medicals as $medical) {
-            //         $childModel = new Medical;
-            //         $childValidator = Validator::make($medical, $this->medicalRules());
+            $medicals = $request->medicals;
+            if (count($medicals)) {
+                foreach ($medicals as $medical) {
+                    $childModel = new Medical;
+                    $childValidator = Validator::make($medical, $this->medicalRules());
     
-            //         if ($childValidator->fails()) {
-            //             return $this->jsonErrorDataValidation($childValidator->errors());
-            //         }
+                    if ($childValidator->fails()) {
+                        return $this->jsonErrorDataValidation($childValidator->errors());
+                    }
     
-            //         $childData = $childValidator->valid();
+                    $childData = $childValidator->valid();
     
-            //         $childModel->fill($childData);
-            //         $model->medical()->save($childModel);
+                    $childModel->fill($childData);
+                    $model->medicals()->save($childModel);
     
-            //         if (isset($childData['medics'])) {
-            //             $childModel->medics()->sync($childData['medics']);
-            //         }
-            //     }
-            // }
+                    if (isset($childData['medics'])) {
+                        $childModel->medics()->sync($childData['medics']);
+                    }
+                }
+            }
 
             DB::commit();
 
@@ -417,9 +417,9 @@ class IncidentController extends Controller
                         'time_arrive_at_facility' => ($vehicle['time_arrive_at_facility']=="")?null:Carbon::parse($vehicle['time_arrive_at_facility'])->format('H:i:s'),
                         'time_depart_from_facility' => ($vehicle['time_depart_from_facility']=="")?null:Carbon::parse($vehicle['time_depart_from_facility'])->format('H:i:s'),
                         'time_arrive_at_base' => ($vehicle['time_arrive_at_base']=="")?null:Carbon::parse($vehicle['time_arrive_at_base'])->format('H:i:s'),
-                        'starting_mileage' => $vehicle['starting_mileage'],
-                        'incident_site_mileage' => $vehicle['incident_site_mileage'],
-                        'ending_mileage' => $vehicle['ending_mileage'],
+                        'starting_mileage' => ($vehicle['starting_mileage']==null)?0:$vehicle['starting_mileage'],
+                        'incident_site_mileage' => ($vehicle['incident_site_mileage']==null)?0:$vehicle['incident_site_mileage'],
+                        'ending_mileage' => ($vehicle['ending_mileage']==null)?0:$vehicle['ending_mileage'],
                     ];
                 }
                 $model->vehicles()->sync($syncs);
@@ -431,6 +431,7 @@ class IncidentController extends Controller
             $medicals = $request->medicals;
             if (count($medicals)) {
                 foreach ($medicals as $medical) {
+
                     $medical_id = $medical['id'];
 
                     $childModel = new Medical;
@@ -447,12 +448,17 @@ class IncidentController extends Controller
                     $childData = $childValidator->valid();
     
                     $childModel->fill($childData);
-                    $model->medical()->save($childModel);
+                    $model->medicals()->save($childModel);
     
                     if (isset($childData['medics'])) {
                         $childModel->medics()->sync($childData['medics']);
                     }
                 }
+            }
+
+            $delete_medicals = $request->delete_medicals;
+            if (count($delete_medicals)) {
+                Medical::destroy($delete_medicals);
             }
 
             DB::commit();
