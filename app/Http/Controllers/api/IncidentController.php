@@ -58,35 +58,28 @@ class IncidentController extends Controller
     private function rules($isNew,$model=null)
     {
         $rules = [
+            'incident_type_id' => 'required|string',
             'response_type_id' => 'required|string',
             'incident_date' => 'required|string',
             'incident_time' => 'required|string',
             'communication_mode_id' => 'required|string',
-            // 'requestor_name' => 'string',
+            'requestor_name' => 'string|nullable',
             'number_of_casualty' => 'integer',
             'incident_status' => 'boolean',
-            'landmark' => 'required|string',
-            // 'street_purok_sitio' => 'string',
+            'landmark' => 'nullable|string',
+            'street_purok_sitio' => 'string|nullable',
             'barangay' => 'required|string',
             'city_municipality' => 'required|string',
             'province' => 'required|string',
             'region' => 'required|string',
             'what_happened' => 'required|string',
-            // 'time_depart_from_base' => 'string',
-            // 'time_arrive_at_incident_site' => 'string',
-            // 'time_depart_from_incident_site' => 'string',
-            // 'time_arrive_at_facility' => 'string',
-            // 'time_depart_from_facility' => 'string',
-            // 'time_arrive_at_base' => 'string',
-            // 'starting_mileage' => 'integer',
-            // 'incident_site_mileage' => 'integer',
-            // 'ending_mileage' => 'integer',
             'agencies' => 'array',
             'facilities' => 'array',
             'staffs' => 'array',
             'agents' => 'array',
             'vehicles' => 'array',
             'has_medical' => 'boolean',
+            'medicals' => 'array',
         ];
 
         return $rules;
@@ -137,6 +130,7 @@ class IncidentController extends Controller
      * 
      * Incident input
      *
+     * @bodyParam incident_type_id string required
      * @bodyParam response_type_id string required
      * @bodyParam incident_date date required
      * @bodyParam incident_time time required
@@ -144,27 +138,45 @@ class IncidentController extends Controller
      * @bodyParam requestor_name string
      * @bodyParam number_of_casualty integer
      * @bodyParam incident_status boolean
-     * @bodyParam landmark string required
+     * @bodyParam landmark string
      * @bodyParam street_purok_sitio string
      * @bodyParam barangay string required
      * @bodyParam city_municipality string required
      * @bodyParam province string required
      * @bodyParam region string required
      * @bodyParam what_happened string required
-     * @bodyParam time_depart_from_base string
-     * @bodyParam time_arrive_at_incident_site string
-     * @bodyParam time_depart_from_incident_site string
-     * @bodyParam time_arrive_at_facility string
-     * @bodyParam time_depart_from_facility string
-     * @bodyParam time_arrive_at_base string
-     * @bodyParam starting_mileage integer
-     * @bodyParam incident_site_mileage integer
-     * @bodyParam ending_mileage integer
      * @bodyParam agencies string[]
      * @bodyParam facilities string[]
      * @bodyParam staffs string[]
      * @bodyParam agents string[]
-     * @bodyParam vehicles string[]
+     * @bodyParam vehicles object[]
+     * @bodyParam vehicles[].id string
+     * @bodyParam vehicles[].time_depart_from_base string
+     * @bodyParam vehicles[].time_arrive_at_incident_site string
+     * @bodyParam vehicles[].time_depart_from_incident_site string
+     * @bodyParam vehicles[].time_arrive_at_facility string
+     * @bodyParam vehicles[].time_depart_from_facility string
+     * @bodyParam vehicles[].time_arrive_at_base string
+     * @bodyParam vehicles[].starting_mileage string
+     * @bodyParam vehicles[].incident_site_mileage string
+     * @bodyParam vehicles[].ending_mileage string
+     * @bodyParam medicals object[]
+     * @bodyParam medicals[].noi_moi string
+     * @bodyParam medicals[].is_covid19 boolean
+     * @bodyParam medicals[].patient_name string
+     * @bodyParam medicals[].age integer
+     * @bodyParam medicals[].gender string
+     * @bodyParam medicals[].region string
+     * @bodyParam medicals[].province string
+     * @bodyParam medicals[].city_municipality string
+     * @bodyParam medicals[].barangay string
+     * @bodyParam medicals[].street_purok_sitio string
+     * @bodyParam medicals[].facility_referral boolean
+     * @bodyParam medicals[].transport_type_id string
+     * @bodyParam medicals[].facility_id string
+     * @bodyParam medicals[].complaints string
+     * @bodyParam medicals[].interventions string
+     * @bodyParam medicals[].medics array
      *
      * @authenticated
      */
@@ -183,12 +195,6 @@ class IncidentController extends Controller
         try {
 
             $data['incident_time'] = Carbon::parse($data['incident_time'])->format('H:i:s');
-            $data['time_depart_from_base'] = Carbon::parse($data['time_depart_from_base'])->format('H:i:s');
-            $data['time_arrive_at_incident_site'] = Carbon::parse($data['time_arrive_at_incident_site'])->format('H:i:s');
-            $data['time_depart_from_incident_site'] = Carbon::parse($data['time_depart_from_incident_site'])->format('H:i:s');
-            $data['time_arrive_at_facility'] = Carbon::parse($data['time_arrive_at_facility'])->format('H:i:s');
-            $data['time_depart_from_facility'] = Carbon::parse($data['time_depart_from_facility'])->format('H:i:s');
-            $data['time_arrive_at_base'] = Carbon::parse($data['time_arrive_at_base'])->format('H:i:s');
         
             $model = new Incident;
             $model->fill($data);
@@ -207,38 +213,46 @@ class IncidentController extends Controller
                 $model->agents()->sync($data['agents']);
             }
             if (isset($data['vehicles'])) {
-                $model->vehicles()->sync($data['vehicles']);
+                $vehicles = $data['vehicles'];
+                $syncs = [];
+                foreach ($vehicles as $vehicle) {
+                    $syncs[$vehicle['vehicle_id']] = [
+                        'time_depart_from_base' => ($vehicle['time_depart_from_base']=="")?null:Carbon::parse($vehicle['time_depart_from_base'])->format('H:i:s'),
+                        'time_arrive_at_incident_site' => ($vehicle['time_arrive_at_incident_site']=="")?null:Carbon::parse($vehicle['time_arrive_at_incident_site'])->format('H:i:s'),
+                        'time_depart_from_incident_site' => ($vehicle['time_depart_from_incident_site']=="")?null:Carbon::parse($vehicle['time_depart_from_incident_site'])->format('H:i:s'),
+                        'time_arrive_at_facility' => ($vehicle['time_arrive_at_facility']=="")?null:Carbon::parse($vehicle['time_arrive_at_facility'])->format('H:i:s'),
+                        'time_depart_from_facility' => ($vehicle['time_depart_from_facility']=="")?null:Carbon::parse($vehicle['time_depart_from_facility'])->format('H:i:s'),
+                        'time_arrive_at_base' => ($vehicle['time_arrive_at_base']=="")?null:Carbon::parse($vehicle['time_arrive_at_base'])->format('H:i:s'),
+                        'starting_mileage' => $vehicle['starting_mileage'],
+                        'incident_site_mileage' => $vehicle['incident_site_mileage'],
+                        'ending_mileage' => $vehicle['ending_mileage'],
+                    ];
+                }
+                $model->vehicles()->sync($syncs);
             }
 
             /**
              * Medical
              */
-            if ($request->has_medical) {
-
-                $childModel = new Medical;
-                $childValidator = Validator::make($request->medical, $this->medicalRules());
-
-                if ($childValidator->fails()) {
-                    return $this->jsonErrorDataValidation($childValidator->errors());
+            $medicals = $request->medicals;
+            if (count($medicals)) {
+                foreach ($medicals as $medical) {
+                    $childModel = new Medical;
+                    $childValidator = Validator::make($medical, $this->medicalRules());
+    
+                    if ($childValidator->fails()) {
+                        return $this->jsonErrorDataValidation($childValidator->errors());
+                    }
+    
+                    $childData = $childValidator->valid();
+    
+                    $childModel->fill($childData);
+                    $model->medicals()->save($childModel);
+    
+                    if (isset($childData['medics'])) {
+                        $childModel->medics()->sync($childData['medics']);
+                    }
                 }
-
-                $childData = $childValidator->valid();
-
-                $childModel->fill($childData);
-                $model->medical()->save($childModel);
-
-                // if (isset($childData['complaints'])) {
-                //     $childModel->complaints()->sync($childData['complaints']);
-                // }
-
-                // if (isset($childData['interventions'])) {
-                //     $childModel->interventions()->sync($childData['interventions']);
-                // }
-
-                if (isset($childData['medics'])) {
-                    $childModel->medics()->sync($childData['medics']);
-                }
-
             }
 
             DB::commit();
@@ -324,7 +338,34 @@ class IncidentController extends Controller
      * @bodyParam facilities string[]
      * @bodyParam staffs string[]
      * @bodyParam agents string[]
-     * @bodyParam vehicles string[]
+     * @bodyParam vehicles object[]
+     * @bodyParam vehicles[].id string
+     * @bodyParam vehicles[].time_depart_from_base string
+     * @bodyParam vehicles[].time_arrive_at_incident_site string
+     * @bodyParam vehicles[].time_depart_from_incident_site string
+     * @bodyParam vehicles[].time_arrive_at_facility string
+     * @bodyParam vehicles[].time_depart_from_facility string
+     * @bodyParam vehicles[].time_arrive_at_base string
+     * @bodyParam vehicles[].starting_mileage string
+     * @bodyParam vehicles[].incident_site_mileage string
+     * @bodyParam vehicles[].ending_mileage string
+     * @bodyParam medicals object[]
+     * @bodyParam medicals[].noi_moi string
+     * @bodyParam medicals[].is_covid19 boolean
+     * @bodyParam medicals[].patient_name string
+     * @bodyParam medicals[].age integer
+     * @bodyParam medicals[].gender string
+     * @bodyParam medicals[].region string
+     * @bodyParam medicals[].province string
+     * @bodyParam medicals[].city_municipality string
+     * @bodyParam medicals[].barangay string
+     * @bodyParam medicals[].street_purok_sitio string
+     * @bodyParam medicals[].facility_referral boolean
+     * @bodyParam medicals[].transport_type_id string
+     * @bodyParam medicals[].facility_id string
+     * @bodyParam medicals[].complaints string
+     * @bodyParam medicals[].interventions string
+     * @bodyParam medicals[].medics array
      *
      * @authenticated
      */
@@ -349,12 +390,6 @@ class IncidentController extends Controller
         try {
 
             $data['incident_time'] = Carbon::parse($data['incident_time'])->format('H:i:s');
-            $data['time_depart_from_base'] = Carbon::parse($data['time_depart_from_base'])->format('H:i:s');
-            $data['time_arrive_at_incident_site'] = Carbon::parse($data['time_arrive_at_incident_site'])->format('H:i:s');
-            $data['time_depart_from_incident_site'] = Carbon::parse($data['time_depart_from_incident_site'])->format('H:i:s');
-            $data['time_arrive_at_facility'] = Carbon::parse($data['time_arrive_at_facility'])->format('H:i:s');
-            $data['time_depart_from_facility'] = Carbon::parse($data['time_depart_from_facility'])->format('H:i:s');
-            $data['time_arrive_at_base'] = Carbon::parse($data['time_arrive_at_base'])->format('H:i:s');
         
             $model->fill($data);
             $model->save();
@@ -372,44 +407,58 @@ class IncidentController extends Controller
                 $model->agents()->sync($data['agents']);
             }
             if (isset($data['vehicles'])) {
-                $model->vehicles()->sync($data['vehicles']);
+                $vehicles = $data['vehicles'];
+                $syncs = [];
+                foreach ($vehicles as $vehicle) {
+                    $syncs[$vehicle['vehicle_id']] = [
+                        'time_depart_from_base' => ($vehicle['time_depart_from_base']=="")?null:Carbon::parse($vehicle['time_depart_from_base'])->format('H:i:s'),
+                        'time_arrive_at_incident_site' => ($vehicle['time_arrive_at_incident_site']=="")?null:Carbon::parse($vehicle['time_arrive_at_incident_site'])->format('H:i:s'),
+                        'time_depart_from_incident_site' => ($vehicle['time_depart_from_incident_site']=="")?null:Carbon::parse($vehicle['time_depart_from_incident_site'])->format('H:i:s'),
+                        'time_arrive_at_facility' => ($vehicle['time_arrive_at_facility']=="")?null:Carbon::parse($vehicle['time_arrive_at_facility'])->format('H:i:s'),
+                        'time_depart_from_facility' => ($vehicle['time_depart_from_facility']=="")?null:Carbon::parse($vehicle['time_depart_from_facility'])->format('H:i:s'),
+                        'time_arrive_at_base' => ($vehicle['time_arrive_at_base']=="")?null:Carbon::parse($vehicle['time_arrive_at_base'])->format('H:i:s'),
+                        'starting_mileage' => ($vehicle['starting_mileage']==null)?0:$vehicle['starting_mileage'],
+                        'incident_site_mileage' => ($vehicle['incident_site_mileage']==null)?0:$vehicle['incident_site_mileage'],
+                        'ending_mileage' => ($vehicle['ending_mileage']==null)?0:$vehicle['ending_mileage'],
+                    ];
+                }
+                $model->vehicles()->sync($syncs);
             }
 
             /**
              * Medical
              */
-            if ($request->has_medical) {
+            $medicals = $request->medicals;
+            if (count($medicals)) {
+                foreach ($medicals as $medical) {
 
-                $medical_id = $request->medical['id'];
+                    $medical_id = $medical['id'];
 
-                $childModel = new Medical;
-                if ($medical_id!=null) {
-                    $childModel = Medical::find($medical_id);
+                    $childModel = new Medical;
+                    if ($medical_id!=null) {
+                        $childModel = Medical::find($medical_id);
+                    }
+    
+                    $childValidator = Validator::make($medical, $this->medicalRules());
+    
+                    if ($childValidator->fails()) {
+                        return $this->jsonErrorDataValidation($childValidator->errors());
+                    }
+    
+                    $childData = $childValidator->valid();
+    
+                    $childModel->fill($childData);
+                    $model->medicals()->save($childModel);
+    
+                    if (isset($childData['medics'])) {
+                        $childModel->medics()->sync($childData['medics']);
+                    }
                 }
+            }
 
-                $childValidator = Validator::make($request->medical, $this->medicalRules());
-
-                if ($childValidator->fails()) {
-                    return $this->jsonErrorDataValidation($childValidator->errors());
-                }
-
-                $childData = $childValidator->valid();
-
-                $childModel->fill($childData);
-                $model->medical()->save($childModel);
-
-                // if (isset($childData['complaints'])) {
-                //     $childModel->complaints()->sync($childData['complaints']);
-                // }
-
-                // if (isset($childData['interventions'])) {
-                //     $childModel->interventions()->sync($childData['interventions']);
-                // }
-
-                if (isset($childData['medics'])) {
-                    $childModel->medics()->sync($childData['medics']);
-                }
-
+            $delete_medicals = $request->delete_medicals;
+            if (count($delete_medicals)) {
+                Medical::destroy($delete_medicals);
             }
 
             DB::commit();
