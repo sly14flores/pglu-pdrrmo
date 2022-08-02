@@ -18,6 +18,7 @@ class IncidentsListResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'incident_number' => $this->incident_number,
             'incident_type_id' => $this->incident_type_id,
             'incident_type' => (is_null($this->incidentType))?null:$this->incidentType->name,            
             'response_type_id' => $this->response_type_id,

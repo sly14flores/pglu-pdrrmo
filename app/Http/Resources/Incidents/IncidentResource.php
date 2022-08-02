@@ -106,6 +106,7 @@ class IncidentResource extends JsonResource
 
         return [
             'id' => $this->id,
+            'incident_number' => $this->incident_number,
             'incident_type_id' => $this->incident_type_id,
             'incident_type' => $this->incidentType->name ?? '',
             'response_type_id' => $this->response_type_id,
