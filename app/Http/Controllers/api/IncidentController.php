@@ -11,6 +11,7 @@ use Carbon\Carbon;
 
 use App\Traits\Messages;
 use App\Traits\Dumper;
+use App\Traits\IncidentHelpers;
 
 use App\Models\Incident;
 use App\Http\Resources\Incidents\IncidentResource;
@@ -20,7 +21,7 @@ use App\Models\Medical;
 
 class IncidentController extends Controller
 {
-    use Messages, Dumper;
+    use Messages, Dumper, IncidentHelpers;
 
 	public function __construct()
 	{
@@ -198,6 +199,7 @@ class IncidentController extends Controller
         
             $model = new Incident;
             $model->fill($data);
+            $model->incident_number = $this->incidentNumber();
             $model->save();
 
             if (isset($data['agencies'])) {
